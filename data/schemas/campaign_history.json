@@ -1,0 +1,74 @@
+[
+  {
+    "name": "campaign_id",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Campaign identifier, e.g. CMP-003. Joins to ad_performance and creative_variants."
+  },
+  {
+    "name": "name",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Campaign name, e.g. Winter Sun Early Bird 2025."
+  },
+  {
+    "name": "objective",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "The business outcome the campaign was meant to produce."
+  },
+  {
+    "name": "target_segment",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Audience key, e.g. lapsed_compass (lapsed Compass members), lapsed_compass_cold, all_customers, active_compass, urban_explorers."
+  },
+  {
+    "name": "start_date",
+    "type": "DATE",
+    "mode": "REQUIRED",
+    "description": "First flight date."
+  },
+  {
+    "name": "end_date",
+    "type": "DATE",
+    "mode": "REQUIRED",
+    "description": "Last flight date. 2026-12-31 for always-on programs."
+  },
+  {
+    "name": "channels",
+    "type": "STRING",
+    "mode": "REPEATED",
+    "description": "Channels used: one of paid_search, paid_social, organic, email, direct, affiliate."
+  },
+  {
+    "name": "budget_usd",
+    "type": "FLOAT64",
+    "mode": "REQUIRED",
+    "description": "Approved budget in US dollars for the flight (annual budget for always-on programs)."
+  },
+  {
+    "name": "spend_to_date_usd",
+    "type": "FLOAT64",
+    "mode": "REQUIRED",
+    "description": "Paid media actually spent through Sep 15, 2026, from ad_performance."
+  },
+  {
+    "name": "bookings_attributed",
+    "type": "INT64",
+    "mode": "REQUIRED",
+    "description": "Confirmed bookings attributed to the campaign (to date for campaigns still running)."
+  },
+  {
+    "name": "roi",
+    "type": "FLOAT64",
+    "mode": "NULLABLE",
+    "description": "Contribution ROI as reported in the retrospective: (attributed revenue × 22% contribution margin − campaign cost) ÷ campaign cost. Negative means the campaign lost money."
+  },
+  {
+    "name": "retrospective",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Two to three sentences on what happened and what was learned."
+  }
+]

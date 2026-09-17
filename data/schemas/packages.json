@@ -1,0 +1,50 @@
+[
+  {
+    "name": "package_id",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Unique package identifier, e.g. PKG-0032. Joins to bookings.package_id."
+  },
+  {
+    "name": "destination_id",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "The destination this package visits. Joins to destinations.destination_id, which carries the category."
+  },
+  {
+    "name": "name",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Customer-facing package name, e.g. Aruba Classic Week."
+  },
+  {
+    "name": "nights",
+    "type": "INT64",
+    "mode": "REQUIRED",
+    "description": "Number of nights included."
+  },
+  {
+    "name": "description",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "60–120 word customer-facing package description. Embedded in catalog_embeddings for semantic search."
+  },
+  {
+    "name": "base_price_usd",
+    "type": "FLOAT64",
+    "mode": "REQUIRED",
+    "description": "Current per-person price in US dollars, double occupancy, taxes and fees included."
+  },
+  {
+    "name": "previous_base_price_usd",
+    "type": "FLOAT64",
+    "mode": "NULLABLE",
+    "description": "The per-person price before the most recent price change. NULL for packages that have not been re-priced during the data window."
+  },
+  {
+    "name": "price_effective_date",
+    "type": "DATE",
+    "mode": "REQUIRED",
+    "description": "Date the current base_price_usd took effect. Aug 1, 2026 for the two packages re-priced this summer."
+  }
+]

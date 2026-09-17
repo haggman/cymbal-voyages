@@ -1,0 +1,68 @@
+[
+  {
+    "name": "customer_id",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Unique customer identifier, e.g. C000123. Joins to bookings, web_sessions, customer_features and customer_month_status."
+  },
+  {
+    "name": "signup_date",
+    "type": "DATE",
+    "mode": "REQUIRED",
+    "description": "Date the customer created their account."
+  },
+  {
+    "name": "home_market",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Home metro area, e.g. Chicago, Toronto, Miami. Joins to plan.market and ad_performance.market."
+  },
+  {
+    "name": "home_market_climate",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Climate group of the home market: cold (Chicago, Boston, Minneapolis, Detroit, Denver, Toronto, Cleveland, Milwaukee), warm (Miami, Phoenix, Houston, Los Angeles, San Diego) or mild (every other metro). Warm escapes sell mainly to cold-weather markets."
+  },
+  {
+    "name": "loyalty_tier",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Cymbal Compass tier: none (not enrolled), blue, silver or gold. Anyone with a tier other than none is a Compass member."
+  },
+  {
+    "name": "loyalty_status",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "As of Sep 15, 2026: active (booked in the last 12 months), lapsed (booked at least once ever but not in the last 12 months) or never (no confirmed booking on record)."
+  },
+  {
+    "name": "last_booking_date",
+    "type": "DATE",
+    "mode": "NULLABLE",
+    "description": "Date of the most recent confirmed booking, including bookings before the data window. NULL when the customer has never booked."
+  },
+  {
+    "name": "lifetime_bookings",
+    "type": "INT64",
+    "mode": "REQUIRED",
+    "description": "Count of confirmed bookings over the customer's lifetime, including bookings before Jul 1, 2025."
+  },
+  {
+    "name": "lifetime_value_usd",
+    "type": "FLOAT64",
+    "mode": "REQUIRED",
+    "description": "Total confirmed booking revenue over the customer's lifetime, in US dollars."
+  },
+  {
+    "name": "email_optin",
+    "type": "BOOL",
+    "mode": "REQUIRED",
+    "description": "TRUE when the customer has opted in to marketing email."
+  },
+  {
+    "name": "sms_optin",
+    "type": "BOOL",
+    "mode": "REQUIRED",
+    "description": "TRUE when the customer has opted in to marketing SMS."
+  }
+]

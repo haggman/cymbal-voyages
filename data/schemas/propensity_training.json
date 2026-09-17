@@ -1,0 +1,68 @@
+[
+  {
+    "name": "reference_date",
+    "type": "DATE",
+    "mode": "REQUIRED",
+    "description": "The as-of date for the features; the label window is the 60 days after it."
+  },
+  {
+    "name": "customer_id",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Joins to customers.customer_id."
+  },
+  {
+    "name": "days_since_last_booking",
+    "type": "INT64",
+    "mode": "NULLABLE",
+    "description": "Days from the most recent confirmed booking to reference_date; NULL if never booked."
+  },
+  {
+    "name": "lifetime_bookings",
+    "type": "INT64",
+    "mode": "REQUIRED",
+    "description": "Confirmed bookings before reference_date."
+  },
+  {
+    "name": "loyalty_tier",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "none, blue, silver or gold."
+  },
+  {
+    "name": "home_market_climate",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "cold, mild or warm."
+  },
+  {
+    "name": "sessions_last_90d",
+    "type": "INT64",
+    "mode": "REQUIRED",
+    "description": "Signed-in sessions in the 90 days before reference_date."
+  },
+  {
+    "name": "warm_views_last_90d",
+    "type": "INT64",
+    "mode": "REQUIRED",
+    "description": "Sessions with a warm-escape view in the 90 days before reference_date."
+  },
+  {
+    "name": "email_optin",
+    "type": "BOOL",
+    "mode": "REQUIRED",
+    "description": "Email opt-in flag."
+  },
+  {
+    "name": "ltv_band",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "none, low, mid, high or vip, computed on lifetime value before reference_date."
+  },
+  {
+    "name": "booked_warm_escape_60d",
+    "type": "INT64",
+    "mode": "REQUIRED",
+    "description": "Label: 1 if the customer made a confirmed warm-escape booking in the 60 days after reference_date, else 0."
+  }
+]

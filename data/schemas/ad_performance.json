@@ -1,0 +1,62 @@
+[
+  {
+    "name": "spend_date",
+    "type": "DATE",
+    "mode": "REQUIRED",
+    "description": "Calendar date of the spend. Partition column."
+  },
+  {
+    "name": "channel",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Paid channel: paid_search, paid_social or affiliate."
+  },
+  {
+    "name": "campaign_id",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Campaign identifier, e.g. CMP-002. Joins to campaign_history.campaign_id."
+  },
+  {
+    "name": "campaign_name",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Campaign name, e.g. Warm Escapes Retargeting, Fall City Breaks 2026."
+  },
+  {
+    "name": "target_segment",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Audience the campaign targets, e.g. lapsed_compass_cold (lapsed Compass members in cold-weather markets), all_customers, urban_explorers."
+  },
+  {
+    "name": "market",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Metro the spend was targeted to. Joins to customers.home_market and plan.market."
+  },
+  {
+    "name": "impressions",
+    "type": "INT64",
+    "mode": "REQUIRED",
+    "description": "Ad impressions served."
+  },
+  {
+    "name": "clicks",
+    "type": "INT64",
+    "mode": "REQUIRED",
+    "description": "Ad clicks."
+  },
+  {
+    "name": "spend_usd",
+    "type": "FLOAT64",
+    "mode": "REQUIRED",
+    "description": "Media spend in US dollars."
+  },
+  {
+    "name": "attributed_conversions",
+    "type": "INT64",
+    "mode": "REQUIRED",
+    "description": "Bookings the ad platform attributed to this campaign, market and day (platform attribution, not the bookings table)."
+  }
+]

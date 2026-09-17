@@ -1,0 +1,38 @@
+[
+  {
+    "name": "receipt_id",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Unique receipt identifier returned by the activation endpoint."
+  },
+  {
+    "name": "segment_description",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "The natural-language segment definition that was activated."
+  },
+  {
+    "name": "audience_size",
+    "type": "INT64",
+    "mode": "REQUIRED",
+    "description": "Number of customers in the submitted audience."
+  },
+  {
+    "name": "channel",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Channel the audience was sent to: one of paid_search, paid_social, organic, email, direct, affiliate."
+  },
+  {
+    "name": "submitted_at",
+    "type": "TIMESTAMP",
+    "mode": "REQUIRED",
+    "description": "When the audience was submitted (UTC)."
+  },
+  {
+    "name": "status",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "accepted, rejected or pending."
+  }
+]

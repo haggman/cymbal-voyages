@@ -1,0 +1,86 @@
+[
+  {
+    "name": "session_id",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Unique session identifier, e.g. S00012345. bookings.session_id points here when a booking was completed inside a tracked web session."
+  },
+  {
+    "name": "session_ts",
+    "type": "TIMESTAMP",
+    "mode": "REQUIRED",
+    "description": "Session start time in UTC."
+  },
+  {
+    "name": "session_date",
+    "type": "DATE",
+    "mode": "REQUIRED",
+    "description": "Calendar date of the session (UTC). Partition column."
+  },
+  {
+    "name": "customer_id",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "The signed-in customer, or NULL for an anonymous visitor. Joins to customers.customer_id."
+  },
+  {
+    "name": "channel",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Marketing channel that brought the session: one of paid_search, paid_social, organic, email, direct, affiliate. paid_social includes the always-on retargeting program."
+  },
+  {
+    "name": "device",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Device category: mobile, desktop or tablet."
+  },
+  {
+    "name": "landing_category",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Product category of the landing page (warm_escape, city_break, ski, adventure, cruise) or home for the homepage."
+  },
+  {
+    "name": "destinations_viewed",
+    "type": "STRING",
+    "mode": "REPEATED",
+    "description": "Destination ids viewed during the session, in order, e.g. [DST-007, DST-012]. Joins to destinations.destination_id."
+  },
+  {
+    "name": "primary_category_viewed",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "The product category the session mostly browsed: one of warm_escape (winter and early-spring sun getaways, our signature category), city_break, ski, adventure, cruise."
+  },
+  {
+    "name": "viewed_warm_escape",
+    "type": "BOOL",
+    "mode": "REQUIRED",
+    "description": "TRUE when at least one warm-escape destination was viewed in the session. Use this to find customers who browsed warm escapes."
+  },
+  {
+    "name": "pages_viewed",
+    "type": "INT64",
+    "mode": "REQUIRED",
+    "description": "Number of pages viewed in the session."
+  },
+  {
+    "name": "searched_travel_month",
+    "type": "DATE",
+    "mode": "NULLABLE",
+    "description": "First day of the travel month the visitor searched for (e.g. 2027-02-01 for February 2027), or NULL if no dates were entered."
+  },
+  {
+    "name": "added_to_cart",
+    "type": "BOOL",
+    "mode": "REQUIRED",
+    "description": "TRUE when the visitor added a package to the cart."
+  },
+  {
+    "name": "converted",
+    "type": "BOOL",
+    "mode": "REQUIRED",
+    "description": "TRUE when a booking was completed inside this session. Conversion rate = COUNTIF(converted) / COUNT(*). Anonymous sessions are always FALSE."
+  }
+]

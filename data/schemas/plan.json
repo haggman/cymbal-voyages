@@ -1,0 +1,32 @@
+[
+  {
+    "name": "plan_month",
+    "type": "DATE",
+    "mode": "REQUIRED",
+    "description": "First day of the plan month, e.g. 2026-08-01 for August 2026."
+  },
+  {
+    "name": "category",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Product category: one of warm_escape (winter and early-spring sun getaways, our signature category), city_break, ski, adventure, cruise."
+  },
+  {
+    "name": "market",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Customer home market (metro). Joins to customers.home_market."
+  },
+  {
+    "name": "planned_bookings",
+    "type": "INT64",
+    "mode": "REQUIRED",
+    "description": "Planned count of confirmed bookings for the month, category and market."
+  },
+  {
+    "name": "planned_revenue_usd",
+    "type": "FLOAT64",
+    "mode": "REQUIRED",
+    "description": "Planned gross booking revenue in US dollars."
+  }
+]

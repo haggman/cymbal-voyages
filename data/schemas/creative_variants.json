@@ -1,0 +1,62 @@
+[
+  {
+    "name": "variant_id",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Unique creative variant identifier, e.g. CRV-0042."
+  },
+  {
+    "name": "campaign_id",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Campaign the variant ran in. Joins to campaign_history.campaign_id."
+  },
+  {
+    "name": "target_segment",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Audience the variant was shown to, e.g. lapsed_compass_cold, all_customers, urban_explorers. Can be narrower than the campaign's segment."
+  },
+  {
+    "name": "hero_imagery_style",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Hero image style: beach_couple, family_pool, resort_aerial, city_skyline or adventure."
+  },
+  {
+    "name": "offer_framing",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "How the offer was framed: percent_off, bonus_points (Compass points), free_night, urgency (countdown / limited time) or no_offer."
+  },
+  {
+    "name": "cta_construction",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Call-to-action wording: book_now, see_deals, plan_your_escape or claim_offer."
+  },
+  {
+    "name": "impressions",
+    "type": "INT64",
+    "mode": "REQUIRED",
+    "description": "Impressions served for the variant."
+  },
+  {
+    "name": "clicks",
+    "type": "INT64",
+    "mode": "REQUIRED",
+    "description": "Clicks on the variant."
+  },
+  {
+    "name": "conversions",
+    "type": "INT64",
+    "mode": "REQUIRED",
+    "description": "Bookings attributed to the variant."
+  },
+  {
+    "name": "conversion_rate",
+    "type": "FLOAT64",
+    "mode": "REQUIRED",
+    "description": "conversions ÷ clicks, as a fraction (0.031 = 3.1%). Weight by clicks when averaging across variants."
+  }
+]

@@ -1,0 +1,62 @@
+[
+  {
+    "name": "destination_id",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Unique destination identifier, e.g. DST-007. Joins to packages.destination_id and appears in web_sessions.destinations_viewed."
+  },
+  {
+    "name": "name",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Customer-facing destination name, e.g. Aruba, Whistler, Alaska Inside Passage."
+  },
+  {
+    "name": "country",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Country (or countries) of the destination."
+  },
+  {
+    "name": "region",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Marketing region, e.g. Caribbean, Hawaii, Canadian Rockies, Mediterranean."
+  },
+  {
+    "name": "category",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Product category: one of warm_escape (winter and early-spring sun getaways, our signature category), city_break, ski, adventure, cruise."
+  },
+  {
+    "name": "description",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "120–200 word customer-facing description in the brand voice. This text is embedded in catalog_embeddings for semantic search."
+  },
+  {
+    "name": "price_band",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Relative price positioning: budget, mid, premium or luxury."
+  },
+  {
+    "name": "best_months",
+    "type": "INT64",
+    "mode": "REPEATED",
+    "description": "Calendar months (1–12) when the destination is at its best for travel."
+  },
+  {
+    "name": "highlights",
+    "type": "STRING",
+    "mode": "REPEATED",
+    "description": "Five short phrases naming the destination's signature experiences."
+  },
+  {
+    "name": "good_for",
+    "type": "STRING",
+    "mode": "REPEATED",
+    "description": "Traveler types the destination suits, e.g. couples, families, active travelers."
+  }
+]

@@ -1,0 +1,120 @@
+{
+  "customers": {
+    "description": "One row per customer account (50,000). Identity is the customer_id only; there are no names or contact details, just opt-in flags. Loyalty status is as of the end of the data window (Sep 15, 2026).",
+    "partition": null,
+    "partition_type": "DAY",
+    "cluster": [
+      "home_market_climate",
+      "loyalty_status"
+    ]
+  },
+  "destinations": {
+    "description": "The 60 places and itineraries Cymbal Voyages sells, with the customer-facing description that is embedded for semantic search. About a third are warm escapes.",
+    "partition": null,
+    "partition_type": "DAY",
+    "cluster": null
+  },
+  "packages": {
+    "description": "The 300 bookable trip packages (five per destination): flights, nights and transfers bundled at a per-person price. Two warm-escape packages were re-priced on Aug 1, 2026.",
+    "partition": null,
+    "partition_type": "DAY",
+    "cluster": [
+      "destination_id"
+    ]
+  },
+  "web_sessions": {
+    "description": "Website and app sessions, one row per session, Jul 1, 2025 – Sep 15, 2026. About half of sessions belong to a signed-in customer; anonymous sessions have no customer_id and cannot convert because booking requires signing in. A 4-hour site incident on Aug 9, 2026 (14:00–18:00 UTC) removed that window's sessions.",
+    "partition": "session_date",
+    "partition_type": "DAY",
+    "cluster": [
+      "customer_id",
+      "channel"
+    ]
+  },
+  "bookings": {
+    "description": "Reservations, one row per booking, Jul 1, 2025 – Sep 15, 2026. A booking in reporting means a row with status = confirmed; cancelled rows are excluded from bookings and revenue. About 40% of bookings complete inside a tracked web session (session_id set); the rest complete in the app or by phone within two days of a browse session.",
+    "partition": "booking_date",
+    "partition_type": "DAY",
+    "cluster": [
+      "customer_id",
+      "package_id"
+    ]
+  },
+  "ad_performance": {
+    "description": "Daily paid-media results by campaign and market, Jul 1, 2025 – Sep 15, 2026. Only paid channels (paid_search, paid_social, affiliate) appear here; email and organic have no media spend. Total paid spend is steady across the summer of 2026, but its allocation between campaigns changed on Jul 24, 2026.",
+    "partition": "spend_date",
+    "partition_type": "DAY",
+    "cluster": [
+      "campaign_id",
+      "market"
+    ]
+  },
+  "plan": {
+    "description": "The booking and revenue plan by calendar month, product category and market, Jul 2025 – Sep 2026. Fiscal months equal calendar months. Compare confirmed bookings by booking_date month against planned_bookings; variance = actual / plan − 1.",
+    "partition": null,
+    "partition_type": "DAY",
+    "cluster": [
+      "category",
+      "market"
+    ]
+  },
+  "campaign_history": {
+    "description": "The 12 marketing campaigns run since Jul 2025, with objective, audience, flight dates, budget, attributed results and a short retrospective. Always-on programs have end_date 2026-12-31 and results to date.",
+    "partition": null,
+    "partition_type": "DAY",
+    "cluster": null
+  },
+  "creative_variants": {
+    "description": "Performance of 200 ad creative variants across the campaigns, tagged by imagery style, offer framing and call-to-action wording. Use it to learn which creative choices convert for a given target segment.",
+    "partition": null,
+    "partition_type": "DAY",
+    "cluster": [
+      "target_segment"
+    ]
+  },
+  "customer_month_status": {
+    "description": "Loyalty status of every customer at the start of each month, Jul 2025 – Sep 2026 (50,000 customers × 15 months). Use it to define a cohort as it stood at the time, e.g. who was lapsed on Aug 1, 2025 versus Aug 1, 2026.",
+    "partition": "status_month",
+    "partition_type": "MONTH",
+    "cluster": [
+      "customer_id"
+    ]
+  },
+  "customer_features": {
+    "description": "One row per customer as of Sep 1, 2026: the audience-building table. Combines loyalty status, recency, contactability, 90-day browsing and the model's warm-escape propensity score. Everything here is computed as of as_of_date; do not join to later sessions.",
+    "partition": null,
+    "partition_type": "DAY",
+    "cluster": [
+      "home_market_climate",
+      "loyalty_status"
+    ]
+  },
+  "propensity_training": {
+    "description": "Training set for the warm-escape propensity model: 100,000 customer snapshots at eight monthly reference dates (Oct 2025 – May 2026), with features as they stood on the reference date and whether the customer booked a warm escape in the following 60 days.",
+    "partition": null,
+    "partition_type": "DAY",
+    "cluster": [
+      "reference_date"
+    ]
+  },
+  "decisioning_policy": {
+    "description": "Next-best-action rules evaluated per customer against customer_features. Rules run in ascending priority; the first enabled rule whose condition(s) hold decides the action. Marketers edit this table.",
+    "partition": null,
+    "partition_type": "DAY",
+    "cluster": null
+  },
+  "activations": {
+    "description": "Receipts written by the activation endpoint when an audience is submitted to a channel. Empty until the lab submits an audience.",
+    "partition": null,
+    "partition_type": "DAY",
+    "cluster": null
+  },
+  "catalog_embeddings": {
+    "description": "Vector embeddings of every destination and package description (360 rows) from Vertex AI gemini-embedding-001 at 3,072 dimensions, for semantic search with VECTOR_SEARCH or ML.DISTANCE.",
+    "partition": null,
+    "partition_type": "DAY",
+    "cluster": [
+      "item_type"
+    ]
+  }
+}

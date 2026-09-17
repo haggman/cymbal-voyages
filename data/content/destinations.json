@@ -1,0 +1,2047 @@
+[
+ {
+  "destination_id": "DST-001",
+  "name": "Cancún",
+  "country": "Mexico",
+  "region": "Mexican Caribbean",
+  "category": "warm_escape",
+  "price_band": "mid",
+  "best_months": [
+   12,
+   1,
+   2,
+   3,
+   4
+  ],
+  "description": "Cancún splits neatly in two. The Hotel Zone runs along a narrow barrier strip, with the Caribbean on one side and the calm Nichupté Lagoon on the other, so mornings can be spent on wide white sand and afternoons on a paddleboard in flat water. Downtown, a short bus ride west, is where the city actually lives: taco stands in Parque de las Palapas, the souvenir sprawl of Mercado 28, and a growing crop of mezcal bars. Day trips are the point for many visitors. Isla Mujeres is twenty minutes by ferry, Chichén Itzá is a long but worthwhile day, and the cenotes near Puerto Morelos are close enough for a lazy half day. Water stays warm all year, but June through November brings storm risk and heavier sargassum, so December through April is the reliable window. Big resorts dominate, which makes this easy for families and groups who want everything on one property, and the airport is very busy, so flights are frequent and often inexpensive.",
+  "highlights": [
+   "ferry to Isla Mujeres",
+   "cenote swims near Puerto Morelos",
+   "a long day at Chichén Itzá",
+   "tacos in Parque de las Palapas",
+   "paddleboarding on the lagoon"
+  ],
+  "vibe": [
+   "lively",
+   "easy",
+   "sunny"
+  ],
+  "good_for": [
+   "families",
+   "friends",
+   "first-timers"
+  ]
+ },
+ {
+  "destination_id": "DST-002",
+  "name": "Tulum and the Riviera Maya",
+  "country": "Mexico",
+  "region": "Mexican Caribbean",
+  "category": "warm_escape",
+  "price_band": "premium",
+  "best_months": [
+   12,
+   1,
+   2,
+   3,
+   4
+  ],
+  "description": "South of Cancún the coast loosens up. The Riviera Maya stretches roughly eighty miles from Puerto Morelos through Playa del Carmen to Tulum, and each town has a different pace. Playa is walkable and lively, with Fifth Avenue for shopping and a ferry to Cozumel for diving. Tulum trades on its beach road of thatched-roof hotels, its clifftop Maya ruins above a small cove, and a jungle full of cenotes where you swim in clear freshwater under limestone ceilings. Rent a bike, eat ceviche barefoot, and go to the ruins at opening time before the tour buses. Prices along the Tulum beach strip run high and many properties are off-grid, so check for air conditioning and reliable water if that matters to you. Sargassum can blanket the sand from May into September, and the hurricane season overlaps, which is why December through April draws the most visitors. Couples and small groups of friends who want boutique stays, long lunches, and something to do beyond the beach tend to settle in here for a week.",
+  "highlights": [
+   "the clifftop ruins at Tulum",
+   "swimming in jungle cenotes",
+   "cycling the beach road",
+   "ferry to Cozumel for diving",
+   "ceviche lunches on the sand"
+  ],
+  "vibe": [
+   "bohemian",
+   "relaxed",
+   "stylish"
+  ],
+  "good_for": [
+   "couples",
+   "friends",
+   "honeymooners"
+  ]
+ },
+ {
+  "destination_id": "DST-003",
+  "name": "Los Cabos",
+  "country": "Mexico",
+  "region": "Baja California",
+  "category": "warm_escape",
+  "price_band": "premium",
+  "best_months": [
+   11,
+   12,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "description": "At the tip of the Baja peninsula, two towns share one airport and very different moods. Cabo San Lucas is the marina, the sportfishing fleet, and the bars that go late; San José del Cabo, twenty miles east, is a colonial plaza, an art walk on Thursday evenings, and quieter dinners. The corridor of resorts between them faces the Sea of Cortez, and note that many beaches here have strong surf and are not swimmable, so ask about Medano or Chileno if you want to actually get in the water. Desert meets ocean in a way that surprises people: cactus down to the sand, whales passing close to shore from January through March, and dry, bright weather nearly every day. Boat trips to the Arch and Lover's Beach, a morning at Todos Santos up the coast, and tequila or raicilla tastings fill the days. Prices skew upward, especially in high season. Late summer brings heat and some storm risk. Good for golfers, anglers, and anyone who likes their beach with a margarita and a view.",
+  "highlights": [
+   "boat trip to the Arch",
+   "whale watching in winter",
+   "Thursday art walk in San José",
+   "swimming at Chileno Bay",
+   "a morning in Todos Santos"
+  ],
+  "vibe": [
+   "polished",
+   "sunny",
+   "spirited"
+  ],
+  "good_for": [
+   "couples",
+   "friends",
+   "active travelers",
+   "repeat visitors"
+  ]
+ },
+ {
+  "destination_id": "DST-004",
+  "name": "Puerto Vallarta",
+  "country": "Mexico",
+  "region": "Pacific Mexico",
+  "category": "warm_escape",
+  "price_band": "budget",
+  "best_months": [
+   11,
+   12,
+   1,
+   2,
+   3,
+   4
+  ],
+  "description": "Puerto Vallarta sits where the Sierra Madre drops into Banderas Bay, so the beach has mountains behind it and the old town climbs uphill in cobbled streets. The Malecón is the spine of the place, a long seafront promenade with sculptures, street food, and sunset crowds. The Zona Romántica has the restaurants, the galleries, and the gay-friendly bars that have made the city a welcoming spot for decades. Boats leave the pier for Yelapa and Las Animas, small beaches reachable only by water, and in winter humpback whales are visible from the shore. Prices stay friendlier than in Cancún or Cabo, the food scene is genuinely good, and the airport is well connected. The rainy season runs June through October with hot, humid afternoons and evening downpours; November through April is dry and pleasant. This suits people who want a real Mexican city with a beach attached rather than a resort bubble, and it works equally well for a long weekend or a slow month.",
+  "highlights": [
+   "sunset walk on the Malecón",
+   "water taxi to Yelapa",
+   "dinner in the Zona Romántica",
+   "humpback whales in winter",
+   "street tacos on Basilio Badillo"
+  ],
+  "vibe": [
+   "welcoming",
+   "colorful",
+   "unhurried"
+  ],
+  "good_for": [
+   "couples",
+   "solo travelers",
+   "foodies",
+   "repeat visitors"
+  ]
+ },
+ {
+  "destination_id": "DST-005",
+  "name": "Punta Cana",
+  "country": "Dominican Republic",
+  "region": "Caribbean",
+  "category": "warm_escape",
+  "price_band": "mid",
+  "best_months": [
+   12,
+   1,
+   2,
+   3,
+   4
+  ],
+  "description": "Punta Cana is built for ease. The eastern tip of the Dominican Republic has roughly thirty miles of coconut-lined beach, an airport minutes from most hotels, and a lineup of all-inclusive resorts where the pools, the buffets, and the swim-up bars are all part of the price. That simplicity is exactly why families, wedding parties, and groups of friends keep choosing it. The water at Bávaro is calm and shallow, with a reef offshore. Beyond the resort gates there is more than people expect: catamaran trips to a natural sandbar, ziplining in the hills, freshwater lagoons in a protected reserve, and a day on Saona Island with a beach lunch. Bring pesos for the small colmados and roadside fruit stands if you head out. Hurricane season runs June through November, with greater risk in August and September, and rain showers are frequent in the shoulder months. December through April is dry, warm, and busy. If you want very little friction between arrival and a lounge chair, this is the one.",
+  "highlights": [
+   "catamaran to the sandbar",
+   "day trip to Saona Island",
+   "freshwater lagoons in the reserve",
+   "calm water at Bávaro",
+   "ziplining in the hills"
+  ],
+  "vibe": [
+   "effortless",
+   "festive",
+   "tropical"
+  ],
+  "good_for": [
+   "families",
+   "friends",
+   "honeymooners",
+   "first-timers"
+  ]
+ },
+ {
+  "destination_id": "DST-006",
+  "name": "Montego Bay",
+  "country": "Jamaica",
+  "region": "Caribbean",
+  "category": "warm_escape",
+  "price_band": "mid",
+  "best_months": [
+   12,
+   1,
+   2,
+   3,
+   4
+  ],
+  "description": "Montego Bay is the arrival point for most of Jamaica's visitors and rewards those who stay. Doctor's Cave beach has calm, clear water a few steps from town, and the Hip Strip runs along it with jerk stands, rum bars, and a soundtrack of reggae and dancehall. Resorts line the coast east and west, from adults-only spots to large family properties with water parks. The real texture is outside them: a bamboo raft drift down the Martha Brae, the plantation history of Rose Hall, roadside jerk chicken cooked over pimento wood, and a night in a fishing village where the music does not stop. Negril's long beach and cliffs are a ninety-minute drive if you want a second base. Jerk, patties, ackee and saltfish, and Blue Mountain coffee are worth seeking out. Warm all year; the hurricane season peaks August through October, and December through April is the dry, sunny stretch. Travelers who want a resort with a strong sense of place, and a culture that meets you at the door, do well here.",
+  "highlights": [
+   "swimming at Doctor's Cave",
+   "bamboo rafting the Martha Brae",
+   "roadside jerk over pimento wood",
+   "a night on the Hip Strip",
+   "day trip to Negril's cliffs"
+  ],
+  "vibe": [
+   "rhythmic",
+   "warm",
+   "laid-back"
+  ],
+  "good_for": [
+   "couples",
+   "families",
+   "friends"
+  ]
+ },
+ {
+  "destination_id": "DST-007",
+  "name": "Aruba",
+  "country": "Aruba",
+  "region": "Southern Caribbean",
+  "category": "warm_escape",
+  "price_band": "premium",
+  "best_months": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12
+  ],
+  "description": "Aruba sits far enough south to be outside the main hurricane belt, and that single fact shapes the whole island. Constant trade winds, low rainfall, and an average temperature that barely moves make it a reliable choice in any month, including the summer and fall when the rest of the Caribbean gets nervous. The west coast has the beaches: Eagle Beach with its fofoti trees and Palm Beach with its high-rise resorts and water sports. The north and east are wild, with limestone cliffs, a natural pool reached by four-wheel drive, and the cactus scrub of Arikok National Park. Oranjestad, the small Dutch-colonial capital, has pastel buildings and a free tram. Windsurfers and kitesurfers gather at Fisherman's Huts. Restaurants lean toward seafood and Dutch-Caribbean dishes like keshi yena. The island is safe, easy to drive, and the currency question is settled by using dollars nearly everywhere. Repeat visitors are the norm; people come back year after year for the certainty of it.",
+  "highlights": [
+   "fofoti trees on Eagle Beach",
+   "jeep ride to the natural pool",
+   "kitesurfing at Fisherman's Huts",
+   "hiking in Arikok National Park",
+   "keshi yena in Oranjestad"
+  ],
+  "vibe": [
+   "breezy",
+   "dependable",
+   "friendly"
+  ],
+  "good_for": [
+   "families",
+   "repeat visitors",
+   "couples",
+   "multigenerational groups"
+  ]
+ },
+ {
+  "destination_id": "DST-008",
+  "name": "Providenciales, Turks and Caicos",
+  "country": "Turks and Caicos Islands",
+  "region": "Caribbean",
+  "category": "warm_escape",
+  "price_band": "luxury",
+  "best_months": [
+   12,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "description": "Providenciales, or Provo to everyone who lives there, is the developed island in the Turks and Caicos chain, and its reputation rests on Grace Bay: three miles of powder sand facing water so clear and pale it looks lit from below. A barrier reef keeps the waves down and the snorkeling is a few fin kicks from shore. The rest of the island is low and scrubby, which keeps the attention on the water: bonefishing in the flats, diving the wall off Northwest Point, kayaking through mangroves in Chalk Sound, and a Thursday night fish fry that is the main social event of the week. Conch is on every menu, and a conch farm gives tours. Villas and small resorts cost real money, and there is little in the way of budget lodging or nightlife. Flights from the US East Coast are short. Hurricane season is June through November; December through May is dry and bright. Honeymooners and families with a generous budget who want quiet, clean, and calm tend to find exactly that.",
+  "highlights": [
+   "mornings on Grace Bay",
+   "kayaking through Chalk Sound",
+   "Thursday night fish fry",
+   "wall diving at Northwest Point",
+   "bonefishing on the flats"
+  ],
+  "vibe": [
+   "serene",
+   "pristine",
+   "unhurried"
+  ],
+  "good_for": [
+   "honeymooners",
+   "families",
+   "couples"
+  ]
+ },
+ {
+  "destination_id": "DST-009",
+  "name": "Barbados",
+  "country": "Barbados",
+  "region": "Eastern Caribbean",
+  "category": "warm_escape",
+  "price_band": "premium",
+  "best_months": [
+   12,
+   1,
+   2,
+   3,
+   4
+  ],
+  "description": "Barbados stands apart in the Atlantic, east of the island chain, with two distinct coasts. The west is the calm, sheltered side, with gentle water, sea turtles, and the pricier hotels; the east faces open ocean, with surf at Bathsheba and a rugged, windswept feel. Bridgetown is a working capital with a UNESCO-listed old town, and the island is small enough to circle in a day. Rum is the thread that ties it together, with distilleries that date back centuries and a rum shop in every parish. Friday night at Oistins is the fish fry, with grilled marlin and mahi eaten at picnic tables to a soca soundtrack. Cricket, flying fish cutters, and a well-preserved plantation house or two fill out the days. Crop Over, the summer carnival, peaks in early August. Hurricanes are rarer here than farther west, but the wet season runs June through November with brief heavy showers. December through April is dry and breezy. Travelers who like a beach with history and food to go with it should look here.",
+  "highlights": [
+   "Friday fish fry at Oistins",
+   "swimming with west coast turtles",
+   "surf watching at Bathsheba",
+   "a rum distillery tour",
+   "Crop Over in August"
+  ],
+  "vibe": [
+   "genteel",
+   "spirited",
+   "sunny"
+  ],
+  "good_for": [
+   "couples",
+   "foodies",
+   "multigenerational groups",
+   "repeat visitors"
+  ]
+ },
+ {
+  "destination_id": "DST-010",
+  "name": "St. Lucia",
+  "country": "Saint Lucia",
+  "region": "Eastern Caribbean",
+  "category": "warm_escape",
+  "price_band": "luxury",
+  "best_months": [
+   12,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "description": "Two volcanic spires called the Pitons rise straight out of the sea on St. Lucia's southwest coast, and the island's green, steep, rainforested interior gives it a feel unlike the flatter Caribbean islands. Soufrière is the base for the dramatic side: a drive-in volcano with sulfur springs, mud baths, waterfalls, and a hike up Gros Piton that takes a solid morning. Rodney Bay in the north has the marina, the beaches, and the restaurants, with a Friday street party in nearby Gros Islet. Diving and snorkeling are strong along the west coast. Resorts range from hillside hideaways with plunge pools to family properties on the sand, and prices reflect the island's honeymoon reputation. The local cuisine mixes Creole, French, and West African influences; try green fig and saltfish, and the Saturday market in Castries. Rainy season is June through November, hurricane risk included; the dry months from December through May are the ones to book. Couples on a milestone trip and active travelers who want to hike as much as they swim both find plenty here.",
+  "highlights": [
+   "hiking Gros Piton",
+   "mud baths at the sulfur springs",
+   "Friday street party in Gros Islet",
+   "snorkeling beneath the Pitons",
+   "Saturday market in Castries"
+  ],
+  "vibe": [
+   "lush",
+   "romantic",
+   "dramatic"
+  ],
+  "good_for": [
+   "honeymooners",
+   "couples",
+   "active travelers"
+  ]
+ },
+ {
+  "destination_id": "DST-011",
+  "name": "Nassau and Paradise Island",
+  "country": "Bahamas",
+  "region": "Bahamas",
+  "category": "warm_escape",
+  "price_band": "mid",
+  "best_months": [
+   12,
+   1,
+   2,
+   3,
+   4
+  ],
+  "description": "Nassau is a short hop from Florida and a good candidate for a Caribbean city break with a beach attached. Paradise Island, linked by two bridges, holds the big resort complexes with their water parks, marine habitats, and casinos. Downtown Nassau has Bay Street shops, pastel colonial buildings, a straw market, and the Queen's Staircase cut from limestone. The fish fry at Arawak Cay serves conch fritters, cracked conch, and rum punch at open-air stalls. Cable Beach stretches west. Junkanoo, the island's street parade with drums, whistles, and elaborate costumes, runs on Boxing Day and New Year's Day and is worth planning around. Day boats reach the Exumas' swimming pigs and the sandbars off Rose Island. Cruise ships crowd the port on many days, so mornings and evenings are calmer in town. Hurricane season is June through November; December through April is dry and warm with cooler nights. Families with young children and first-time Caribbean visitors who want a quick, easy trip usually land here.",
+  "highlights": [
+   "conch fritters at Arawak Cay",
+   "Junkanoo parade at New Year",
+   "day boat to the Exumas",
+   "the Queen's Staircase",
+   "resort water parks on Paradise Island"
+  ],
+  "vibe": [
+   "bustling",
+   "playful",
+   "convenient"
+  ],
+  "good_for": [
+   "families",
+   "first-timers",
+   "friends"
+  ]
+ },
+ {
+  "destination_id": "DST-012",
+  "name": "Maui",
+  "country": "United States",
+  "region": "Hawaii",
+  "category": "warm_escape",
+  "price_band": "premium",
+  "best_months": [
+   12,
+   1,
+   2,
+   3,
+   4,
+   5,
+   9,
+   10
+  ],
+  "description": "Maui has a wide range of the Hawaiian islands' scenery packed into a drivable space. Wailea and Kā'anapali have the resort beaches and calm morning water; Pā'ia and the upcountry towns of Makawao and Kula have farm stands, cowboys, and cooler air. The road to Hāna, with its bridges, waterfalls, and banana bread stands, is a full day that is more about the drive than the town at the end. Haleakalā sunrise requires a reservation and a very early alarm, and the summit is cold enough for a jacket. Humpback whales fill the channel from December through April, and boats to Molokini crater for snorkeling leave early. Lahaina's recovery after the 2023 fire is ongoing; check current guidance on which areas welcome visitors. Poke, shave ice, and plate lunches are cheap and everywhere. Prices for hotels and cars run high in winter and around the holidays; April through May and September through October are gentler. Couples, families, and anyone who wants beach mornings and mountain afternoons on the same day will be comfortable here.",
+  "highlights": [
+   "sunrise at Haleakalā summit",
+   "driving the road to Hāna",
+   "snorkeling at Molokini crater",
+   "whale watching from Kā'anapali",
+   "farm stands in upcountry Kula"
+  ],
+  "vibe": [
+   "scenic",
+   "varied",
+   "mellow"
+  ],
+  "good_for": [
+   "couples",
+   "families",
+   "honeymooners",
+   "active travelers"
+  ]
+ },
+ {
+  "destination_id": "DST-013",
+  "name": "Oahu",
+  "country": "United States",
+  "region": "Hawaii",
+  "category": "warm_escape",
+  "price_band": "mid",
+  "best_months": [
+   4,
+   5,
+   9,
+   10,
+   11,
+   12,
+   1,
+   2
+  ],
+  "description": "Oahu carries most of Hawaii's population and its capital, so the trip has an urban side that the other islands lack. Waikīkī is the base for most visitors, with a long curved beach, gentle surf lessons, and Diamond Head crater at the end. Honolulu itself has Chinatown, ramen counters, a serious food scene, and Pearl Harbor, which deserves a half day. The North Shore is an hour away and a different world: winter swells that bring professional surfers to Pipeline, shrimp trucks in Kahuku, and a slower pace in Hale'iwa. The windward side has the Ko'olau cliffs, Lanikai's small, calm beach, and kayaking to the Mokulua islets. Hiking trails range from a paved stroll up Diamond Head to a steep ridge climb on Koko Head. Weather is warm year-round, with more rain on the windward side in winter; spring and fall are less crowded and a little cheaper. First-timers to Hawaii, families, and anyone who wants city energy with their beach days do well starting here.",
+  "highlights": [
+   "surf lessons at Waikīkī",
+   "winter swells on the North Shore",
+   "shrimp trucks in Kahuku",
+   "kayaking to the Mokulua islets",
+   "a half day at Pearl Harbor"
+  ],
+  "vibe": [
+   "energetic",
+   "iconic",
+   "welcoming"
+  ],
+  "good_for": [
+   "first-timers",
+   "families",
+   "friends",
+   "solo travelers"
+  ]
+ },
+ {
+  "destination_id": "DST-014",
+  "name": "Kauai",
+  "country": "United States",
+  "region": "Hawaii",
+  "category": "warm_escape",
+  "price_band": "premium",
+  "best_months": [
+   4,
+   5,
+   6,
+   9,
+   10
+  ],
+  "description": "Kauai is older and greener than the other main Hawaiian islands, and it rains often enough to keep it that way. The payoff is scenery: the fluted cliffs of the Nā Pali coast, the red canyon at Waimea, taro fields in the Hanalei valley, and waterfalls that appear after every shower. The north shore around Hanalei and Princeville is lush and slower, with big winter surf and calm summer water; the south shore at Po'ipū is sunnier and more reliable for swimming. There is one main road, no building taller than a coconut palm, and traffic can back up, so plan the day by region. Boat and helicopter tours of Nā Pali are the splurge; the first two miles of the Kalalau trail are the free alternative. Roosters are everywhere. Restaurants are limited and close early, so food trucks and farmers markets fill in. Winter is wet and dramatic, April through June and September through October are drier, and the summer is busy with families. Hikers, couples who like quiet, and repeat Hawaii visitors tend to fall for this one.",
+  "highlights": [
+   "boat tour of Nā Pali",
+   "lookouts over Waimea Canyon",
+   "taro fields in Hanalei valley",
+   "snorkeling at Po'ipū Beach",
+   "first miles of the Kalalau trail"
+  ],
+  "vibe": [
+   "wild",
+   "green",
+   "quiet"
+  ],
+  "good_for": [
+   "couples",
+   "active travelers",
+   "repeat visitors",
+   "honeymooners"
+  ]
+ },
+ {
+  "destination_id": "DST-015",
+  "name": "Guanacaste",
+  "country": "Costa Rica",
+  "region": "Costa Rica Pacific",
+  "category": "warm_escape",
+  "price_band": "mid",
+  "best_months": [
+   12,
+   1,
+   2,
+   3,
+   4
+  ],
+  "description": "Guanacaste is Costa Rica's dry northwest corner, where the Pacific coast has a string of beach towns and the interior has cattle ranches, volcanoes, and hot springs. Liberia's airport puts you an hour from the sand. Tamarindo is the surf town with the nightlife; Playas del Coco and Flamingo are for sportfishing and quieter resorts; Nosara and Sámara, farther south, are yoga, long boards, and dirt roads. Turtles nest at Ostional, monkeys shout at dawn, and the Rincón de la Vieja park has mud pots and waterfalls. Sunsets are a nightly event. Rental cars with four-wheel drive make the region far easier. December through April is the dry season, with dusty roads and hot afternoons; May through November is greener, cheaper, and wetter, with mornings usually clear and rain arriving late in the day. September and October see the heaviest rain. Active travelers, families who want wildlife between beach days, and surfers of any level find a good balance here, and the general ease of the country reassures first-timers.",
+  "highlights": [
+   "surf lessons in Tamarindo",
+   "turtle nesting at Ostional",
+   "Rincón de la Vieja mud pots",
+   "sunset on Playa Flamingo",
+   "howler monkeys at dawn"
+  ],
+  "vibe": [
+   "adventurous",
+   "sun-baked",
+   "easygoing"
+  ],
+  "good_for": [
+   "active travelers",
+   "families",
+   "first-timers",
+   "friends"
+  ]
+ },
+ {
+  "destination_id": "DST-016",
+  "name": "Ambergris Caye",
+  "country": "Belize",
+  "region": "Belize",
+  "category": "warm_escape",
+  "price_band": "mid",
+  "best_months": [
+   12,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "description": "Ambergris Caye runs long and narrow off the coast of Belize, with the second-longest barrier reef in the world less than a mile offshore. San Pedro, the one real town, gets around on golf carts and bicycles over sandy streets, and much of the island's life happens on docks that stretch out over the water. Snorkeling at Hol Chan and Shark Ray Alley puts you alongside nurse sharks, rays, and turtles in shallow water; divers head farther out to the Blue Hole for a long day trip. Fly fishing for bonefish, permit, and tarpon on the flats is a serious draw. The beach is thin and the swimming is easier from piers, which surprises some visitors. Food leans to grilled lobster in season, ceviche, fry jacks, and rum punch at sunset. English is the official language and US dollars are accepted everywhere. Dry season is December through May; rainy season and hurricane risk run June through November. Divers, anglers, and easygoing groups who like a small-town feel do well here.",
+  "highlights": [
+   "snorkeling at Hol Chan",
+   "nurse sharks at Shark Ray Alley",
+   "day trip to the Blue Hole",
+   "golf carts through San Pedro",
+   "fly fishing on the flats"
+  ],
+  "vibe": [
+   "barefoot",
+   "small-town",
+   "aquatic"
+  ],
+  "good_for": [
+   "active travelers",
+   "couples",
+   "friends"
+  ]
+ },
+ {
+  "destination_id": "DST-017",
+  "name": "Curaçao",
+  "country": "Curaçao",
+  "region": "Southern Caribbean",
+  "category": "warm_escape",
+  "price_band": "mid",
+  "best_months": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12
+  ],
+  "description": "Curaçao's capital, Willemstad, has a waterfront of narrow Dutch gabled houses painted in candy colors, a floating market of Venezuelan fruit boats, and a pontoon bridge that swings open for ships. That makes it a rare Caribbean island where a day in town is as rewarding as a day at the beach. The beaches themselves are small coves tucked between limestone cliffs along the west coast, with shore-entry snorkeling and diving at places like Playa Lagun and Grote Knip. A shipwreck and a tugboat lie in shallow water for easy dives. Inland is dry, cactus-covered, and quiet, with flamingos in the salt pans and Christoffel mountain for a morning hike. The island sits outside the hurricane belt, so summer and fall are viable, and the trade winds keep it comfortable. Food mixes Dutch, Caribbean, and Latin, with stews and fresh fish at the old market. Travelers who want culture and history alongside good water, at a friendlier price than some neighbors, keep coming back.",
+  "highlights": [
+   "the gabled waterfront in Willemstad",
+   "shore snorkeling at Playa Lagun",
+   "the swinging pontoon bridge",
+   "diving the shallow tugboat wreck",
+   "flamingos in the salt pans"
+  ],
+  "vibe": [
+   "colorful",
+   "cultured",
+   "breezy"
+  ],
+  "good_for": [
+   "couples",
+   "active travelers",
+   "repeat visitors",
+   "solo travelers"
+  ]
+ },
+ {
+  "destination_id": "DST-018",
+  "name": "Grand Cayman",
+  "country": "Cayman Islands",
+  "region": "Caribbean",
+  "category": "warm_escape",
+  "price_band": "luxury",
+  "best_months": [
+   12,
+   1,
+   2,
+   3,
+   4
+  ],
+  "description": "Grand Cayman is polished, prosperous, and easy. Seven Mile Beach runs along the west side with calm water, condos, and resorts within walking distance of one another, and George Town is minutes away with duty-free shops and a working financial district. The reason to come, though, is the water. Stingray City is a sandbar where southern stingrays glide up to wade-in visitors, the reef walls off the north and west drop into blue, and the visibility for diving is consistently strong. Bioluminescent bay tours run on dark nights. The east end is slower, with blowholes, a rum cake bakery, and Rum Point for a day under the casuarinas. Prices are high across the board; this is one of the more expensive islands in the region, and the food scene reflects it, with strong seafood and a January festival. US dollars are widely accepted. Hurricane season peaks August through October; December through April is dry and calm. Families, divers, and couples who want a safe, tidy island with reliable water usually settle in comfortably.",
+  "highlights": [
+   "wading with rays at Stingray City",
+   "wall diving off the north side",
+   "afternoon at Rum Point",
+   "bioluminescent bay by night",
+   "walking Seven Mile Beach"
+  ],
+  "vibe": [
+   "polished",
+   "calm",
+   "orderly"
+  ],
+  "good_for": [
+   "families",
+   "couples",
+   "active travelers"
+  ]
+ },
+ {
+  "destination_id": "DST-019",
+  "name": "Key West",
+  "country": "United States",
+  "region": "Florida Keys",
+  "category": "warm_escape",
+  "price_band": "mid",
+  "best_months": [
+   12,
+   1,
+   2,
+   3,
+   4
+  ],
+  "description": "Key West sits at the end of a 113-mile road across the water, and it feels like it. The island is tiny, walkable, and a little unruly, with Conch-style houses under banyan trees, roosters in the streets, and a sunset celebration at Mallory Square every evening with jugglers and cats on tightropes. Duval Street runs the length of Old Town with bars, drag shows, and Key lime pie on every corner. Ernest Hemingway's house and its six-toed cats, the Southernmost Point marker, and the Little White House cover the history. The beaches are modest, so the water fun is offshore: snorkeling the reef, sunset sails, fishing charters, and kayaking through mangroves. Conch fritters, stone crab in season, and pink shrimp are the eating. Drive down from Miami over the bridges if you can; the flight is easy but the road is the experience. Hurricane season is June through November; December through April is dry and warm with high hotel prices. Friends, couples, and travelers who like a beach town with a bar culture and a story fit right in.",
+  "highlights": [
+   "sunset at Mallory Square",
+   "the cats at Hemingway's house",
+   "snorkeling the offshore reef",
+   "the drive down the Overseas Highway",
+   "Key lime pie on Duval Street"
+  ],
+  "vibe": [
+   "quirky",
+   "boozy",
+   "sunny"
+  ],
+  "good_for": [
+   "friends",
+   "couples",
+   "foodies"
+  ]
+ },
+ {
+  "destination_id": "DST-020",
+  "name": "San Juan",
+  "country": "Puerto Rico",
+  "region": "Puerto Rico",
+  "category": "warm_escape",
+  "price_band": "budget",
+  "best_months": [
+   12,
+   1,
+   2,
+   3,
+   4
+  ],
+  "description": "San Juan has a five-hundred-year-old walled city, a beach within a bus ride, and no passport needed for US travelers. Old San Juan's blue cobblestones, pastel balconies, and two Spanish forts give it a European feel; Condado and Isla Verde have the hotel beaches and the strip of restaurants. Santurce is where the murals, the food, and the bars are, and La Placita turns into a street party on weekends. The kiosks at Piñones sell alcapurrias and pinchos beside the sea, and a day trip to El Yunque rainforest has waterfalls and a swimmable pool. The bioluminescent bay at Fajardo is a night trip worth booking. Mofongo, lechón, and rum cocktails are the flavors. Prices are friendlier than in most of the Caribbean and the flights from the US East Coast are short and cheap. Hurricane season is June through November; December through April is dry and lively. First-timers, foodies, and friends looking for a warm long weekend with culture will be happy here.",
+  "highlights": [
+   "walking Old San Juan's walls",
+   "weekend nights at La Placita",
+   "fritters at the Piñones kiosks",
+   "waterfalls in El Yunque",
+   "bioluminescent bay at Fajardo"
+  ],
+  "vibe": [
+   "historic",
+   "vibrant",
+   "affordable"
+  ],
+  "good_for": [
+   "first-timers",
+   "foodies",
+   "friends",
+   "solo travelers"
+  ]
+ },
+ {
+  "destination_id": "DST-021",
+  "name": "New York City",
+  "country": "United States",
+  "region": "US Northeast",
+  "category": "city_break",
+  "price_band": "premium",
+  "best_months": [
+   4,
+   5,
+   6,
+   9,
+   10,
+   11,
+   12
+  ],
+  "description": "New York rewards a plan and then punishes you for sticking to it, which is part of the appeal. Give each day a neighborhood: the Met and Central Park, then the West Village and a walk on the High Line to Hudson Yards; Williamsburg and the Brooklyn Bridge; Flushing for dumplings or the Bronx for pizza. Broadway tickets are easier with the lottery apps and the day-of booths. The subway runs all night and is a fast way anywhere. Hotels are expensive and small, so a modest room in a good location beats a large one far out. Spring and fall are the comfortable months; December has the tree, the window displays, and the crowds; July and August are hot and humid but full of free outdoor events. Bagels, a slice, a deli sandwich, and one serious dinner cover the food basics. First-time visitors and repeat travelers both find new ground here, and friends or couples who like to walk ten miles a day and end with a late drink will get the most out of it.",
+  "highlights": [
+   "walking the High Line",
+   "a Broadway show",
+   "dumplings in Flushing",
+   "crossing the Brooklyn Bridge on foot",
+   "a morning at the Met"
+  ],
+  "vibe": [
+   "relentless",
+   "electric",
+   "diverse"
+  ],
+  "good_for": [
+   "first-timers",
+   "repeat visitors",
+   "friends",
+   "foodies"
+  ]
+ },
+ {
+  "destination_id": "DST-022",
+  "name": "Chicago",
+  "country": "United States",
+  "region": "US Midwest",
+  "category": "city_break",
+  "price_band": "mid",
+  "best_months": [
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "description": "Chicago's lakefront is the first thing that catches people off guard: eighteen miles of public beach and parkland along Lake Michigan, backed by a skyline that invented the skyscraper. The architecture river cruise is the standard first move and it earns its reputation. Millennium Park, the Art Institute, and the museum campus are walkable from the Loop. Then spread out: Wicker Park for record stores and bars, Pilsen for murals and Mexican food, Logan Square for restaurants, Andersonville for a slower afternoon. Deep-dish pizza is one dinner; Italian beef, a Chicago dog with the works, and the city's tasting-menu scene cover the rest. Blues clubs and comedy theaters run late. Summer brings street festivals nearly every weekend and a baseball game in the sun; May, June, September, and October are pleasant; winter is severe and suits only those who enjoy it. Hotel rates are lower than on the coasts. Foodies, families with older kids, and friends on a long weekend all get a lot for their money here.",
+  "highlights": [
+   "architecture cruise on the river",
+   "murals and tacos in Pilsen",
+   "a ballgame in the sun",
+   "the Art Institute's galleries",
+   "blues clubs after dark"
+  ],
+  "vibe": [
+   "big-shouldered",
+   "friendly",
+   "cultured"
+  ],
+  "good_for": [
+   "foodies",
+   "families",
+   "friends"
+  ]
+ },
+ {
+  "destination_id": "DST-023",
+  "name": "Montréal",
+  "country": "Canada",
+  "region": "Eastern Canada",
+  "category": "city_break",
+  "price_band": "budget",
+  "best_months": [
+   6,
+   7,
+   8,
+   9,
+   2
+  ],
+  "description": "Montréal speaks French first and feels closer to Europe than any other city on the continent, though it is a short flight from the US Northeast. Old Montréal has cobblestones, a basilica, and the river; the Plateau has walk-up staircases, bagels baked in wood ovens, and Mount Royal for a view. The Mile End is the neighborhood for cafés and vintage shops. Poutine, smoked meat, and a serious restaurant scene keep the eating interesting, and the Jean-Talon market is open year-round. Summer is festival season, with jazz, comedy, and fireworks competitions filling the calendar from June through August, and the city drinks on terrasses until late. Winter is cold in a way that needs proper boots, but the underground city, the outdoor skating rinks, and the February light festival make it a worthwhile trip in its own right. Prices are moderate and the exchange rate often favors US visitors. Couples, foodies, and friends who want a European-style weekend without a transatlantic flight tend to leave very pleased.",
+  "highlights": [
+   "wood-oven bagels in the Plateau",
+   "the jazz festival in July",
+   "produce at Jean-Talon market",
+   "the view from Mount Royal",
+   "the February light festival"
+  ],
+  "vibe": [
+   "bilingual",
+   "festive",
+   "bohemian"
+  ],
+  "good_for": [
+   "couples",
+   "foodies",
+   "friends",
+   "solo travelers"
+  ]
+ },
+ {
+  "destination_id": "DST-024",
+  "name": "Paris",
+  "country": "France",
+  "region": "Western Europe",
+  "category": "city_break",
+  "price_band": "premium",
+  "best_months": [
+   4,
+   5,
+   6,
+   9,
+   10
+  ],
+  "description": "Paris rewards slowing down. Pick two or three neighborhoods and give them time: the Marais for small museums and falafel, Saint-Germain for cafés and bookshops, Canal Saint-Martin for a picnic, Montmartre early in the morning before the crowds. The big museums are worth their lines, but timed tickets and a late-evening slot help enormously. A boulangerie breakfast, a long lunch, a walk along the Seine, and dinner at a neighborhood bistro is a day well spent. The Métro is dense and cheap; walking is better. Hotels are small and prices climb quickly near the river, so look at the 10th, 11th, and 12th arrondissements for value. April through June and September through October are the pleasant months, with long evenings; August empties out as Parisians leave, and many small shops close; winter is grey but calm and cheaper. Couples, first-time visitors to Europe, and food-focused travelers will find the reputation holds up, and repeat visitors keep finding new streets.",
+  "highlights": [
+   "a picnic on Canal Saint-Martin",
+   "Montmartre before the crowds",
+   "late-evening museum slots",
+   "bistro dinner in the 11th",
+   "a walk along the Seine"
+  ],
+  "vibe": [
+   "elegant",
+   "romantic",
+   "unhurried"
+  ],
+  "good_for": [
+   "couples",
+   "first-timers",
+   "foodies",
+   "repeat visitors"
+  ]
+ },
+ {
+  "destination_id": "DST-025",
+  "name": "London",
+  "country": "United Kingdom",
+  "region": "Western Europe",
+  "category": "city_break",
+  "price_band": "premium",
+  "best_months": [
+   5,
+   6,
+   7,
+   8,
+   9
+  ],
+  "description": "London is really a collection of villages that grew together, and the trick is to treat it that way. Spend a morning in one and an afternoon in another: Borough Market and the South Bank, Notting Hill's Saturday market, Shoreditch for street art and late bars, Greenwich by riverboat, Hampstead Heath for a swim in the ponds. The major museums are free, which changes the math on a rainy day. Theatre in the West End is a strong reason to come; day-seat tickets keep it affordable. Pubs, curry on Brick Lane, a Sunday roast, and the city's Chinese, Turkish, and West African food are the eating. The Tube and contactless payment make transport simple. Hotel prices are steep; consider a flat or a neighborhood hotel outside Zone 1. May through September brings long evenings and the most outdoor life, though rain can appear in any month and summer heat is real. Winter is dark by four but festive in December. First-timers, families, and theatre-goers find a full week barely enough.",
+  "highlights": [
+   "a West End matinee",
+   "lunch at Borough Market",
+   "swimming in the Hampstead ponds",
+   "riverboat to Greenwich",
+   "free afternoons in the museums"
+  ],
+  "vibe": [
+   "storied",
+   "sprawling",
+   "cosmopolitan"
+  ],
+  "good_for": [
+   "first-timers",
+   "families",
+   "couples",
+   "repeat visitors"
+  ]
+ },
+ {
+  "destination_id": "DST-026",
+  "name": "Rome",
+  "country": "Italy",
+  "region": "Southern Europe",
+  "category": "city_break",
+  "price_band": "mid",
+  "best_months": [
+   4,
+   5,
+   10,
+   11
+  ],
+  "description": "Rome layers two thousand years on top of one another, and you walk across most of them without trying. The Colosseum, the Forum, and the Pantheon are what people come for and they deliver; book the Vatican Museums early or for an evening opening and skip the midday crush. Then let the city take over: an evening passeggiata through Trastevere, the Sunday flea market at Porta Portese, gelato near the Pantheon, a carbonara or cacio e pepe in a trattoria with paper tablecloths. The Testaccio market is where locals eat lunch. Churches with free Caravaggios sit around corners. The centre is walkable, cobbled, and hard on bad shoes. April, May, October, and November are the comfortable months; July and August are hot, crowded, and see many Romans leave the city; winter is mild and quieter, with occasional rain. Hotel prices vary widely, and apartment rentals in Monti or Prati give good value. First-time visitors to Italy, foodies, and couples with an eye for history could fill several trips.",
+  "highlights": [
+   "evening walk through Trastevere",
+   "early entry to the Vatican Museums",
+   "lunch at Testaccio market",
+   "cacio e pepe on paper tablecloths",
+   "Sunday flea market at Porta Portese"
+  ],
+  "vibe": [
+   "ancient",
+   "theatrical",
+   "delicious"
+  ],
+  "good_for": [
+   "first-timers",
+   "foodies",
+   "couples",
+   "multigenerational groups"
+  ]
+ },
+ {
+  "destination_id": "DST-027",
+  "name": "Barcelona",
+  "country": "Spain",
+  "region": "Southern Europe",
+  "category": "city_break",
+  "price_band": "mid",
+  "best_months": [
+   4,
+   5,
+   6,
+   9,
+   10
+  ],
+  "description": "Barcelona pairs a real beach with a real city, and few European capitals manage both. Gaudí's Sagrada Família and Park Güell are the headliners and need timed tickets; the Gothic Quarter and El Born reward getting lost in narrow lanes between tapas bars and small squares. Barceloneta has the sand and the seafood, Gràcia has a village feel, and Montjuïc has gardens, museums, and a cable car with views. Eat late: tapas at eight, dinner at ten, vermouth on Sunday afternoon. The Boqueria market is crowded but worth a morning. Pickpocketing on Las Ramblas and the metro is a known issue, so keep valuables close. Spring and fall are comfortable, with warm beach days lasting into October; July and August are hot, humid, and packed, and the city has pushed back on overtourism, so consider the shoulder months. Prices are moderate for Western Europe. Friends, couples, and first-time visitors who want architecture in the morning and the Mediterranean in the afternoon will find the rhythm quickly.",
+  "highlights": [
+   "inside the Sagrada Família",
+   "Sunday vermouth in Gràcia",
+   "seafood on Barceloneta beach",
+   "getting lost in El Born",
+   "cable car up Montjuïc"
+  ],
+  "vibe": [
+   "sun-soaked",
+   "artistic",
+   "late-night"
+  ],
+  "good_for": [
+   "friends",
+   "couples",
+   "first-timers",
+   "foodies"
+  ]
+ },
+ {
+  "destination_id": "DST-028",
+  "name": "Lisbon",
+  "country": "Portugal",
+  "region": "Southern Europe",
+  "category": "city_break",
+  "price_band": "budget",
+  "best_months": [
+   3,
+   4,
+   5,
+   6,
+   9,
+   10
+  ],
+  "description": "Lisbon rises in steep hills above the Tagus, and its yellow trams, tiled facades, and sudden viewpoints make the climbing worthwhile. Alfama is the old Moorish quarter, a tangle of alleys where fado drifts out of small restaurants at night; Bairro Alto and Cais do Sodré have the bars; Belém has the monastery, the tower, and the custard tarts eaten warm with cinnamon. The market hall at Cais do Sodré is busy but a good first meal. A day trip to Sintra's palaces or the beaches at Cascais is an easy train ride. Grilled sardines, bacalhau, and inexpensive wine are the staples, and coffee costs very little. The city has become popular quickly, so prices have risen, but it remains one of the more affordable Western European capitals. March through June and September through October are warm without the peak heat; summer is hot and crowded; winter is mild and green with rain. Couples, solo travelers, and foodies looking for a walkable, sunny city with a soft edge find it easy to love.",
+  "highlights": [
+   "warm custard tarts in Belém",
+   "fado in an Alfama alley",
+   "riding the yellow tram",
+   "day trip to Sintra's palaces",
+   "grilled sardines with cheap wine"
+  ],
+  "vibe": [
+   "sunlit",
+   "melancholic",
+   "affordable"
+  ],
+  "good_for": [
+   "couples",
+   "solo travelers",
+   "foodies"
+  ]
+ },
+ {
+  "destination_id": "DST-029",
+  "name": "Amsterdam",
+  "country": "Netherlands",
+  "region": "Western Europe",
+  "category": "city_break",
+  "price_band": "mid",
+  "best_months": [
+   4,
+   5,
+   6,
+   9
+  ],
+  "description": "Amsterdam is compact, flat, and built around water, which makes a bicycle the natural way to see it. The canal ring is the postcard, and a slow boat tour or a walk along the Prinsengracht at dusk explains why. The Rijksmuseum, the Van Gogh Museum, and the Anne Frank House all require advance booking, and the last one sells out weeks ahead. The Jordaan has small galleries and brown cafés; De Pijp has the Albert Cuyp market and a young, mixed dining scene; the north side across the free ferry has a former shipyard turned creative district. Stroopwafels, herring, and Indonesian rijsttafel cover the food basics. The city has tightened rules on rowdy tourism, and visitors who come for the museums and the neighborhoods are the ones it welcomes. April brings tulips and King's Day; May, June, and September are mild and bright; winter is grey and damp but the canals occasionally freeze. Couples, solo travelers, and repeat visitors who like to wander find it very easy here.",
+  "highlights": [
+   "cycling the canal ring",
+   "a brown café in the Jordaan",
+   "the Albert Cuyp market",
+   "free ferry to the north shipyards",
+   "tulips and King's Day in April"
+  ],
+  "vibe": [
+   "cycling",
+   "tolerant",
+   "picturesque"
+  ],
+  "good_for": [
+   "couples",
+   "solo travelers",
+   "repeat visitors"
+  ]
+ },
+ {
+  "destination_id": "DST-030",
+  "name": "Mexico City",
+  "country": "Mexico",
+  "region": "Central Mexico",
+  "category": "city_break",
+  "price_band": "budget",
+  "best_months": [
+   10,
+   11,
+   12,
+   1,
+   2,
+   3,
+   4
+  ],
+  "description": "Mexico City sprawls across a high valley at 7,300 feet, so the air is thin, the light is sharp, and the days are mild even in winter. Roma and Condesa are the neighborhoods most visitors base in, with art deco buildings, leafy parks, cafés, and a restaurant scene that ranges from street tacos al pastor to serious tasting menus. The Centro Histórico has the Zócalo, Diego Rivera murals, and the Templo Mayor ruins; Coyoacán has Frida Kahlo's house and a weekend market; Chapultepec park holds the anthropology museum, which deserves a full morning. Xochimilco's canal boats and the pyramids at Teotihuacán are the classic day trips. Mezcal bars, lucha libre on a Friday, and the Sunday bike route along Reforma round it out. Prices are low relative to the experience. Rainy season runs May through September with afternoon downpours; October through April is dry. Foodies, solo travelers, and anyone who wants a big, creative city without the cost of one will find this very hard to leave.",
+  "highlights": [
+   "tacos al pastor in Roma",
+   "a morning at the anthropology museum",
+   "canal boats at Xochimilco",
+   "climbing the pyramids at Teotihuacán",
+   "lucha libre on Friday night"
+  ],
+  "vibe": [
+   "vast",
+   "creative",
+   "delicious"
+  ],
+  "good_for": [
+   "foodies",
+   "solo travelers",
+   "couples",
+   "friends"
+  ]
+ },
+ {
+  "destination_id": "DST-031",
+  "name": "Charleston",
+  "country": "United States",
+  "region": "US Southeast",
+  "category": "city_break",
+  "price_band": "mid",
+  "best_months": [
+   3,
+   4,
+   5,
+   10,
+   11
+  ],
+  "description": "Charleston moves at a walking pace, and that is the point. Pastel single houses lean over narrow streets south of Broad, church steeples mark the skyline instead of towers, and a harbor breeze carries the smell of pluff mud at low tide. Mornings begin with biscuits and a slow coffee before you wander the historic district, where side gardens open through wrought-iron gates and plaques explain what happened on each corner, including the harder chapters of the city's history that the plantation and museum tours now address directly. Afternoons suit a ferry ride to Fort Sumter or a drive out to Folly Beach and Sullivan's Island. Evenings belong to the table: shrimp and grits, she-crab soup, oysters roasted over a fire on the porch, and a dining scene that has grown well beyond Lowcountry standards. Spring brings azaleas and garden tours; fall brings gentler heat and fewer crowds. July and August can be humid and heavy, and late summer sits inside hurricane season, so pack patience and a light rain layer. A relaxed weekend here rewards travelers who enjoy walking, eating, and stopping often.",
+  "highlights": [
+   "the Battery at sunrise",
+   "shrimp and grits downtown",
+   "ferry to Fort Sumter",
+   "spring garden tours",
+   "an afternoon on Folly Beach"
+  ],
+  "vibe": [
+   "genteel",
+   "historic",
+   "unhurried"
+  ],
+  "good_for": [
+   "couples",
+   "foodies",
+   "multigenerational groups"
+  ]
+ },
+ {
+  "destination_id": "DST-032",
+  "name": "New Orleans",
+  "country": "United States",
+  "region": "US Gulf Coast",
+  "category": "city_break",
+  "price_band": "mid",
+  "best_months": [
+   2,
+   3,
+   4,
+   10,
+   11,
+   12
+  ],
+  "description": "Music spills out of doorways in New Orleans before noon, and by evening a brass band may be leading a second line down the street outside your hotel. The French Quarter gives you the postcard version: wrought-iron balconies, beignets dusted with powdered sugar, and a riverfront where the Mississippi bends wide and brown. Step a few blocks further to the Marigny for smaller jazz clubs, to the Garden District for shaded mansions and the streetcar clanking along St. Charles Avenue, or to Tremé for the neighborhood that shaped so much of the city's sound. Food anchors every day, from po'boys eaten on a bench to long Creole dinners in rooms that have not changed their menus in decades. Late October through April is the pleasant window, with Mardi Gras and the spring festivals at the center of it. Summer is hot, humid, and inside hurricane season, so prices drop and afternoons call for a courtyard and a cold drink. The city suits travelers who like a late night, a full plate, and a story told well.",
+  "highlights": [
+   "live jazz on Frenchmen Street",
+   "beignets at the riverfront",
+   "the St. Charles streetcar",
+   "a Creole dinner in the Quarter",
+   "Garden District mansions"
+  ],
+  "vibe": [
+   "soulful",
+   "festive",
+   "indulgent"
+  ],
+  "good_for": [
+   "friends",
+   "foodies",
+   "couples",
+   "solo travelers"
+  ]
+ },
+ {
+  "destination_id": "DST-033",
+  "name": "Whistler",
+  "country": "Canada",
+  "region": "British Columbia",
+  "category": "ski",
+  "price_band": "premium",
+  "best_months": [
+   12,
+   1,
+   2,
+   3,
+   4
+  ],
+  "description": "Two mountains, one long valley, and a pedestrian village strung with lights between them. Whistler and Blackcomb together offer more skiable terrain than almost anything else in North America, from wide-open alpine bowls above the treeline to long cruisers through cedar and fir that seem to go on for twenty minutes. The Peak 2 Peak gondola links the two summits, so a morning on one side and an afternoon on the other takes little planning. Snow arrives early and stays deep, though coastal weather brings its share of wet days at village level, and the top can be socked in while the mid-mountain skis beautifully. Off the slopes, the village is walkable end to end, with après patios, a well-used ice rink, and a mix of casual and serious dining. Non-skiers find snowshoe trails, a tube park, and the spa culture that has grown around the resort. December through March is core season; late March and April bring softer snow and sunnier afternoons. Good for groups with mixed abilities, since beginner areas and expert chutes sit within the same lift network.",
+  "highlights": [
+   "the Peak 2 Peak gondola",
+   "alpine bowls above treeline",
+   "après on a village patio",
+   "snowshoeing through cedar forest",
+   "long cruisers on Blackcomb"
+  ],
+  "vibe": [
+   "expansive",
+   "lively",
+   "outdoorsy"
+  ],
+  "good_for": [
+   "friends",
+   "families",
+   "active travelers",
+   "repeat visitors"
+  ]
+ },
+ {
+  "destination_id": "DST-034",
+  "name": "Banff and Lake Louise",
+  "country": "Canada",
+  "region": "Canadian Rockies",
+  "category": "ski",
+  "price_band": "mid",
+  "best_months": [
+   12,
+   1,
+   2,
+   3,
+   4
+  ],
+  "description": "Three ski areas share one lift ticket in the Banff region, and the drive between them passes frozen lakes and peaks that look painted on. Lake Louise is the big one, with long groomers on the front side and steeper bowls off the back. Sunshine Village sits high on the Continental Divide and holds its snow into May. Mount Norquay, ten minutes from town, is small, steep, and quiet on weekdays. Snow here is dry and light, though cold snaps can push temperatures well below what coastal skiers expect, so layering matters. The town of Banff has a true main street with outfitters, pubs, and a hot springs pool where you can sit in steam and watch snow fall on the mountains. The Lake Louise village is smaller and hushed, better for early nights and early lifts. Between ski days, ice walks through frozen canyons and a sleigh ride along the lake fill an afternoon. Late December through March is dependable; February is cold and clear. Suits families, mixed-ability groups, and anyone who wants scenery to rival the skiing.",
+  "highlights": [
+   "back bowls at Lake Louise",
+   "soaking in the hot springs",
+   "an ice walk in Johnston Canyon",
+   "sleigh ride along the lake",
+   "Banff Avenue pubs after dark"
+  ],
+  "vibe": [
+   "scenic",
+   "crisp",
+   "wholesome"
+  ],
+  "good_for": [
+   "families",
+   "couples",
+   "multigenerational groups",
+   "active travelers"
+  ]
+ },
+ {
+  "destination_id": "DST-035",
+  "name": "Park City",
+  "country": "United States",
+  "region": "Utah",
+  "category": "ski",
+  "price_band": "premium",
+  "best_months": [
+   12,
+   1,
+   2,
+   3
+  ],
+  "description": "A former silver-mining town with a Main Street that still looks the part, Park City sits thirty-five minutes from a major airport, which means you can land at noon and be on a chairlift by three. Two large ski areas rise directly from the edges of town. One is broad and varied, with terrain for every ability and a lift that departs from the middle of Main Street. The other leans toward polished service, wide groomers, and long lunches. Utah's snow is famously dry, and storms roll through frequently from December through March, so fresh tracks are common on midweek mornings. Après happens along the Main Street bars, and dinner options range from taco counters to serious tasting menus. Late January brings the film festival, which fills rooms and raises prices, so book around it unless that is the draw. Families like the ski-school setup and the free town bus. Non-skiers find a bobsled run at the Olympic park, fat-bike trails, and a walkable town with galleries and a lively coffee culture. Good for first-time ski trips and repeat visitors alike.",
+  "highlights": [
+   "the Town Lift from Main Street",
+   "dry Utah powder mornings",
+   "bobsled run at the Olympic park",
+   "après along Main Street",
+   "fat biking on packed trails"
+  ],
+  "vibe": [
+   "convenient",
+   "polished",
+   "sociable"
+  ],
+  "good_for": [
+   "families",
+   "first-timers",
+   "friends",
+   "repeat visitors"
+  ]
+ },
+ {
+  "destination_id": "DST-036",
+  "name": "Vail",
+  "country": "United States",
+  "region": "Colorado Rockies",
+  "category": "ski",
+  "price_band": "luxury",
+  "best_months": [
+   12,
+   1,
+   2,
+   3
+  ],
+  "description": "Vail's Back Bowls are the reason many skiers make the trip: seven wide, treeless basins that open up after a storm and hold enough terrain to spend a day without repeating a run. The front side is groomed and orderly, with long blue runs that let intermediates cover real ground. Blue Sky Basin adds glades and rolling terrain further out. The base village, built in a style borrowed from Tyrol, is pedestrian-only, with heated streets, a covered bridge, and shops that stay open late. Lodging tends toward the upper end, though Lionshead and nearby towns down the valley offer better value. Mid-December through March is the reliable window, and storms tend to arrive in cycles, so a five-day stay usually catches at least one fresh morning. Altitude runs high, and the base sits above eight thousand feet, so plan an easy first day and drink water. Après begins on sunny decks and moves indoors as the light goes. Vail suits confident intermediates, groups who want a polished base, and skiers who want to see how far a single mountain can stretch.",
+  "highlights": [
+   "powder day in the Back Bowls",
+   "glades in Blue Sky Basin",
+   "the covered bridge in Vail Village",
+   "long blue groomers up front",
+   "après on a sunny deck"
+  ],
+  "vibe": [
+   "refined",
+   "sprawling",
+   "bright"
+  ],
+  "good_for": [
+   "couples",
+   "families",
+   "active travelers",
+   "repeat visitors"
+  ]
+ },
+ {
+  "destination_id": "DST-037",
+  "name": "Jackson Hole",
+  "country": "United States",
+  "region": "Wyoming",
+  "category": "ski",
+  "price_band": "premium",
+  "best_months": [
+   12,
+   1,
+   2,
+   3
+  ],
+  "description": "Steep is the word most people use for Jackson Hole, and it fits. The tram rises over four thousand vertical feet in nine minutes, and the terrain below it includes couloirs and cliff bands that draw expert skiers from around the world. That reputation hides the fact that the lower mountain has wide, sunny groomers, a well-run ski school, and a beginner zone separated from the crowds. Teton Village sits at the base, compact and lively, while the town of Jackson, twenty minutes away, has a wooden boardwalk, a rodeo-era square, and a busy restaurant scene. Snow falls heavily from late December through February, and cold, clear days are common. A trip here pairs well with a snowcoach tour into Yellowstone or an elk-refuge sleigh ride. The mountain rewards strong skiers and riders, and those who are still building confidence will find enough to fill a week without pushing beyond their comfort. Suits active travelers, friends chasing steep runs, and families who want the national park experience alongside the skiing.",
+  "highlights": [
+   "riding the tram to the summit",
+   "sleigh ride through the elk refuge",
+   "a snowcoach day in Yellowstone",
+   "the wooden boardwalks of Jackson",
+   "cold, clear powder mornings"
+  ],
+  "vibe": [
+   "rugged",
+   "bold",
+   "western"
+  ],
+  "good_for": [
+   "active travelers",
+   "friends",
+   "families",
+   "repeat visitors"
+  ]
+ },
+ {
+  "destination_id": "DST-038",
+  "name": "Aspen and Snowmass",
+  "country": "United States",
+  "region": "Colorado Rockies",
+  "category": "ski",
+  "price_band": "luxury",
+  "best_months": [
+   12,
+   1,
+   2,
+   3
+  ],
+  "description": "Four mountains on a single ticket give Aspen and Snowmass an unusual range. Snowmass is the workhorse, with over three thousand acres, long groomers, and a base village that suits families. Aspen Mountain rises directly from downtown and is steep and expert-oriented, with no beginner terrain at all. Aspen Highlands has the hike-to Highland Bowl, and Buttermilk is a gentle learning hill that also hosts the winter X Games. Downtown Aspen, a Victorian mining town at heart, has evolved into a place of galleries, bookshops, and restaurants where jeans and ski boots sit next to something dressier. A free shuttle connects all four mountains, so cars are optional. Snow is dry and the sun shines most days, which makes for pleasant on-mountain lunches even in January. High season runs mid-December through March, and holiday weeks push prices sharply. Non-skiers find cross-country trails, a small but serious music and lecture calendar, and hot-tub afternoons. Expect premium pricing, and in return, a resort that has kept its character. Suits foodies, repeat visitors, and groups with widely different ability levels.",
+  "highlights": [
+   "hiking Highland Bowl",
+   "long groomers at Snowmass",
+   "Victorian storefronts downtown",
+   "on-mountain lunch in the sun",
+   "learning turns at Buttermilk"
+  ],
+  "vibe": [
+   "glamorous",
+   "varied",
+   "cultured"
+  ],
+  "good_for": [
+   "foodies",
+   "repeat visitors",
+   "families",
+   "couples"
+  ]
+ },
+ {
+  "destination_id": "DST-039",
+  "name": "Zermatt",
+  "country": "Switzerland",
+  "region": "Swiss Alps",
+  "category": "ski",
+  "price_band": "luxury",
+  "best_months": [
+   12,
+   1,
+   2,
+   3,
+   4
+  ],
+  "description": "Cars stop at Täsch, and from there a short train brings you into Zermatt, a car-free village where electric taxis hum past chalets and the Matterhorn stands at the end of nearly every street. The ski area is enormous, spread across three linked sectors and reaching over 3,800 meters, with a glacier that allows skiing year-round. Runs are long: a descent from the Klein Matterhorn to the village covers more than two thousand vertical meters. Lift passes also connect to Cervinia on the Italian side, where a plate of pasta at lunch feels like a small border crossing. Mountain restaurants here are a genuine attraction, with sun terraces, rösti, and fondue served at altitude. Snow is reliable from December through April thanks to the elevation, and spring skiing under warm sun is a favorite for many. The village itself is upscale, with a lively après strip and quieter lanes in the old quarter. Prices reflect the Swiss setting, though half-board packages soften the cost. Suits couples, confident intermediates, and anyone who wants scenery and long runs in equal measure.",
+  "highlights": [
+   "skiing across to Cervinia",
+   "the Klein Matterhorn descent",
+   "fondue on a sun terrace",
+   "car-free village lanes",
+   "Matterhorn views from every lift"
+  ],
+  "vibe": [
+   "iconic",
+   "elegant",
+   "alpine"
+  ],
+  "good_for": [
+   "couples",
+   "honeymooners",
+   "active travelers",
+   "repeat visitors"
+  ]
+ },
+ {
+  "destination_id": "DST-040",
+  "name": "Chamonix",
+  "country": "France",
+  "region": "French Alps",
+  "category": "ski",
+  "price_band": "mid",
+  "best_months": [
+   1,
+   2,
+   3
+  ],
+  "description": "Chamonix sits at the foot of Mont Blanc, and the town has been a base for mountain people since long before lifts existed. The skiing is spread across several separate areas along the valley, connected by bus and train rather than a single lift network. Grands Montets draws advanced skiers with steep, glaciated terrain, Brévent and Flégère offer sunny slopes with views straight across to the massif, and Le Tour and Les Houches are gentler and quieter. The Vallée Blanche, a guided off-piste descent of twenty kilometers across a glacier, is the run people come here to do once. Off the slopes, the town is a real town with a market, bakeries, climbing shops, and a nightlife that runs later than most ski resorts. Conditions are strongest from January through March; lower slopes can be thin in early December. Non-skiers can ride the cable car to the Aiguille du Midi and stand in a glass box above a drop of a thousand meters. Chamonix suits active travelers, strong skiers, and friends who value a lively town over a purpose-built village.",
+  "highlights": [
+   "the Vallée Blanche descent",
+   "cable car to Aiguille du Midi",
+   "steep runs at Grands Montets",
+   "Saturday market in town",
+   "sunny slopes at Brévent"
+  ],
+  "vibe": [
+   "gritty",
+   "storied",
+   "energetic"
+  ],
+  "good_for": [
+   "active travelers",
+   "friends",
+   "solo travelers",
+   "repeat visitors"
+  ]
+ },
+ {
+  "destination_id": "DST-041",
+  "name": "Arenal and La Fortuna",
+  "country": "Costa Rica",
+  "region": "Costa Rica",
+  "category": "adventure",
+  "price_band": "mid",
+  "best_months": [
+   12,
+   1,
+   2,
+   3,
+   4
+  ],
+  "description": "The volcano dominates everything in La Fortuna. Arenal rises in a near-perfect cone above the town, its upper slopes often wrapped in cloud by mid-morning, and the surrounding countryside is a green tangle of pasture, rainforest, and hot springs fed by the mountain's heat. Days fill quickly. Hanging bridges lead through the canopy where sloths and toucans go about their business; ziplines cross river gorges; a horseback ride or a hike reaches the base of the La Fortuna waterfall, where a swim in the cold pool is the reward. Rafting on the Balsa and Sarapiquí rivers runs from gentle to lively depending on the section. Evenings end in thermal pools, some elaborate and some simple concrete tubs in a farmer's field. The dry season from December through April is the most reliable for clear volcano views, though the rainforest stays green all year, and May through November brings afternoon showers and lower prices. Lodges range from hostels to upscale hot-spring retreats. Suits families with older children, active travelers, and first-time visitors to Central America.",
+  "highlights": [
+   "hanging bridges in the canopy",
+   "hot springs after dark",
+   "swimming below La Fortuna waterfall",
+   "ziplines over the gorge",
+   "rafting the Balsa River"
+  ],
+  "vibe": [
+   "lush",
+   "steamy",
+   "playful"
+  ],
+  "good_for": [
+   "families",
+   "active travelers",
+   "first-timers",
+   "couples"
+  ]
+ },
+ {
+  "destination_id": "DST-042",
+  "name": "Torres del Paine, Patagonia",
+  "country": "Chile",
+  "region": "Chile",
+  "category": "adventure",
+  "price_band": "premium",
+  "best_months": [
+   11,
+   12,
+   1,
+   2,
+   3
+  ],
+  "description": "Wind is the first thing you notice in Torres del Paine, and it never fully leaves. The park sits at the southern edge of Chile, where granite towers rise above turquoise lakes and glaciers calve into water the color of milk. The classic W trek covers roughly seventy kilometers over four to five days, linking the base of the towers, the French Valley, and the Grey Glacier, with nights in refugios or campsites. Day hikers based at a lodge can reach the towers viewpoint on a long, steep out-and-back. Guanacos graze the steppe, condors circle, and pumas are seen more often than you might expect from a vehicle at dawn. The season runs from November through March, with December through February bringing the longest days, the most wind, and the fullest trails. October and April are quieter and colder, with a real chance of snow. Getting here takes effort: fly to Punta Arenas, drive several hours north. Book campsites and refugios months ahead. Suits active travelers, solo hikers who like company on the trail, and repeat visitors to South America.",
+  "highlights": [
+   "sunrise at the towers viewpoint",
+   "the W trek over five days",
+   "boat to Grey Glacier",
+   "guanacos on the steppe",
+   "puma tracking at dawn"
+  ],
+  "vibe": [
+   "windswept",
+   "raw",
+   "vast"
+  ],
+  "good_for": [
+   "active travelers",
+   "solo travelers",
+   "friends",
+   "repeat visitors"
+  ]
+ },
+ {
+  "destination_id": "DST-043",
+  "name": "Iceland Ring Road",
+  "country": "Iceland",
+  "region": "Iceland",
+  "category": "adventure",
+  "price_band": "premium",
+  "best_months": [
+   6,
+   7,
+   8,
+   9
+  ],
+  "description": "Route 1 circles Iceland in roughly 1,300 kilometers, and driving it over eight to ten days is one of the simpler ways to see a great deal of a strange and beautiful country. Waterfalls appear beside the road without ceremony. Black-sand beaches near Vík give way to glacier lagoons where icebergs drift toward the sea, then to fjords in the east, the geothermal country around Mývatn, and the horse farms of the north. Each day has a natural stop or two: a hike to a hot river, a boat among the ice, a soak in a pool that the locals also use. Summer brings nearly endless daylight, open highland roads, and puffins on the cliffs, along with the highest prices and the most rental cars. Late September through March swaps daylight for the northern lights and the possibility of closed roads, so a winter loop needs flexibility and a car with proper tires. Accommodation along the route is a mix of guesthouses and farm stays. Suits couples, friends sharing a car, and travelers who like to be behind the wheel.",
+  "highlights": [
+   "icebergs at Jökulsárlón lagoon",
+   "black sand at Reynisfjara",
+   "geothermal pools near Mývatn",
+   "puffins on the eastern cliffs",
+   "a hot river hike in Reykjadalur"
+  ],
+  "vibe": [
+   "elemental",
+   "stark",
+   "self-directed"
+  ],
+  "good_for": [
+   "couples",
+   "friends",
+   "active travelers",
+   "repeat visitors"
+  ]
+ },
+ {
+  "destination_id": "DST-044",
+  "name": "Cusco and the Sacred Valley",
+  "country": "Peru",
+  "region": "Peru",
+  "category": "adventure",
+  "price_band": "mid",
+  "best_months": [
+   5,
+   6,
+   7,
+   8,
+   9
+  ],
+  "description": "At 3,400 meters, Cusco asks you to slow down for a day or two, and that pause is a gift. The former Inca capital layers colonial churches on top of fitted stone walls, and its plazas fill with markets, brass bands, and school processions. From here the Sacred Valley drops to a friendlier altitude, with terraced ruins at Pisac and Ollantaytambo, salt pans stepped down a hillside at Maras, and villages where weaving cooperatives sell what they make. Machu Picchu is the goal for most visitors, reached by train to Aguas Calientes or by the four-day Inca Trail, which requires permits booked well ahead. Shorter alternatives such as the Lares and Salkantay routes are quieter. The dry season from May through September brings clear skies and cold nights; the rains from December to March turn the trail muddy and close it entirely in February. Food is a pleasure, from street-side anticuchos to ambitious tasting menus in Cusco. Suits first-timers to South America, active travelers, and multigenerational groups who split walking and train days.",
+  "highlights": [
+   "dawn at Machu Picchu",
+   "the salt pans of Maras",
+   "Sunday market at Pisac",
+   "stone streets of Ollantaytambo",
+   "anticuchos from a street cart"
+  ],
+  "vibe": [
+   "ancient",
+   "textured",
+   "high-altitude"
+  ],
+  "good_for": [
+   "first-timers",
+   "active travelers",
+   "multigenerational groups",
+   "foodies"
+  ]
+ },
+ {
+  "destination_id": "DST-045",
+  "name": "Moab and Utah's Canyon Country",
+  "country": "United States",
+  "region": "US Southwest",
+  "category": "adventure",
+  "price_band": "budget",
+  "best_months": [
+   3,
+   4,
+   5,
+   9,
+   10
+  ],
+  "description": "Red rock defines Moab, and it comes in every form the desert can manage: arches, fins, slot canyons, and mesas that glow orange at dusk. Two national parks sit within a short drive. Arches has a paved loop with short hikes to the famous formations and a longer scramble to Delicate Arch at sunset. Canyonlands is bigger and wilder, with overlooks at Island in the Sky and four-wheel-drive routes that take a full day. The town itself is a base for mountain biking on slickrock trails, rafting on the Colorado River, and canyoneering with local guides. Spring and fall are the seasons to come; March through May and September through October bring warm days and cool nights. Summer temperatures pass 100 degrees, which pushes activity to dawn and dusk and makes river days more appealing. Winter is quiet and cold, with occasional snow on the rocks. Lodging ranges from campgrounds to comfortable inns, and dark skies make stargazing a routine after-dinner activity. Suits active travelers, families with teens, and friends planning a road trip.",
+  "highlights": [
+   "Delicate Arch at sunset",
+   "mountain biking on slickrock",
+   "rafting the Colorado River",
+   "overlooks at Island in the Sky",
+   "stargazing from the campground"
+  ],
+  "vibe": [
+   "dusty",
+   "dramatic",
+   "adventurous"
+  ],
+  "good_for": [
+   "active travelers",
+   "families",
+   "friends",
+   "solo travelers"
+  ]
+ },
+ {
+  "destination_id": "DST-046",
+  "name": "Kenai Peninsula",
+  "country": "United States",
+  "region": "Alaska",
+  "category": "adventure",
+  "price_band": "premium",
+  "best_months": [
+   6,
+   7,
+   8
+  ],
+  "description": "South of Anchorage, the Kenai Peninsula gathers much of what people picture when they think of Alaska into a region you can drive across in a few hours. The Seward Highway hugs Turnagain Arm, where beluga whales and bore tides appear at the right moment. Seward is the gateway to Kenai Fjords, where a day boat reaches tidewater glaciers, puffin colonies, and humpbacks feeding in the swells. Homer, at the end of the road, has a long spit, a working harbor, and water taxis to Kachemak Bay for kayaking and coastal hikes. Between the two, the Kenai and Russian rivers run thick with salmon in July, and anglers line the banks shoulder to shoulder. Bear viewing by floatplane is a splurge worth considering. June through August is the season, with long light and the fullest schedule; May and September are quieter, with fewer boats and cooler weather. Rain is part of the deal, so pack for it. Suits multigenerational groups, active travelers, and first-time visitors to Alaska who want variety without a cruise ship.",
+  "highlights": [
+   "glacier boat tour from Seward",
+   "salmon fishing on the Kenai",
+   "kayaking in Kachemak Bay",
+   "the Homer Spit at dusk",
+   "bear viewing by floatplane"
+  ],
+  "vibe": [
+   "wild",
+   "generous",
+   "unpolished"
+  ],
+  "good_for": [
+   "multigenerational groups",
+   "active travelers",
+   "first-timers",
+   "families"
+  ]
+ },
+ {
+  "destination_id": "DST-047",
+  "name": "Yosemite and the Sierra",
+  "country": "United States",
+  "region": "California",
+  "category": "adventure",
+  "price_band": "mid",
+  "best_months": [
+   5,
+   6,
+   9,
+   10
+  ],
+  "description": "Yosemite Valley is seven miles long, and within that stretch you will find El Capitan, Half Dome, and waterfalls that thunder in May and thin to a whisper by August. The valley floor has paved trails, bike loops, and meadows where the light shifts by the hour. Above it, Glacier Point and the Tioga Road open in late spring and reveal a high country of granite domes, alpine lakes, and trailheads that lead into real wilderness. The Mist Trail to Vernal and Nevada falls is the classic day hike. Half Dome requires a permit and a long, exposed day. Outside the park, the eastern Sierra offers Mono Lake, hot springs, and the ghost town of Bodie. Summer is crowded; reservations are required for park entry on peak days, and campsites book months out. Late April through early June brings full waterfalls, while September and October bring quieter trails and warm days. Winter closes the high roads but opens a small ski area and a valley dusted with snow. Suits families, active travelers, and repeat visitors who want to go deeper than the valley.",
+  "highlights": [
+   "the Mist Trail in spring",
+   "sunset from Glacier Point",
+   "Tuolumne Meadows in July",
+   "biking the valley floor",
+   "tufa towers at Mono Lake"
+  ],
+  "vibe": [
+   "granite",
+   "grand",
+   "restorative"
+  ],
+  "good_for": [
+   "families",
+   "active travelers",
+   "repeat visitors",
+   "first-timers"
+  ]
+ },
+ {
+  "destination_id": "DST-048",
+  "name": "Galápagos Islands",
+  "country": "Ecuador",
+  "region": "Ecuador",
+  "category": "adventure",
+  "price_band": "luxury",
+  "best_months": [
+   12,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "description": "Animals in the Galápagos do not move away when you approach. Sea lions nap on the dock, marine iguanas sun on the lava, and blue-footed boobies perform their courtship dance a few meters from the trail. That absence of fear, shaped by millions of years without predators, is what makes the islands feel different from anywhere else. Visitors choose between a small live-aboard boat that moves between islands overnight and a land-based stay on Santa Cruz or San Cristóbal with day trips by speedboat. The boat option reaches the outer islands and their unique species; the land option costs less and suits families with young children. Snorkeling is a daily activity, with sea turtles, rays, reef sharks, and penguins in the water. December through May is warmer and calmer with occasional rain; June through November is cooler, with rougher seas and richer marine life drawn by the Humboldt Current. Park rules limit group sizes and require licensed guides. Suits couples, honeymooners, and first-timers who want wildlife close up.",
+  "highlights": [
+   "snorkeling with sea turtles",
+   "blue-footed booby courtship",
+   "giant tortoises in the highlands",
+   "sea lions on the dock",
+   "a dinghy ride at dusk"
+  ],
+  "vibe": [
+   "otherworldly",
+   "intimate",
+   "unhurried"
+  ],
+  "good_for": [
+   "couples",
+   "honeymooners",
+   "first-timers",
+   "families"
+  ]
+ },
+ {
+  "destination_id": "DST-049",
+  "name": "Serengeti and Ngorongoro",
+  "country": "Tanzania",
+  "region": "Tanzania",
+  "category": "adventure",
+  "price_band": "luxury",
+  "best_months": [
+   1,
+   2,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "description": "Grass stretches to the horizon in the Serengeti, and somewhere across it, more than a million wildebeest are on the move. The great migration follows the rains in a loop through the year, with river crossings in the north from July through October and calving on the southern plains in January and February. Game drives begin before dawn and return by midday, then head out again as the heat fades. Lions, elephants, giraffes, and cheetahs are routine sightings; leopards and rhinos take patience. Ngorongoro Crater, a few hours away, is a collapsed volcano with a floor of grassland and a resident population that includes black rhino. A typical itinerary combines three or four nights in the Serengeti with a night at the crater rim, often in tented camps that move with the season. The long rains from March through May bring lower prices and green landscapes, along with muddy roads. Flights arrive at Kilimanjaro, and a bush plane can save a long drive. Suits honeymooners, multigenerational groups, and first-timers to Africa.",
+  "highlights": [
+   "wildebeest crossing the Mara River",
+   "dawn game drive from camp",
+   "the crater floor at Ngorongoro",
+   "sundowners on the plains",
+   "a bush flight over the savanna"
+  ],
+  "vibe": [
+   "epic",
+   "golden",
+   "patient"
+  ],
+  "good_for": [
+   "honeymooners",
+   "multigenerational groups",
+   "first-timers",
+   "couples"
+  ]
+ },
+ {
+  "destination_id": "DST-050",
+  "name": "Queenstown and Fiordland",
+  "country": "New Zealand",
+  "region": "New Zealand",
+  "category": "adventure",
+  "price_band": "premium",
+  "best_months": [
+   12,
+   1,
+   2,
+   3,
+   4
+  ],
+  "description": "Queenstown built its reputation on the bungy jump, and the town still hums with jet boats, paragliders, and skydivers, but the lakeside setting and the mountains that ring it are what stay with you. Lake Wakatipu sits below the Remarkables, and a short drive reaches wineries in Gibbston, the historic gold town of Arrowtown, and trailheads for day hikes with big views. Fiordland lies to the west, where Milford Sound is reached by a road that passes through beech forest and a tunnel to emerge among waterfalls. Cruises on the sound run daily, and overnight boats stay for the quiet. The Routeburn and Kepler tracks are multi-day walks that need hut bookings months ahead. Summer, from December through February, is warm and busy; March and April bring autumn colors and fewer people. Winter turns Queenstown into a ski base, with two areas nearby. Rain is frequent in Fiordland, and it feeds the waterfalls. Suits active travelers, friends, and couples who want both adrenaline and a good glass of pinot noir.",
+  "highlights": [
+   "a Milford Sound cruise",
+   "jet boating the Shotover",
+   "wine tasting in Gibbston",
+   "the Routeburn Track",
+   "autumn in Arrowtown"
+  ],
+  "vibe": [
+   "adrenaline-fueled",
+   "cinematic",
+   "fresh"
+  ],
+  "good_for": [
+   "active travelers",
+   "friends",
+   "couples",
+   "honeymooners"
+  ]
+ },
+ {
+  "destination_id": "DST-051",
+  "name": "Western Caribbean Sailing",
+  "country": "Mexico, Honduras, Belize, Cayman Islands",
+  "region": "Caribbean",
+  "category": "cruise",
+  "price_band": "budget",
+  "best_months": [
+   12,
+   1,
+   2,
+   3,
+   4
+  ],
+  "description": "Seven nights out of a Florida or Texas port, this sailing heads south and west toward the Yucatán and Central America. Cozumel is usually the first call, with reef snorkeling and a ferry to the mainland for the ruins at Tulum. From there the ship turns to Roatán, where a hillside of rainforest drops to beaches and a well-known reef, then to Belize, where tenders take you ashore for cave tubing or a fast boat out to the cayes. Grand Cayman rounds out many itineraries with a stop at Stingray City sandbar. Two sea days give the rhythm its shape: one early to settle in, one at the end to unpack the week. Onboard life runs from lounge chairs and trivia to specialty dining and a late show. The winter months from December through April are dry and settled; June through November is hurricane season, and ships reroute when needed. Prices drop in September and October for that reason. Suits families, first-time cruisers, and friends who want beach time with a bit of exploring.",
+  "highlights": [
+   "reef snorkeling off Cozumel",
+   "cave tubing in Belize",
+   "Stingray City sandbar",
+   "beach day on Roatán",
+   "a lazy sea day poolside"
+  ],
+  "vibe": [
+   "easygoing",
+   "sunny",
+   "sociable"
+  ],
+  "good_for": [
+   "families",
+   "first-timers",
+   "friends"
+  ]
+ },
+ {
+  "destination_id": "DST-052",
+  "name": "Eastern Caribbean Sailing",
+  "country": "Puerto Rico, U.S. Virgin Islands, Sint Maarten, Bahamas",
+  "region": "Caribbean",
+  "category": "cruise",
+  "price_band": "mid",
+  "best_months": [
+   12,
+   1,
+   2,
+   3,
+   4
+  ],
+  "description": "Long stretches of open water mark an eastern Caribbean itinerary, and the ports that follow feel earned. A typical week from Florida includes a day at sea before San Juan, where the old city's blue cobblestones and forts are a short walk from the pier. St. Thomas follows, with beach days at Magens Bay or a ferry across to St. John's national park trails. St. Maarten offers two flavors on one island: Dutch shopping streets on one side, French bakeries and calmer beaches on the other. Many sailings add a private island in the Bahamas as the last stop. The sea days here are real, so pick a ship whose pools, spas, and programming you will enjoy for a full day. Winter through spring is the settled season; the same hurricane caveat that applies across the Caribbean holds from June through November, with September the riskiest month. Cabins with balconies pay off on this route because the sunsets happen over open ocean. Suits couples, honeymooners, and multigenerational groups who value a slower pace with fewer port days.",
+  "highlights": [
+   "Old San Juan's blue cobblestones",
+   "Magens Bay beach day",
+   "ferry to St. John trails",
+   "French bakeries in St. Maarten",
+   "balcony sunsets at sea"
+  ],
+  "vibe": [
+   "leisurely",
+   "balmy",
+   "romantic"
+  ],
+  "good_for": [
+   "couples",
+   "honeymooners",
+   "multigenerational groups"
+  ]
+ },
+ {
+  "destination_id": "DST-053",
+  "name": "Mexican Riviera Cruise",
+  "country": "Mexico",
+  "region": "Pacific Mexico",
+  "category": "cruise",
+  "price_band": "budget",
+  "best_months": [
+   12,
+   1,
+   2,
+   3,
+   4
+  ],
+  "description": "Departing from Los Angeles or San Diego, this sailing runs down the Baja coast and along mainland Mexico for seven nights. The first full day is spent at sea, with the Pacific swell noticeable and whales sometimes visible from the rail in winter. Cabo San Lucas comes first, a tender port with a marina, the rock arch at Land's End, and beaches on both the Pacific and Sea of Cortez sides. Mazatlán has a long malecón, a restored historic center, and surf beaches to the north. Puerto Vallarta is the third call, where cobbled streets climb from the bay and day trips reach the jungle villages of Yelapa and Las Animas by water taxi. Two more sea days close the loop back north. The water is cooler than the Caribbean, and the coastline is drier and more dramatic. December through April is the season, with winter whale watching a highlight; summer brings heat, humidity, and the eastern Pacific hurricane season. Suits first-time cruisers, families from the West Coast, and repeat visitors to Mexico who prefer the Pacific side.",
+  "highlights": [
+   "the arch at Land's End",
+   "Mazatlán's historic center",
+   "water taxi to Yelapa",
+   "whales from the rail",
+   "sea days on the Pacific"
+  ],
+  "vibe": [
+   "relaxed",
+   "coastal",
+   "warm"
+  ],
+  "good_for": [
+   "first-timers",
+   "families",
+   "repeat visitors"
+  ]
+ },
+ {
+  "destination_id": "DST-054",
+  "name": "Alaska Inside Passage",
+  "country": "United States and Canada",
+  "region": "Alaska",
+  "category": "cruise",
+  "price_band": "premium",
+  "best_months": [
+   5,
+   6,
+   7,
+   8,
+   9
+  ],
+  "description": "Ships on the Inside Passage move through channels so narrow that forest and cliff fill both sides of the window. A seven-night round trip from Seattle or Vancouver calls at Juneau, Ketchikan, and Skagway, with a day of scenic cruising in Glacier Bay or past the face of Hubbard Glacier, where the ship idles as ice calves into the water. Juneau offers a helicopter to a glacier, a whale-watching boat, or a tram up Mount Roberts. Ketchikan is a rainy fishing town with totem parks and salmon in the creek. Skagway keeps its gold-rush storefronts and a narrow-gauge railway that climbs the White Pass. Wildlife appears from the deck: humpbacks, orcas, eagles, and occasionally bears on the shore. The season runs May through September; May and September are cooler and less crowded, June has the longest light, and July and August bring the warmest weather and highest prices. Rain is likely somewhere along the way. Suits multigenerational groups, first-time cruisers, and travelers who prefer scenery to beaches.",
+  "highlights": [
+   "glacier calving in Glacier Bay",
+   "the White Pass railway",
+   "whale watching from Juneau",
+   "totem parks in Ketchikan",
+   "eagles from the promenade deck"
+  ],
+  "vibe": [
+   "majestic",
+   "cool",
+   "contemplative"
+  ],
+  "good_for": [
+   "multigenerational groups",
+   "first-timers",
+   "couples",
+   "families"
+  ]
+ },
+ {
+  "destination_id": "DST-055",
+  "name": "Western Mediterranean Cruise",
+  "country": "Spain, France, Italy",
+  "region": "Mediterranean",
+  "category": "cruise",
+  "price_band": "mid",
+  "best_months": [
+   4,
+   5,
+   6,
+   9,
+   10
+  ],
+  "description": "Barcelona is the usual starting point, and the ship leaves the harbor in the evening with the city lights fading behind. Over seven nights the itinerary touches three countries. Marseille or Toulon leads to Provence, with a day trip to Aix or the calanques. Genoa or Livorno places Florence and Pisa within reach, though the drive is long enough to make choosing one wise. Civitavecchia is the port for Rome, and a full day there is a taste rather than a meal. Naples brings Pompeii, the Amalfi coast, or simply pizza in the old town. Palma de Mallorca often closes the loop, with a cathedral by the sea and beaches a short bus ride away. Sea days are rare on this route, so the week is busy and early alarms are common. April through June and September through October bring mild weather and thinner crowds; July and August are hot and full. Suits first-timers to Europe, foodies, and multigenerational groups who want to sample several countries from one cabin.",
+  "highlights": [
+   "a day in Florence from Livorno",
+   "pizza in old Naples",
+   "the calanques near Marseille",
+   "Palma's seaside cathedral",
+   "Pompeii before the crowds"
+  ],
+  "vibe": [
+   "cultured",
+   "busy",
+   "sun-drenched"
+  ],
+  "good_for": [
+   "first-timers",
+   "foodies",
+   "multigenerational groups"
+  ]
+ },
+ {
+  "destination_id": "DST-056",
+  "name": "Norwegian Fjords Cruise",
+  "country": "Norway",
+  "region": "Northern Europe",
+  "category": "cruise",
+  "price_band": "premium",
+  "best_months": [
+   5,
+   6,
+   7,
+   8
+  ],
+  "description": "Sailing into Geirangerfjord, the ship slows to a crawl between walls of rock that rise a thousand meters on either side, with waterfalls threading down to the water. This is the heart of a Norwegian fjords itinerary, usually seven to ten nights from Southampton, Copenhagen, or Amsterdam. Bergen is a frequent first call, with its wooden wharf and a funicular to the ridge above town. From there the ship works north through Flåm, where a mountain railway climbs a steep valley, and on to Olden or Ålesund, with its art nouveau center rebuilt after a fire. Some sailings continue past the Arctic Circle toward the Lofoten Islands and the midnight sun. Days in port revolve around hikes, kayaking on still water, and short drives to glaciers. May through August is the season, with June offering the longest days and waterfalls at full flow. Weather changes quickly, and a warm layer belongs in every daypack. Suits couples, repeat cruisers, and travelers who prefer quiet scenery to nightlife.",
+  "highlights": [
+   "cruising into Geirangerfjord",
+   "the Flåm mountain railway",
+   "Bergen's wooden wharf",
+   "kayaking on a still fjord",
+   "midnight sun above the Arctic Circle"
+  ],
+  "vibe": [
+   "serene",
+   "monumental",
+   "cool"
+  ],
+  "good_for": [
+   "couples",
+   "repeat visitors",
+   "multigenerational groups"
+  ]
+ },
+ {
+  "destination_id": "DST-057",
+  "name": "Greek Isles Cruise",
+  "country": "Greece",
+  "region": "Aegean",
+  "category": "cruise",
+  "price_band": "premium",
+  "best_months": [
+   5,
+   6,
+   9,
+   10
+  ],
+  "description": "Whitewashed villages and blue domes appear on the hillside as the ship approaches Santorini, where a cable car or a donkey path climbs from the tender dock to the caldera rim. That arrival is the image most people carry, but a Greek isles itinerary offers more range than the postcard. Mykonos has windmills and a lively waterfront. Rhodes has a walled medieval old town you can walk in an afternoon. Crete brings the Minoan palace at Knossos and a harbor lined with tavernas. Some sailings add Kusadasi in Turkey for the ruins at Ephesus. Athens, at the beginning or end, deserves an extra night for the Acropolis. Sea time is short, so port days are the focus, and lunches ashore of grilled octopus and cold wine become a habit. May, June, September, and October are the comfortable months; July and August bring heat, wind on the exposed islands, and heavy crowds at the famous stops. Suits honeymooners, foodies, and first-timers to Greece who want to see several islands without ferry logistics.",
+  "highlights": [
+   "sunset on the Santorini caldera",
+   "the walled old town of Rhodes",
+   "grilled octopus by the harbor",
+   "windmills of Mykonos",
+   "the ruins at Ephesus"
+  ],
+  "vibe": [
+   "sunlit",
+   "storied",
+   "convivial"
+  ],
+  "good_for": [
+   "honeymooners",
+   "foodies",
+   "first-timers",
+   "couples"
+  ]
+ },
+ {
+  "destination_id": "DST-058",
+  "name": "Bahamas Short Cruise",
+  "country": "Bahamas",
+  "region": "Bahamas",
+  "category": "cruise",
+  "price_band": "budget",
+  "best_months": [
+   11,
+   12,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "description": "Three or four nights from a Florida port makes this the easiest way to test whether cruising suits you. The ship sails in the afternoon, and by morning you are in Nassau, where the straw market, the forts, and a beach day across the harbor bridge fill the hours. The second stop is usually a private island, a stretch of sand set up for the ship's guests with loungers, water sports, and a buffet lunch under the palms. Some sailings call at Freeport on Grand Bahama instead, with a quieter beach and a nature reserve. A single day at sea rounds out the longer itineraries, giving the pool deck its moment. Because the trips are short, energy runs high and the atmosphere leans toward celebration. Prices are low, especially midweek. Weather is pleasant from November through May; summer is hot and falls within hurricane season, though short sailings can dodge most storms with a day's notice. Suits friends, first-time cruisers, and families looking for a long weekend that requires no planning.",
+  "highlights": [
+   "a private island beach day",
+   "the straw market in Nassau",
+   "snorkeling near Nassau",
+   "pool deck on the sea day",
+   "a first night at sea"
+  ],
+  "vibe": [
+   "breezy",
+   "celebratory",
+   "simple"
+  ],
+  "good_for": [
+   "friends",
+   "first-timers",
+   "families"
+  ]
+ },
+ {
+  "destination_id": "DST-059",
+  "name": "Hawaiian Islands Cruise",
+  "country": "United States",
+  "region": "Hawaii",
+  "category": "cruise",
+  "price_band": "premium",
+  "best_months": [
+   1,
+   2,
+   3,
+   4,
+   9,
+   10,
+   11
+  ],
+  "description": "Four islands in seven nights, with the ship serving as your hotel and the driving left to others. The sailing loops out of Honolulu and gives full days on Maui, the Big Island of Hawaii, and Kauai, with overnights in some ports that allow for both a sunrise at Haleakalā and a late dinner ashore. On the Big Island, Hilo brings waterfalls and the volcano park, while Kona offers coffee farms and snorkeling with manta rays after dark. Kauai's Na Pali coast is viewed from the deck on the final afternoon as the ship cruises slowly past cliffs that no road reaches. Sea time is minimal, and the days are long, so the pace can feel more like a road trip than a traditional cruise. Weather is mild year-round; winter brings surf on the north shores and whales offshore from December through April, and summer is drier with calmer water. Suits multigenerational groups, first-timers to Hawaii, and travelers who want to compare the islands before choosing one to return to.",
+  "highlights": [
+   "sunrise at Haleakalā",
+   "manta ray snorkel off Kona",
+   "cruising the Na Pali coast",
+   "the volcano park from Hilo",
+   "a Kona coffee farm visit"
+  ],
+  "vibe": [
+   "tropical",
+   "easy",
+   "varied"
+  ],
+  "good_for": [
+   "multigenerational groups",
+   "first-timers",
+   "families",
+   "couples"
+  ]
+ },
+ {
+  "destination_id": "DST-060",
+  "name": "Baltic Capitals Cruise",
+  "country": "Denmark, Sweden, Finland, Estonia",
+  "region": "Northern Europe",
+  "category": "cruise",
+  "price_band": "premium",
+  "best_months": [
+   5,
+   6,
+   7,
+   8
+  ],
+  "description": "Copenhagen or Stockholm usually opens a Baltic itinerary, and the ship threads through an archipelago of pine islands on the way out to sea. Over seven to ten nights the route calls at cities that sit close together but feel distinctly their own. Tallinn's medieval old town is compact enough to walk from the pier. Helsinki has clean design, a busy market square, and an island fortress reached by ferry. Stockholm spreads across islands linked by bridges, with a preserved seventeenth-century warship in its own museum. Some sailings add Riga, Gdańsk, or a German port with a train to Berlin. Sea days are short hops overnight, so most mornings begin in a new harbor. Late May through August is the season, with long summer evenings that make an after-dinner walk in port a real option. Weather is cool and changeable; a light jacket is standard. Museums, cafes, and a bit of history give the days shape. Suits repeat cruisers, foodies, and couples who prefer culture and cities over beaches.",
+  "highlights": [
+   "Tallinn's medieval old town",
+   "sailing the Stockholm archipelago",
+   "Helsinki's market square",
+   "the warship museum in Stockholm",
+   "long evenings in port"
+  ],
+  "vibe": [
+   "tidy",
+   "cerebral",
+   "northern"
+  ],
+  "good_for": [
+   "repeat visitors",
+   "foodies",
+   "couples"
+  ]
+ }
+]

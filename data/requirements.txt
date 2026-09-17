@@ -1,0 +1,6 @@
+# Generator + local verification. Python 3.11+ (developed on 3.11/3.12).
+pandas>=2.2
+pyarrow>=16
+numpy>=1.26
+scikit-learn>=1.4     # reference propensity model (AUC check + seed scores)
+duckdb>=1.0           # sql/verify_local.py runs the walkthrough queries without BigQuery

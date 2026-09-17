@@ -1,0 +1,50 @@
+[
+  {
+    "name": "item_type",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "destination or package."
+  },
+  {
+    "name": "item_id",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "destination_id or package_id."
+  },
+  {
+    "name": "name",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Destination or package name."
+  },
+  {
+    "name": "category",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Product category: one of warm_escape (winter and early-spring sun getaways, our signature category), city_break, ski, adventure, cruise."
+  },
+  {
+    "name": "content",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "The exact text that was embedded (name, category and description)."
+  },
+  {
+    "name": "embedding",
+    "type": "FLOAT64",
+    "mode": "REPEATED",
+    "description": "3,072-dimension embedding vector from gemini-embedding-001 (task type RETRIEVAL_DOCUMENT)."
+  },
+  {
+    "name": "model",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Embedding model name: gemini-embedding-001."
+  },
+  {
+    "name": "dimensions",
+    "type": "INT64",
+    "mode": "REQUIRED",
+    "description": "Vector length: 3072."
+  }
+]

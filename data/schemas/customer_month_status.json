@@ -1,0 +1,38 @@
+[
+  {
+    "name": "status_month",
+    "type": "DATE",
+    "mode": "REQUIRED",
+    "description": "First day of the month the status applies to. Status is evaluated at 00:00 on this date."
+  },
+  {
+    "name": "customer_id",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Joins to customers.customer_id."
+  },
+  {
+    "name": "loyalty_tier",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Cymbal Compass tier: none, blue, silver or gold."
+  },
+  {
+    "name": "loyalty_status",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "active (confirmed booking in the 12 months before status_month), lapsed (booked before that but not in the last 12 months) or never."
+  },
+  {
+    "name": "days_since_last_booking",
+    "type": "INT64",
+    "mode": "NULLABLE",
+    "description": "Days from the most recent confirmed booking to status_month. NULL when the customer had never booked."
+  },
+  {
+    "name": "lifetime_bookings_to_date",
+    "type": "INT64",
+    "mode": "REQUIRED",
+    "description": "Confirmed bookings on record before status_month."
+  }
+]

@@ -1,0 +1,68 @@
+[
+  {
+    "name": "rule_id",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Rule identifier, e.g. R01."
+  },
+  {
+    "name": "priority",
+    "type": "INT64",
+    "mode": "REQUIRED",
+    "description": "Evaluation order; lower runs first and the first match wins."
+  },
+  {
+    "name": "feature",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "customer_features column the condition tests, e.g. propensity_score, days_since_last_booking, loyalty_tier."
+  },
+  {
+    "name": "operator",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Comparison: one of ==, !=, >=, >, <=, <."
+  },
+  {
+    "name": "threshold",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Value to compare against, stored as text (60, 0.30, gold, true). Cast to the feature's type."
+  },
+  {
+    "name": "feature_2",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "Optional second feature; when set, both conditions must hold (AND)."
+  },
+  {
+    "name": "operator_2",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "Comparison for the second condition."
+  },
+  {
+    "name": "threshold_2",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "Value for the second condition, as text."
+  },
+  {
+    "name": "action",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "What to do when the rule matches: send_offer, hold_for_retargeting, route_to_loyalty_team or suppress."
+  },
+  {
+    "name": "reason_template",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Human-readable explanation with {feature} placeholders filled from customer_features."
+  },
+  {
+    "name": "enabled",
+    "type": "BOOL",
+    "mode": "REQUIRED",
+    "description": "FALSE rules are skipped."
+  }
+]

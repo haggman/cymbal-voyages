@@ -1,0 +1,62 @@
+[
+  {
+    "name": "booking_id",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Unique booking identifier, e.g. B0001234."
+  },
+  {
+    "name": "customer_id",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "The customer who booked. Joins to customers.customer_id. Every booking belongs to a signed-in customer."
+  },
+  {
+    "name": "package_id",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "The package booked. Joins to packages.package_id, and through it to destinations for the category."
+  },
+  {
+    "name": "booking_date",
+    "type": "DATE",
+    "mode": "REQUIRED",
+    "description": "Date the booking was made. Partition column. Compare to plan by the calendar month of this date."
+  },
+  {
+    "name": "travel_start_date",
+    "type": "DATE",
+    "mode": "REQUIRED",
+    "description": "First day of travel. Warm escapes booked in late summer typically travel Dec–Apr."
+  },
+  {
+    "name": "channel",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Last-touch marketing channel credited with the booking: one of paid_search, paid_social, organic, email, direct, affiliate."
+  },
+  {
+    "name": "travelers",
+    "type": "INT64",
+    "mode": "REQUIRED",
+    "description": "Number of travelers on the booking."
+  },
+  {
+    "name": "revenue_usd",
+    "type": "FLOAT64",
+    "mode": "REQUIRED",
+    "description": "Gross booking value in US dollars (per-person price × travelers, less any promotional discount)."
+  },
+  {
+    "name": "status",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "confirmed or cancelled. Only confirmed rows count as bookings."
+  },
+  {
+    "name": "session_id",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "The web session in which the booking was completed, or NULL when it completed in the app or by phone. Joins to web_sessions.session_id."
+  }
+]

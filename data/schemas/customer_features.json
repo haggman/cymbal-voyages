@@ -1,0 +1,110 @@
+[
+  {
+    "name": "customer_id",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Joins to customers.customer_id."
+  },
+  {
+    "name": "as_of_date",
+    "type": "DATE",
+    "mode": "REQUIRED",
+    "description": "The snapshot date all features are computed at: 2026-09-01."
+  },
+  {
+    "name": "propensity_score",
+    "type": "FLOAT64",
+    "mode": "REQUIRED",
+    "description": "Modeled probability (0–1) that the customer books a warm-escape package in the 60 days after as_of_date, from the BigQuery ML logistic regression. Higher is more likely."
+  },
+  {
+    "name": "days_since_last_booking",
+    "type": "INT64",
+    "mode": "NULLABLE",
+    "description": "Days from the most recent confirmed booking to as_of_date. NULL when the customer has never booked. Lapsed = 365 or more."
+  },
+  {
+    "name": "last_booking_date",
+    "type": "DATE",
+    "mode": "NULLABLE",
+    "description": "Date of the most recent confirmed booking before as_of_date, or NULL."
+  },
+  {
+    "name": "loyalty_tier",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Cymbal Compass tier: none, blue, silver or gold."
+  },
+  {
+    "name": "loyalty_status",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "As of as_of_date: active, lapsed or never."
+  },
+  {
+    "name": "home_market_climate",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Climate group of the home market: cold (Chicago, Boston, Minneapolis, Detroit, Denver, Toronto, Cleveland, Milwaukee), warm (Miami, Phoenix, Houston, Los Angeles, San Diego) or mild (every other metro)."
+  },
+  {
+    "name": "lifetime_bookings",
+    "type": "INT64",
+    "mode": "REQUIRED",
+    "description": "Confirmed bookings on record before as_of_date."
+  },
+  {
+    "name": "lifetime_value_usd",
+    "type": "FLOAT64",
+    "mode": "REQUIRED",
+    "description": "Confirmed booking revenue before as_of_date, in US dollars."
+  },
+  {
+    "name": "ltv_band",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "Lifetime value band: none ($0), low (under $1,500), mid ($1,500–4,999), high ($5,000–11,999) or vip ($12,000 and up)."
+  },
+  {
+    "name": "booked_last_60d",
+    "type": "BOOL",
+    "mode": "REQUIRED",
+    "description": "TRUE when the customer made a confirmed booking in the 60 days before as_of_date (a common suppression rule)."
+  },
+  {
+    "name": "has_active_reservation",
+    "type": "BOOL",
+    "mode": "REQUIRED",
+    "description": "TRUE when the customer has a confirmed booking with travel on or after as_of_date."
+  },
+  {
+    "name": "email_contactable",
+    "type": "BOOL",
+    "mode": "REQUIRED",
+    "description": "TRUE when the customer can be emailed (opted in)."
+  },
+  {
+    "name": "sms_contactable",
+    "type": "BOOL",
+    "mode": "REQUIRED",
+    "description": "TRUE when the customer can be texted (opted in)."
+  },
+  {
+    "name": "sessions_last_90d",
+    "type": "INT64",
+    "mode": "REQUIRED",
+    "description": "Signed-in web sessions in the 90 days before as_of_date (Jun 3 – Aug 31, 2026)."
+  },
+  {
+    "name": "warm_views_last_90d",
+    "type": "INT64",
+    "mode": "REQUIRED",
+    "description": "Sessions in the same 90 days in which a warm-escape destination was viewed."
+  },
+  {
+    "name": "recent_engagement_score",
+    "type": "FLOAT64",
+    "mode": "REQUIRED",
+    "description": "0–1 score combining 90-day session count and days since the last session; 0 means no recent activity."
+  }
+]

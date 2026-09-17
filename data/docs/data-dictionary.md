@@ -406,10 +406,10 @@ ORDER BY 1, 2
 | Features | `days_since_last_booking` (NULL → 9999 in `TRANSFORM`), `lifetime_bookings`, `loyalty_tier`, `home_market_climate`, `sessions_last_90d`, `warm_views_last_90d`, `email_optin`, `ltv_band` |
 | Positive rate | 9.7% |
 | Reference model (scikit-learn logistic regression on the same table) | holdout AUC **0.780**, log loss 0.270, random 20% of customers |
-| BigQuery ML result | run `sql/train_propensity.sql`; `ML.EVALUATE` should report `roc_auc` within a few hundredths of the reference model. Training time on the 50,000-row table: _record here from the job details (typically 1–3 minutes for LOGISTIC_REG at this size)_ |
+| BigQuery ML result (recorded Sep 17, 2026, fresh project, US multi-region) | `ML.EVALUATE` on the 20% random split: **roc_auc 0.786**, log_loss 0.269, accuracy 0.907, precision 0.657, recall 0.113 at the default 0.5 cutoff (the lab uses probabilities, not the class). **Training time: the `CREATE MODEL` job ran 56 seconds** on the 50,000-row table; 71 seconds wall clock for the whole script including `ML.EVALUATE` and `ML.GLOBAL_EXPLAIN`. Global explain ranks `home_market_climate`, `loyalty_tier` and `ltv_band` (attribution ≈ 0.67 each) above `lifetime_bookings` (0.37), `days_since_last_booking` (0.29), `warm_views_last_90d` (0.19), `sessions_last_90d` (0.12) and `email_optin` (≈ 0). |
 | Scoring | `sql/predict_propensity.sql` updates `customer_features.propensity_score` in place. The shipped parquet already carries the reference model's scores so the lab works before BigQuery ML runs. |
 
-Score profile as shipped: median customer 0.08; the target audience (lapsed Compass members in cold markets with a warm view in the last 90 days) averages about 0.15 with roughly 8% at or above 0.30. See `docs/anomaly-walkthrough.md` for the audience queries.
+Score profile: median customer about 0.08; the target audience (lapsed Compass members in cold markets with a warm view in the last 90 days, 3,838 customers) averages 0.156 with 8.7% at or above 0.30 on the shipped reference scores, and 0.162 with 10.3% at or above 0.30 once `predict_propensity.sql` has written the BigQuery ML scores. See `docs/anomaly-walkthrough.md` for the audience queries.
 
 ## Embeddings
 

@@ -519,7 +519,7 @@ WHERE home_market_climate = 'cold'
 | --- | --- | --- | --- | --- |
 | 3,838 | 0.16 | 8.7 | 2.1 | 85.2 |
 
-"Lapsed Compass members in cold markets who viewed a warm destination in the last 90 days and did not book" resolves to **3,838 customers** from `customer_features` alone (as of Sep 1, 2026; the 90-day window is Jun 3 – Aug 31). A lapsed customer by definition has not booked in 12 months, so "did not book" is implied by `loyalty_status = 'lapsed'`. Average propensity is 0.16 and 8.7% score 0.30 or higher; 85% are email-contactable.
+"Lapsed Compass members in cold markets who viewed a warm destination in the last 90 days and did not book" resolves to **3,838 customers** from `customer_features` alone (as of Sep 1, 2026; the 90-day window is Jun 3 – Aug 31). A lapsed customer by definition has not booked in 12 months, so "did not book" is implied by `loyalty_status = 'lapsed'`. Average propensity is 0.16 and 8.7% score 0.30 or higher; 85% are email-contactable. Those are the reference scores shipped in the Parquet; after `sql/predict_propensity.sql` replaces them with the BigQuery ML model's scores, the same query returns 3,838 customers, average 0.162 and 10.3% at or above 0.30 (recorded Sep 17, 2026). Lab text should quote whichever state the lab is in at that point.
 
 ### Audience variants: how the size and propensity profile move with each filter
 

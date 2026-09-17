@@ -48,7 +48,7 @@ for t in $TABLES; do
     echo "· $t: nothing at $uri" >&2; exit 1
   fi
 
-  args=(--project_id="$PROJECT_ID" load --replace --source_format=PARQUET)
+  args=(--project_id="$PROJECT_ID" load --replace --source_format=PARQUET --parquet_enable_list_inference=true)
   [[ -n "$part" ]] && args+=(--time_partitioning_field="$part" --time_partitioning_type="$ptype")
   [[ -n "$cluster" ]] && args+=(--clustering_fields="$cluster")
 
@@ -65,7 +65,7 @@ for t in $TABLES; do
   bq "${args[@]}" "$DATASET.$t" "$uri" >/dev/null
   # apply column descriptions (modes in the JSON are relaxed so this never fails on a mode change)
   jq '[.[] | if .mode == "REQUIRED" then .mode = "NULLABLE" else . end]' "$SCHEMAS/$t.json" > "/tmp/cv_schema_$t.json"
-  bq --project_id="$PROJECT_ID" update --schema "/tmp/cv_schema_$t.json" --description "$desc" "$DATASET.$t" >/dev/null
+  bq --project_id="$PROJECT_ID" update --schema "/tmp/cv_schema_$t.json" --description "$desc" "$DATASET.$t"
   rows=$(bq --project_id="$PROJECT_ID" query --nouse_legacy_sql --format=csv "SELECT COUNT(*) FROM \`$PROJECT_ID.$DATASET.$t\`" | tail -1)
   echo "    $rows rows"
 done

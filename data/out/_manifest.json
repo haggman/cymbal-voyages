@@ -1,6 +1,6 @@
 {
   "seed": 20260916,
-  "generated_at": "2026-09-16T23:40:24+00:00",
+  "generated_at": "2026-09-18T20:33:53+00:00",
   "window": [
     "2025-07-01",
     "2026-09-15"
@@ -47,7 +47,7 @@
     "campaign_history": {
       "rows": 12,
       "parts": 1,
-      "bytes": 14620
+      "bytes": 14581
     },
     "creative_variants": {
       "rows": 200,
@@ -88,5 +88,5 @@
     "holdout": "random 20% of customers"
   },
   "incident_sessions_removed": 235,
-  "elapsed_seconds": 24.3
+  "elapsed_seconds": 17.3
 }

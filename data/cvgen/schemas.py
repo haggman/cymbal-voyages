@@ -89,7 +89,7 @@ SCHEMAS = {
             ("session_id", "STRING", "NULLABLE", "The web session in which the booking was completed, or NULL when it completed in the app or by phone. Joins to web_sessions.session_id."),
         ], partition="booking_date", cluster=["customer_id", "package_id"]),
     "ad_performance": dict(
-        description="Daily paid-media results by campaign and market, Jul 1, 2025 – Sep 15, 2026. Only paid channels (paid_search, paid_social, affiliate) appear here; email and organic have no media spend. Total paid spend is steady across the summer of 2026, but its allocation between campaigns changed on Jul 24, 2026.",
+        description="Daily paid-media results by campaign and market, Jul 1, 2025 – Sep 15, 2026. Only paid channels (paid_search, paid_social, affiliate) appear here; email and organic have no media spend.",
         columns=[
             ("spend_date", "DATE", "REQUIRED", "Calendar date of the spend. Partition column."),
             ("channel", "STRING", "REQUIRED", "Paid channel: paid_search, paid_social or affiliate."),

@@ -486,7 +486,7 @@ ORDER BY campaign_id
 | CMP-002 | Warm Escapes Retargeting | lapsed_compass_cold | 2025-07-01 | 2026-12-31 | 1,500,000 | 1,173,155 | 7,748 | 2.1 |
 | CMP-012 | Fall City Breaks 2026 | urban_explorers | 2026-07-24 | 2026-10-31 | 367,800 | 195,281.2 | 640 | 0.1 |
 
-`campaign_history` confirms it in words: CMP-012 is "funded by rotating the always-on paid-social budget rather than new money" and has delivered 640 bookings at an ROI of 0.1 through mid-September; CMP-002's retrospective notes the budget was rotated in late July 2026. The brand corpus brief for Fall City Breaks says the same in its budget section.
+`campaign_history` supplies the context without stating the cause: CMP-012 starts on Jul 24 with a $367,800 budget and has delivered 640 bookings at an ROI of 0.1 through mid-September, and CMP-002's retrospective calls it the most efficient always-on program. Neither retrospective mentions the rotation; that is deliberate, so the date and the money have to be found in `ad_performance`. (The brand corpus brief for Fall City Breaks does state it in its budget section, which the data agent cannot see.)
 
 ## What the trail adds up to
 

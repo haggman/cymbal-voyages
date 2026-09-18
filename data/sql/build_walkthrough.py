@@ -97,7 +97,7 @@ The queries are in BigQuery SQL against dataset `cymbal_voyages`. Column names a
     P.append(_block(res, "q14_retargeting_daily",
                     f"Daily grain pins the date: July 23 is the last full day, July 24 is the first day at the $150 keep-alive."))
     P.append(_block(res, "q15_campaign_history_fcb",
-                    f"`campaign_history` confirms it in words: CMP-012 is \"funded by rotating the always-on paid-social budget rather than new money\" and has delivered {fcb['bookings_attributed']} bookings at an ROI of {fcb['roi']} through mid-September; CMP-002's retrospective notes the budget was rotated in late July 2026. The brand corpus brief for Fall City Breaks says the same in its budget section."))
+                    f"`campaign_history` supplies the context without stating the cause: CMP-012 starts on Jul 24 with a $367,800 budget and has delivered {fcb['bookings_attributed']} bookings at an ROI of {fcb['roi']} through mid-September, and CMP-002's retrospective calls it the most efficient always-on program. Neither retrospective mentions the rotation; that is deliberate, so the date and the money have to be found in `ad_performance`. (The brand corpus brief for Fall City Breaks does state it in its budget section, which the data agent cannot see.)"))
     P.append(f"""## What the trail adds up to
 
 1. Warm escapes missed plan by {abs(warm['bookings_variance_pct']):.1f}% in August 2026; nothing else did, and August 2025 was on plan.

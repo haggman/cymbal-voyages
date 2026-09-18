@@ -205,7 +205,7 @@ The booking and revenue plan by calendar month, product category and market, Jul
 
 ### `ad_performance`
 
-Daily paid-media results by campaign and market, Jul 1, 2025 – Sep 15, 2026. Only paid channels (paid_search, paid_social, affiliate) appear here; email and organic have no media spend. Total paid spend is steady across the summer of 2026, but its allocation between campaigns changed on Jul 24, 2026.
+Daily paid-media results by campaign and market, Jul 1, 2025 – Sep 15, 2026. Only paid channels (paid_search, paid_social, affiliate) appear here; email and organic have no media spend.
 
 *Partitioned by `spend_date` (DAY); clustered by `campaign_id`, `market`.*
 

@@ -41,7 +41,7 @@
     ]
   },
   "ad_performance": {
-    "description": "Daily paid-media results by campaign and market, Jul 1, 2025 – Sep 15, 2026. Only paid channels (paid_search, paid_social, affiliate) appear here; email and organic have no media spend. Total paid spend is steady across the summer of 2026, but its allocation between campaigns changed on Jul 24, 2026.",
+    "description": "Daily paid-media results by campaign and market, Jul 1, 2025 – Sep 15, 2026. Only paid channels (paid_search, paid_social, affiliate) appear here; email and organic have no media spend.",
     "partition": "spend_date",
     "partition_type": "DAY",
     "cluster": [

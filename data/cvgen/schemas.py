@@ -174,7 +174,7 @@ SCHEMAS = {
             ("recent_engagement_score", "FLOAT64", "REQUIRED", "0–1 score combining 90-day session count and days since the last session; 0 means no recent activity."),
         ], partition=None, cluster=["home_market_climate", "loyalty_status"]),
     "propensity_training": dict(
-        description="Training set for the warm-escape propensity model: 100,000 customer snapshots at eight monthly reference dates (Oct 2025 – May 2026), with features as they stood on the reference date and whether the customer booked a warm escape in the following 60 days.",
+        description="Training set for the warm-escape propensity model: one snapshot of every customer (50,000 rows) as of the reference date Sep 1, 2025, the same point in the booking season one year before the Sep 1, 2026 scoring snapshot, with features as they stood on that date and whether the customer booked a warm escape in the following 60 days.",
         columns=[
             ("reference_date", "DATE", "REQUIRED", "The as-of date for the features; the label window is the 60 days after it."),
             ("customer_id", "STRING", "REQUIRED", "Joins to customers.customer_id."),

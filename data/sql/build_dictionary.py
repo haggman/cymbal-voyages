@@ -134,8 +134,7 @@ Score profile: median customer about 0.08; the target audience (lapsed Compass m
 Rules run in ascending `priority`; the first enabled rule whose condition(s) hold decides the action. A rule may carry a second condition (`feature_2`, `operator_2`, `threshold_2`) ANDed with the first. Thresholds are stored as text so one column can hold `60`, `0.30` or `gold`.
 
 | Rule | Priority | Condition | Action | Enabled |
-| --- | ---: | --- | --- | --- |
-""")
+| --- | ---: | --- | --- | --- |""")
     for r in C.POLICY_RULES:
         cond = f"`{r[2]} {r[3]} {r[4]}`" + (f" AND `{r[5]} {r[6]} {r[7]}`" if r[5] else "")
         P.append(f"| {r[0]} | {r[1]} | {cond} | {r[8]} | {'yes' if r[10] else 'no'} |")

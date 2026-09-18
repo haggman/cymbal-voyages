@@ -264,7 +264,7 @@ Performance of 200 ad creative variants across the campaigns, tagged by imagery 
 
 ### `propensity_training`
 
-Training set for the warm-escape propensity model: 100,000 customer snapshots at eight monthly reference dates (Oct 2025 – May 2026), with features as they stood on the reference date and whether the customer booked a warm escape in the following 60 days.
+Training set for the warm-escape propensity model: one snapshot of every customer (50,000 rows) as of the reference date Sep 1, 2025, the same point in the booking season one year before the Sep 1, 2026 scoring snapshot, with features as they stood on that date and whether the customer booked a warm escape in the following 60 days.
 
 *Not partitioned; clustered by `reference_date`.*
 
@@ -421,7 +421,6 @@ Rules run in ascending `priority`; the first enabled rule whose condition(s) hol
 
 | Rule | Priority | Condition | Action | Enabled |
 | --- | ---: | --- | --- | --- |
-
 | R01 | 10 | `days_since_last_booking <= 60` | suppress | yes |
 | R02 | 20 | `loyalty_tier == gold` AND `propensity_score >= 0.60` | route_to_loyalty_team | yes |
 | R03 | 30 | `propensity_score >= 0.30` AND `email_contactable == true` | send_offer | yes |

@@ -132,7 +132,7 @@ Published Sep 19 in the long-lived project **`class-demo-labs`** (public read): 
 
 Rebuild and republish with `bash services/scripts/build_images.sh` (it publishes to the current gcloud project, or `IMAGE_PROJECT=...`).
 
-**Where the images live.** `us-central1-docker.pkg.dev/class-demo-labs/cymbal-voyages`, public read (`allUsers` → Artifact Registry Reader), so every lab project pulls without a grant. `deploy_services.sh` defaults to it and reads the newest Toolbox and orchestrator tags from it. To publish a new version, run `build_images.sh` in Cloud Shell in `class-demo-labs` (it sets up the APIs, the Cloud Build service account's roles and the repo on first run). The Sep 19 test build also left copies in the spike project; ignore them.
+**Where the images live.** `us-central1-docker.pkg.dev/class-demo-labs/cymbal-voyages`, public read (`allUsers` → Artifact Registry Reader), so every lab project pulls without a grant. `deploy_services.sh` defaults to it and reads the newest Toolbox and orchestrator tags from it. To publish a new version, run `build_images.sh` in Cloud Shell in `class-demo-labs` (it sets up the APIs, the Cloud Build service account's roles and the repo on first run). The Sep 19 test build also left copies in the spike project; ignore them. **Verified Sep 19:** `deploy_services.sh` run with defaults in the spike Qwiklabs project pulled both images from `class-demo-labs` across projects, and `test_services.sh` passed, so a student lab project can use them with no grant.
 
 ### Reference deployment
 

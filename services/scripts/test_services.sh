@@ -10,6 +10,7 @@ TOOLBOX_SVC="${TOOLBOX_SVC:-audience-tools}"
 ORCH_SVC="${ORCH_SVC:-orchestrator}"
 TB=$(gcloud run services describe "$TOOLBOX_SVC" --project "$PROJECT" --region "$REGION" --format='value(status.url)')
 OR=$(gcloud run services describe "$ORCH_SVC" --project "$PROJECT" --region "$REGION" --format='value(status.url)')
+[[ -n "$TB" && -n "$OR" ]] || { echo "ERROR: services $TOOLBOX_SVC / $ORCH_SVC are not deployed in $PROJECT; run deploy_services.sh first." >&2; exit 1; }
 TOKEN=$(gcloud auth print-identity-token)
 
 tool() {  # tool <name> <json-params>

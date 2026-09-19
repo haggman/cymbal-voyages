@@ -29,12 +29,14 @@ gcloud artifacts repositories add-iam-policy-binding "$REPO" --location "$REGION
 
 # 1. MCP Toolbox for Databases: mirror Google's image at a pinned version.
 if [[ -z "${TOOLBOX_VERSION:-}" ]]; then
-  LATEST_DIGEST=$(gcloud artifacts docker images describe "${GOOGLE_TOOLBOX}:latest" --format='value(image_summary.digest)')
-  TOOLBOX_VERSION=$(gcloud artifacts docker tags list "$GOOGLE_TOOLBOX" --format='value(tag.basename(),version.basename())' \
-    | awk -v d="$LATEST_DIGEST" '$2==d && $1!="latest" {print $1}' \
-    | python3 -c 'import sys,re; t=[l.strip() for l in sys.stdin if l.strip()]; t.sort(key=lambda v:[int(x) for x in re.findall(r"\d+",v)]); print(t[-1] if t else "")')
+  # The newest release tag (e.g. 1.2.3 or v1.2.3), never "latest".
+  TOOLBOX_VERSION=$(gcloud artifacts docker tags list "$GOOGLE_TOOLBOX" --format='value(tag.basename())' 2>/dev/null \
+    | python3 -c 'import sys,re
+t=[l.strip() for l in sys.stdin if re.fullmatch(r"v?\d+\.\d+\.\d+", l.strip())]
+t.sort(key=lambda v:[int(x) for x in re.findall(r"\d+",v)])
+print(t[-1] if t else "")' || true)
 fi
-[[ -n "$TOOLBOX_VERSION" && "$TOOLBOX_VERSION" != "latest" ]] || { echo "Could not resolve a Toolbox version tag" >&2; exit 1; }
+[[ -n "$TOOLBOX_VERSION" && "$TOOLBOX_VERSION" != "latest" ]] || { echo "Could not resolve a Toolbox version tag. Tags seen:" >&2; gcloud artifacts docker tags list "$GOOGLE_TOOLBOX" --format="value(tag.basename())" 2>&1 | head -20 >&2; exit 1; }
 echo "Toolbox version: $TOOLBOX_VERSION"
 # Mirror with Cloud Build (no local Docker needed): a one-line Dockerfile FROM the pinned image.
 MIRROR_DIR=$(mktemp -d)

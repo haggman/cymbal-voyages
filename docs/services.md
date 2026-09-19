@@ -32,6 +32,7 @@ These are the contracts the lab asks students to read. The Builder reads them in
 | "widen to all Compass members in cold markets who browsed warm" | member status = any |
 | "drop anyone who booked in the last 60 days" | remove recent bookers = yes |
 | "who looked at Hawaii" / "somewhere quiet with snorkeling" | the five catalog destinations closest in meaning; only customers who viewed one of them count |
+| (no place or kind of trip named) | destination hint = none (a required field; Gemini fills it) |
 | "somewhere warm in March" | the meaning match, limited to destinations at their best in March |
 
 **What comes back** (one row):
@@ -190,6 +191,14 @@ Rebuild and republish with `bash services/scripts/build_images.sh` (it publishes
 }
 ```
 
+### Toolbox 1.12 behaviours the design depends on
+
+- Tools are served **only over MCP** (`POST /mcp`, JSON-RPC `tools/list` and `tools/call`). The older `/api/tool/...` REST endpoints return `410 Gone` ("disabled by default"). Gemini Enterprise uses MCP, so nothing in the lab is affected.
+- A parameter that uses `valueFromParam` + `embeddedBy` is copied from its source **before** defaults apply, so the source can't be optional. That's why `destination_hint` is required (Gemini sends `none` when no place was named).
+- `bigquery-sql` runs a multi-statement script (`DECLARE` … `MERGE` … `SELECT`) and returns the final `SELECT`'s rows. `activate_segment` relies on this.
+- `annotations:` in `tools.yaml` reach the MCP `tools/list` response as written (`readOnlyHint`, `destructiveHint`, `idempotentHint`).
+- `${GOOGLE_CLOUD_PROJECT}` in `tools.yaml` is substituted from the service's environment, so one file works in every lab project.
+
 ### Verifying a deployment
 
 `bash services/scripts/test_services.sh` (Cloud Shell, repo root, lab project) calls every tool over MCP (`tools/call` on `/mcp`; Toolbox 1.x disables its old `/api` REST endpoints), checks the receipt retry, runs the orchestrator's policy engine against BigQuery, fetches the served card, and asks the orchestrator three questions over A2A. The numbers must match the reference answers above.
@@ -206,3 +215,46 @@ agents/orchestrator/                 ADK agent: orchestrator/{agent,tools,policy
                                      agent.card.template.json, Dockerfile, entrypoint.sh, requirements.txt
 agents/orchestrator/tests/local_check.py   offline check of the policy engine against data/out (DuckDB)
 ```
+
+---
+
+## Part 3. Test run (Sep 19, spike project `qwiklabs-gcp-04-df5f1f023984`, reference propensity scores)
+
+`test_services.sh` against the deployed services. Every number matches `data/docs/anomaly-walkthrough.md`.
+
+| Check | Result |
+| :-- | :-- |
+| MCP `tools/list` | 3 tools; resolve_segment and variant_performance `readOnlyHint: true`; activate_segment `readOnlyHint: false, idempotentHint: true` |
+| A base | 3,838 · 0.156 · 8.7% (334) · 3,271 email |
+| B email only | 3,271 · 0.156 · 8.6% |
+| C lapsed 12–24 months | 2,242 · 0.188 · 13.5% · 1,908 email |
+| D lapsed 24+ months | 1,596 · 0.112 · 2.0% |
+| E all Compass members | 8,152 · 0.189 · 14.9% · 6,952 email |
+| F E minus booked in 60 days | 6,049 · 0.154 · 9.1% · 5,137 email |
+| "Hawaii" (lapsed, cold) | 2,005 · 0.191; matched Maui, Oahu, Kauai, Hawaiian Islands Cruise **and Key West** (the catalog has only four Hawaii items, so the fifth-closest is filled from elsewhere; the answer lists the matches, so the marketer can see it) |
+| "somewhere warm" + March (lapsed, cold) | 2,326 · 0.187; matched Key West, Los Cabos, Maui, Montego Bay, Tulum and the Riviera Maya |
+| activate, then reworded retry | first: `act-0eb274a679ac`, "New activation recorded."; retry with a different description: **same receipt**, original timestamp, "already activated … nothing was sent twice"; one row for that receipt |
+| variant_performance lapsed_compass_cold | bonus_points 4.76 · beach_couple 3.49 · plan_your_escape 3.95 (all three tables match exactly) |
+| orchestrator dry run, base | R08 2,801 · R06 703 · R03 269 · R05 31 · R04 20 · R02 14 |
+| orchestrator, variant E | suppress (R01) **2,103** of 8,152 |
+| orchestrator, variant F | suppress 0 (F already removes recent bookers) |
+| orchestrator over A2A | reported the same counts in prose (3,535 / 289 / 14; then 2,103 suppressed); "c71" normalized to C000071 → send_offer, R03, propensity 0.56 |
+| served card | A2A-1.x format with `supportedInterfaces`, as expected; students paste the trimmed card |
+
+The `activations` table in the spike project holds leftover rows from Phase 1 and earlier test runs; a fresh lab starts empty.
+
+## Part 4. Decisions made in the build that the plan left open
+
+1. **Toolbox is mirrored, not referenced.** The lab pulls `toolbox:1.12.0` from our public repo, not Google's registry, so a Google-side change can't break Start Lab.
+2. **`resolve_segment` takes structured choices plus the marketer's words.** Gemini maps phrasing to `climate`, `member_status`, `lapsed_months_min/max`, `email_only`, `exclude_booked_last_60d`, `destination_hint` and `travel_month`; the description carries the phrase-to-choice table. The marketer's words are echoed back unchanged.
+3. **Meaning match: top 5 destinations by cosine distance** on `catalog_embeddings`. The hint is embedded inside Toolbox (Vertex AI `gemini-embedding-001`, 3,072 dims), so provisioning needs **no BigQuery connection or remote model**, only `roles/aiplatform.user` on the Toolbox service account. The 90-day viewing window matches `warm_views_last_90d` (Jun 3 – Aug 31, 2026).
+4. **A readable `segment_id` is the activation key.** The receipt is `act-` + MD5(segment_id | channel). This puts a fifth field, **Segment Id**, on the Review card (Channel, Audience Size, Segment Description, Segment Id). Task 3's text should name it.
+5. **`activate_segment` returns a `note`** saying whether the activation is new or a repeat, so the retry beat reads clearly in the chat.
+6. **Channels limited to email, paid_social and paid_search** (`allowedValues`).
+7. **The orchestrator's model never decides.** Python applies the policy; the model picks the tool and explains. Rows it can't read are skipped and reported; `enabled` left empty counts as enabled; `priority` ties break on `rule_id`.
+8. **Orchestrator segments use the same filters as `resolve_segment`** (no destination match), so "run the Task 3 audience through the policy" gives matching counts.
+9. **Suppress is shown on variant E, not F.** F removes exactly the customers R01 would suppress. The plan's Task 6 wording ("the variant that includes recent bookers") already means E.
+10. **Lowering the offer threshold to 0.15 sends offers to 1,082 of 3,838 (28%)**, not "about a third". Task 6 should quote 28%.
+11. **Separate service accounts** (`audience-tools-sa`, `orchestrator-sa`) with least privilege; the orchestrator cannot write to BigQuery.
+12. **Orchestrator model `gemini-3.5-flash`** (as in the spike), overridable by `ORCHESTRATOR_MODEL`.
+13. **Card URL filled at start-up from `AGENT_URL`**, which provisioning can compute before deploying because Cloud Run URLs are deterministic.

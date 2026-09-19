@@ -1,0 +1,56 @@
+{
+  "name": "Cymbal Voyages Orchestrator",
+  "description": "Decides the next best action for each customer in an audience (send an offer, route to the loyalty team, hold for retargeting, or suppress) by applying Cymbal Voyages' decisioning policy table, and explains every decision in plain English.",
+  "url": "__AGENT_URL__/a2a/orchestrator",
+  "version": "1.0.0",
+  "protocolVersion": "0.3.0",
+  "capabilities": {
+    "streaming": true
+  },
+  "defaultInputModes": [
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "text/plain"
+  ],
+  "skills": [
+    {
+      "id": "decide_for_segment",
+      "name": "Decide actions for an audience",
+      "description": "Applies the decisioning policy to every customer in a described audience and reports how many get each action, which rule decided them, and example reasons.",
+      "tags": [
+        "next best action",
+        "decisioning",
+        "audience"
+      ],
+      "examples": [
+        "Run the lapsed Compass members in cold markets who browsed warm destinations through the policy.",
+        "Now widen it to all Compass members in cold markets who browsed warm."
+      ]
+    },
+    {
+      "id": "decide_for_customers",
+      "name": "Decide actions for specific customers",
+      "description": "Returns the action, deciding rule and reason for specific customer ids.",
+      "tags": [
+        "next best action",
+        "customer"
+      ],
+      "examples": [
+        "What should we do with C000071, and why?"
+      ]
+    },
+    {
+      "id": "show_policy",
+      "name": "Show the policy",
+      "description": "Lists the decisioning rules in the order they are applied, and any rows that could not be read.",
+      "tags": [
+        "policy",
+        "governance"
+      ],
+      "examples": [
+        "What rules are you applying right now?"
+      ]
+    }
+  ]
+}

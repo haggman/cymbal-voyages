@@ -1,0 +1,276 @@
+# Cymbal Voyages Audience Tools: MCP Toolbox for Databases configuration (mkt016).
+#
+# Three tools against the cymbal_voyages BigQuery dataset. Gemini Enterprise reads the
+# descriptions below to decide when and how to call each tool, so they are written for a
+# marketer, not a developer.
+#
+# Environment variables the service must set:
+#   GOOGLE_CLOUD_PROJECT  the lab project (BigQuery jobs and Vertex AI embeddings run there)
+#
+# Tables used: customer_features, web_sessions, destinations, catalog_embeddings,
+# creative_variants (read) and activations (write, one receipt row per activation).
+
+kind: source
+name: cymbal_bq
+type: bigquery
+project: ${GOOGLE_CLOUD_PROJECT}
+location: US
+---
+kind: embeddingModel
+name: catalog_embedder
+type: gemini
+model: gemini-embedding-001
+project: ${GOOGLE_CLOUD_PROJECT}
+location: us-central1
+dimension: 3072
+---
+kind: tool
+name: resolve_segment
+type: bigquery-sql
+source: cymbal_bq
+description: >-
+  Sizes a marketing audience from a plain-English description and tells you how good it is.
+  Every audience is Cymbal Compass loyalty members who looked at a warm-escape destination in
+  the last 90 days (June 3 to August 31, 2026), narrowed by the choices below. It returns how
+  many customers are in the audience, their average likelihood to book a warm escape in the
+  next 60 days (0 to 1), the share and number with a strong likelihood (0.30 or higher), how
+  many we can email, and a segment ID that names exactly what was counted.
+  How to translate what the marketer says:
+  "lapsed" means no booking in the last 12 months (member_status = lapsed);
+  "all Compass members" or "widen to everyone" means member_status = any;
+  "only the ones we can email" means email_only = true;
+  "lapsed 12 to 24 months" means lapsed_months_min = 12 and lapsed_months_max = 24;
+  "lapsed more than two years" means lapsed_months_min = 24;
+  "drop anyone who booked in the last 60 days" means exclude_booked_last_60d = true.
+  Only fill destination_hint when the marketer names a place, a region or a kind of trip
+  ("Hawaii", "the Caribbean", "somewhere quiet with snorkeling"); leave it as none for plain
+  "warm escapes" or "warm destinations". If they name a travel month ("somewhere warm in
+  March"), put the month number in travel_month and the rest in destination_hint.
+  Run it again with new choices every time the marketer refines the audience. It only reads
+  data and changes nothing, so it is safe to run as often as you like.
+annotations:
+  readOnlyHint: true
+  idempotentHint: true
+parameters:
+  - name: segment_description
+    type: string
+    description: The audience in the marketer's own words, e.g. "lapsed Compass members in cold markets who browsed warm destinations". Returned unchanged so everyone can see what was asked for.
+  - name: climate
+    type: string
+    description: Climate of the customers' home market. cold means Chicago, Boston, Minneapolis, Detroit, Denver, Toronto, Cleveland and Milwaukee. Use any for all markets.
+    allowedValues: [cold, mild, warm, any]
+  - name: member_status
+    type: string
+    description: lapsed = members with no booking in the last 12 months; active = booked in the last 12 months; never = members who have never booked; any = all Compass members.
+    allowedValues: [lapsed, active, never, any]
+  - name: lapsed_months_min
+    type: integer
+    description: Keep only customers whose last booking was at least this many months ago. 0 means no minimum.
+    default: 0
+  - name: lapsed_months_max
+    type: integer
+    description: Keep only customers whose last booking was less than this many months ago. 0 means no maximum.
+    default: 0
+  - name: email_only
+    type: boolean
+    description: true to keep only customers who have opted in to email.
+    default: false
+  - name: exclude_booked_last_60d
+    type: boolean
+    description: true to drop anyone who made a booking in the last 60 days.
+    default: false
+  - name: destination_hint
+    type: string
+    description: A place, region or kind of trip the marketer named, e.g. "Hawaii" or "quiet beaches with snorkeling". The five closest destinations in our catalog are matched by meaning, and only customers who looked at one of them count. Use none when no place or kind of trip was named (plain "warm escapes" or "warm destinations" is none).
+  - name: travel_month
+    type: integer
+    description: Month number (1 to 12) the marketer wants people to travel in; only destinations at their best that month are matched. 0 means any month. Used only together with destination_hint.
+    default: 0
+  - name: destination_vector
+    type: string
+    description: Hidden copy of destination_hint, turned into an embedding for the meaning match.
+    valueFromParam: destination_hint
+    embeddedBy: catalog_embedder
+statement: |
+  WITH p AS (
+    SELECT
+      LOWER(TRIM(@climate)) AS climate,
+      LOWER(TRIM(@member_status)) AS member_status,
+      GREATEST(@lapsed_months_min, 0) AS mmin,
+      GREATEST(@lapsed_months_max, 0) AS mmax,
+      @email_only AS email_only,
+      @exclude_booked_last_60d AS excl,
+      LOWER(TRIM(IFNULL(@destination_hint, 'none'))) NOT IN ('', 'none', 'any', 'n/a', 'warm', 'warm escape', 'warm escapes', 'warm destinations', 'any warm escape') AS use_hint,
+      IF(@travel_month BETWEEN 1 AND 12, @travel_month, 0) AS travel_month
+  ),
+  matched AS (
+    SELECT d.destination_id, d.name
+    FROM `cymbal_voyages.catalog_embeddings` e
+    JOIN `cymbal_voyages.destinations` d ON d.destination_id = e.item_id
+    CROSS JOIN p
+    WHERE e.item_type = 'destination'
+      AND p.use_hint
+      AND (p.travel_month = 0 OR p.travel_month IN UNNEST(d.best_months))
+    ORDER BY ML.DISTANCE(e.embedding, @destination_vector, 'COSINE')
+    LIMIT 5
+  ),
+  viewers AS (
+    SELECT DISTINCT s.customer_id
+    FROM `cymbal_voyages.web_sessions` s, UNNEST(s.destinations_viewed) AS v
+    WHERE s.session_date BETWEEN DATE '2026-06-03' AND DATE '2026-08-31'
+      AND s.customer_id IS NOT NULL
+      AND v IN (SELECT destination_id FROM matched)
+  ),
+  aud AS (
+    SELECT f.*
+    FROM `cymbal_voyages.customer_features` f
+    CROSS JOIN p
+    WHERE (p.climate = 'any' OR f.home_market_climate = p.climate)
+      AND f.loyalty_tier != 'none'
+      AND IF(p.use_hint, f.customer_id IN (SELECT customer_id FROM viewers), f.warm_views_last_90d >= 1)
+      AND (p.member_status = 'any' OR f.loyalty_status = p.member_status)
+      AND (p.mmin = 0 OR f.days_since_last_booking >= CAST(ROUND(p.mmin * 365 / 12) AS INT64))
+      AND (p.mmax = 0 OR f.days_since_last_booking < CAST(ROUND(p.mmax * 365 / 12) AS INT64))
+      AND (NOT p.email_only OR f.email_contactable)
+      AND (NOT p.excl OR NOT f.booked_last_60d)
+  ),
+  stats AS (
+    SELECT
+      COUNT(*) AS customers,
+      ROUND(AVG(propensity_score), 3) AS avg_propensity,
+      ROUND(100 * SAFE_DIVIDE(COUNTIF(propensity_score >= 0.3), COUNT(*)), 1) AS pct_propensity_ge_030,
+      COUNTIF(propensity_score >= 0.3) AS strong_propensity_customers,
+      COUNTIF(email_contactable) AS email_contactable
+    FROM aud
+  )
+  SELECT
+    CONCAT(
+      p.climate, ' markets | ',
+      IF(p.member_status = 'any', 'all Compass members', CONCAT(p.member_status, ' members')), ' | ',
+      CASE
+        WHEN p.mmin = 0 AND p.mmax = 0 THEN 'any time since last booking'
+        WHEN p.mmax = 0 THEN FORMAT('last booked %d+ months ago', p.mmin)
+        WHEN p.mmin = 0 THEN FORMAT('last booked under %d months ago', p.mmax)
+        ELSE FORMAT('last booked %d to %d months ago', p.mmin, p.mmax)
+      END, ' | ',
+      IF(p.email_only, 'email only', 'any contact'), ' | ',
+      IF(p.excl, 'recent bookers removed', 'recent bookers kept'), ' | ',
+      IF(p.use_hint,
+         CONCAT('viewed ', IFNULL((SELECT STRING_AGG(destination_id, ',' ORDER BY destination_id) FROM matched), 'no match'),
+                IF(p.travel_month > 0, FORMAT(' (best in month %d)', p.travel_month), '')),
+         'viewed any warm escape')
+    ) AS segment_id,
+    @segment_description AS segment_description,
+    s.customers,
+    s.avg_propensity,
+    s.pct_propensity_ge_030,
+    s.strong_propensity_customers,
+    s.email_contactable,
+    IF(p.use_hint,
+       IFNULL((SELECT STRING_AGG(name, ', ' ORDER BY name) FROM matched), 'no destination matched'),
+       'any warm-escape destination') AS destinations_matched,
+    DATE '2026-09-01' AS data_as_of
+  FROM p CROSS JOIN stats s
+---
+kind: tool
+name: activate_segment
+type: bigquery-sql
+source: cymbal_bq
+description: >-
+  Sends an audience to a marketing channel so a campaign can reach it, and returns the
+  activation receipt. Use it only after the audience has been sized with resolve_segment and
+  the marketer has said to activate it. Copy the segment ID exactly as resolve_segment
+  returned it. Sending the same audience to the same channel again does not send it twice:
+  it returns the original receipt and says so, even if the audience is described in
+  different words. This is a stand-in for the real activation endpoint (an ad platform, CDP
+  or email service); it records the receipt and nothing else.
+annotations:
+  readOnlyHint: false
+  destructiveHint: false
+  idempotentHint: true
+parameters:
+  - name: segment_id
+    type: string
+    description: The segment ID from resolve_segment, copied exactly. It names what was counted, so the same audience always gets the same receipt.
+  - name: segment_description
+    type: string
+    description: The audience in plain English, as the marketer would describe it on the receipt.
+  - name: audience_size
+    type: integer
+    description: The number of customers resolve_segment reported for this audience.
+  - name: channel
+    type: string
+    description: Where to send the audience.
+    allowedValues: [email, paid_social, paid_search]
+statement: |
+  DECLARE rid STRING DEFAULT CONCAT('act-', SUBSTR(TO_HEX(MD5(CONCAT(LOWER(TRIM(@segment_id)), '|', LOWER(TRIM(@channel))))), 1, 12));
+  DECLARE already BOOL DEFAULT (SELECT COUNT(*) > 0 FROM `cymbal_voyages.activations` WHERE receipt_id = rid);
+  MERGE `cymbal_voyages.activations` t
+  USING (SELECT rid AS receipt_id) s
+  ON t.receipt_id = s.receipt_id
+  WHEN NOT MATCHED THEN
+    INSERT (receipt_id, segment_description, audience_size, channel, submitted_at, status)
+    VALUES (rid, @segment_description, @audience_size, LOWER(TRIM(@channel)), CURRENT_TIMESTAMP(), 'accepted');
+  SELECT
+    receipt_id, segment_description, audience_size, channel, submitted_at, status,
+    IF(already, 'This audience was already activated on this channel; this is the original receipt. Nothing was sent twice.',
+       'New activation recorded.') AS note
+  FROM `cymbal_voyages.activations`
+  WHERE receipt_id = rid;
+---
+kind: tool
+name: variant_performance
+type: bigquery-sql
+source: cymbal_bq
+description: >-
+  Shows which creative has actually converted for an audience in past campaigns, so new
+  creative starts from evidence. Call this BEFORE generating or suggesting any creative
+  (images, headlines, offers or calls to action) for a segment. For each creative choice
+  (offer framing, hero image style, call to action) it returns every option with the number
+  of variants that used it, clicks, bookings and the booking rate per click, ranked best
+  first. The answer is segment-specific: what wins for lapsed loyalty members is not what
+  wins for everyone. Segment names: lapsed Compass members in cold markets =
+  lapsed_compass_cold; all lapsed Compass members = lapsed_compass; active members =
+  active_compass; everyone = all_customers. Read-only; safe to run as often as you like.
+annotations:
+  readOnlyHint: true
+  idempotentHint: true
+parameters:
+  - name: segment
+    type: string
+    description: The audience the creative was shown to.
+    allowedValues: [lapsed_compass_cold, lapsed_compass, active_compass, all_customers, prospects, urban_explorers, ski_enthusiasts, cruise_interest, adventure_seekers]
+statement: |
+  WITH v AS (
+    SELECT * FROM `cymbal_voyages.creative_variants`
+    WHERE target_segment = LOWER(TRIM(@segment))
+  ),
+  g AS (
+    SELECT 'offer framing' AS creative_choice, offer_framing AS option,
+           COUNT(*) AS variants, SUM(clicks) AS clicks, SUM(conversions) AS bookings
+    FROM v GROUP BY 2
+    UNION ALL
+    SELECT 'hero image style', hero_imagery_style, COUNT(*), SUM(clicks), SUM(conversions)
+    FROM v GROUP BY 2
+    UNION ALL
+    SELECT 'call to action', cta_construction, COUNT(*), SUM(clicks), SUM(conversions)
+    FROM v GROUP BY 2
+  )
+  SELECT
+    LOWER(TRIM(@segment)) AS segment,
+    creative_choice,
+    RANK() OVER (PARTITION BY creative_choice ORDER BY SAFE_DIVIDE(bookings, clicks) DESC) AS rank,
+    option,
+    variants,
+    clicks,
+    bookings,
+    ROUND(100 * SAFE_DIVIDE(bookings, clicks), 2) AS booking_rate_pct
+  FROM g
+  ORDER BY creative_choice, rank
+---
+kind: toolset
+name: audience_tools
+tools:
+  - resolve_segment
+  - activate_segment
+  - variant_performance

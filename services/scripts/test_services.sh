@@ -13,17 +13,38 @@ OR=$(gcloud run services describe "$ORCH_SVC" --project "$PROJECT" --region "$RE
 [[ -n "$TB" && -n "$OR" ]] || { echo "ERROR: services $TOOLBOX_SVC / $ORCH_SVC are not deployed in $PROJECT; run deploy_services.sh first." >&2; exit 1; }
 TOKEN=$(gcloud auth print-identity-token)
 
-tool() {  # tool <name> <json-params>
-  curl -s -X POST "$TB/api/tool/$1/invoke" -H "Authorization: Bearer $TOKEN" \
-       -H "Content-Type: application/json" -d "$2"
+# Toolbox 1.x serves tools only over MCP (/mcp, JSON-RPC); the old /api endpoints are off.
+tool() {  # tool <name> <json-arguments>  -> prints a JSON list of result rows
+  local body
+  body=$(python3 -c 'import json,sys; print(json.dumps({"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":sys.argv[1],"arguments":json.loads(sys.argv[2])}}))' "$1" "$2")
+  curl -s -X POST "$TB/mcp" -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+       -H "Accept: application/json, text/event-stream" -d "$body" \
+  | python3 -c '
+import json,re,sys
+raw=sys.stdin.read()
+m=re.search(r"\{.*\}", raw, re.S)
+try:
+    d=json.loads(m.group(0))
+except Exception:
+    print(json.dumps({"RAW": raw[:1500]})); sys.exit()
+if "error" in d:
+    print(json.dumps({"ERROR": d["error"]})); sys.exit()
+res=d.get("result",{})
+rows=[]
+for c in res.get("content",[]):
+    t=c.get("text","")
+    try:
+        v=json.loads(t); rows.extend(v if isinstance(v,list) else [v])
+    except Exception:
+        rows.append({"text": t})
+if res.get("isError"): rows=[{"TOOL_ERROR": rows}]
+print(json.dumps(rows, default=str))'
 }
 show() { python3 -c '
 import json,sys
 raw=sys.stdin.read()
 try:
-    r=json.loads(raw); res=r.get("result",r)
-    res=json.loads(res) if isinstance(res,str) else res
-    for row in (res if isinstance(res,list) else [res]): print("   ", json.dumps(row, default=str))
+    for row in json.loads(raw): print("   ", json.dumps(row, default=str))
 except Exception: print("    RAW:", raw[:1500])'; }
 
 echo "== MCP endpoint lists the tools"
@@ -46,7 +67,7 @@ echo " warm in March";     seg '{"segment_description":"lapsed members who want 
 
 echo; echo "== activate_segment: first send, then a reworded retry (want the same receipt, one row)"
 SEG_ID=$(tool resolve_segment '{"segment_description":"base","climate":"cold","member_status":"lapsed"}' \
-  | python3 -c 'import json,sys; r=json.load(sys.stdin)["result"]; r=json.loads(r) if isinstance(r,str) else r; print(r[0]["segment_id"])')
+  | python3 -c 'import json,sys; r=json.load(sys.stdin); print(r[0].get("segment_id",""))')
 echo "   segment_id: $SEG_ID"
 ACT1=$(python3 -c 'import json,sys; print(json.dumps({"segment_id":sys.argv[1],"segment_description":"lapsed Compass members in cold markets who browsed warm destinations","audience_size":3838,"channel":"email"}))' "$SEG_ID")
 ACT2=$(python3 -c 'import json,sys; print(json.dumps({"segment_id":sys.argv[1],"segment_description":"cold-market lapsed loyalty members browsing sun trips","audience_size":3838,"channel":"email"}))' "$SEG_ID")

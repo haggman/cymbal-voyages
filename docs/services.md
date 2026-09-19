@@ -122,10 +122,12 @@ Suppress (R01, "booked in the last 60 days") fires on **variant E**, which inclu
 
 ### Images (public Artifact Registry, pull without a grant)
 
+Current build (Sep 19): `IMAGE_PROJECT` = `qwiklabs-gcp-04-df5f1f023984` (temporary; see below), Toolbox **1.12.0**, orchestrator **1.0.0**.
+
 | Service | Image | Notes |
 | :-- | :-- | :-- |
-| Audience Tools | `__IMAGE_REPO__/toolbox:__TOOLBOX_VERSION__` | a mirror of Google's `us-central1-docker.pkg.dev/database-toolbox/toolbox/toolbox` at that pinned version, never `:latest` |
-| Orchestrator | `__IMAGE_REPO__/orchestrator:1.0.0` | built from `agents/orchestrator/` (Python 3.12, google-adk 2.9.2, a2a-sdk 1.1.4, google-cloud-bigquery 3.45.2) |
+| Audience Tools | `us-central1-docker.pkg.dev/IMAGE_PROJECT/cymbal-voyages/toolbox:1.12.0` | a mirror of Google's `us-central1-docker.pkg.dev/database-toolbox/toolbox/toolbox` at that pinned version, never `:latest` |
+| Orchestrator | `us-central1-docker.pkg.dev/IMAGE_PROJECT/cymbal-voyages/orchestrator:1.0.0` | built from `agents/orchestrator/` (Python 3.12, google-adk 2.9.2, a2a-sdk 1.1.4, google-cloud-bigquery 3.45.2) |
 
 Rebuild and republish with `bash services/scripts/build_images.sh` (it publishes to the current gcloud project, or `IMAGE_PROJECT=...`).
 
@@ -142,7 +144,7 @@ Rebuild and republish with `bash services/scripts/build_images.sh` (it publishes
 | Setting | Value |
 | :-- | :-- |
 | Cloud Run service | `audience-tools` |
-| Image | `__IMAGE_REPO__/toolbox:__TOOLBOX_VERSION__` |
+| Image | `us-central1-docker.pkg.dev/IMAGE_PROJECT/cymbal-voyages/toolbox:1.12.0` |
 | Runtime service account | `audience-tools-sa@PROJECT.iam.gserviceaccount.com` |
 | Its project roles | `roles/bigquery.jobUser`, `roles/bigquery.dataViewer`, `roles/bigquery.dataEditor` (the receipt row), `roles/secretmanager.secretAccessor`, **`roles/aiplatform.user`** (the meaning match embeds the destination hint with `gemini-embedding-001` on Vertex AI) |
 | Secret | `audience-tools-config`, created from `services/toolbox/tools.yaml` **unchanged** (the file reads the project from the environment) |
@@ -159,7 +161,7 @@ Rebuild and republish with `bash services/scripts/build_images.sh` (it publishes
 | Setting | Value |
 | :-- | :-- |
 | Cloud Run service | `orchestrator` |
-| Image | `__IMAGE_REPO__/orchestrator:1.0.0` |
+| Image | `us-central1-docker.pkg.dev/IMAGE_PROJECT/cymbal-voyages/orchestrator:1.0.0` |
 | Runtime service account | `orchestrator-sa@PROJECT.iam.gserviceaccount.com` |
 | Its project roles | `roles/bigquery.jobUser`, `roles/bigquery.dataViewer`, `roles/aiplatform.user` |
 | Env vars | `GOOGLE_CLOUD_PROJECT=<project>`, **`GOOGLE_CLOUD_LOCATION=global`** (Gemini 3.x returns 404 in us-central1; also pinned in code), `GOOGLE_GENAI_USE_VERTEXAI=TRUE`, `BQ_PROJECT=<project>`, `BQ_DATASET=cymbal_voyages`, `ORCHESTRATOR_MODEL=gemini-3.5-flash`, `AGENT_URL=https://orchestrator-PROJECT_NUMBER.us-central1.run.app` |
@@ -190,7 +192,7 @@ Rebuild and republish with `bash services/scripts/build_images.sh` (it publishes
 
 ### Verifying a deployment
 
-`bash services/scripts/test_services.sh` (Cloud Shell, repo root, lab project) calls every tool directly, checks the receipt retry, runs the orchestrator's policy engine against BigQuery, fetches the served card, and asks the orchestrator three questions over A2A. The numbers must match the reference answers above.
+`bash services/scripts/test_services.sh` (Cloud Shell, repo root, lab project) calls every tool over MCP (`tools/call` on `/mcp`; Toolbox 1.x disables its old `/api` REST endpoints), checks the receipt retry, runs the orchestrator's policy engine against BigQuery, fetches the served card, and asks the orchestrator three questions over A2A. The numbers must match the reference answers above.
 
 ### Files
 

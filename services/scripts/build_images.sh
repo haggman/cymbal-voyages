@@ -18,7 +18,22 @@ ORCH_TAG="${ORCH_TAG:-1.0.0}"
 GOOGLE_TOOLBOX="us-central1-docker.pkg.dev/database-toolbox/toolbox/toolbox"
 REG="${REGION}-docker.pkg.dev/${IMAGE_PROJECT}/${REPO}"
 
-gcloud services enable artifactregistry.googleapis.com cloudbuild.googleapis.com --project "$IMAGE_PROJECT"
+gcloud services enable artifactregistry.googleapis.com cloudbuild.googleapis.com compute.googleapis.com --project "$IMAGE_PROJECT"
+
+# Cloud Build runs as the Compute Engine default service account in newer projects. It only
+# exists once the Compute API is on, and it needs to write logs and push images; the person
+# running this script needs to be allowed to act as it.
+PN=$(gcloud projects describe "$IMAGE_PROJECT" --format='value(projectNumber)')
+BUILD_SA="${PN}-compute@developer.gserviceaccount.com"
+for i in 1 2 3 4 5 6; do
+  gcloud iam service-accounts describe "$BUILD_SA" --project "$IMAGE_PROJECT" >/dev/null 2>&1 && break
+  echo "Waiting for $BUILD_SA to appear..."; sleep 10
+done
+for r in roles/logging.logWriter roles/artifactregistry.writer roles/storage.objectViewer; do
+  gcloud projects add-iam-policy-binding "$IMAGE_PROJECT" --member="serviceAccount:${BUILD_SA}" --role="$r" --condition=None >/dev/null
+done
+gcloud iam service-accounts add-iam-policy-binding "$BUILD_SA" --project "$IMAGE_PROJECT" \
+  --member="user:$(gcloud config get-value account 2>/dev/null)" --role=roles/iam.serviceAccountUser >/dev/null
 if ! gcloud artifacts repositories describe "$REPO" --location "$REGION" --project "$IMAGE_PROJECT" >/dev/null 2>&1; then
   gcloud artifacts repositories create "$REPO" --repository-format=docker --location "$REGION" \
     --description="Cymbal Voyages lab service images (mkt016), public read" --project "$IMAGE_PROJECT"

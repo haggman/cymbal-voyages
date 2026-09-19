@@ -1,0 +1,4 @@
+# Python 3.12. Pinned Sep 19, 2026.
+google-adk[a2a]==2.9.2
+a2a-sdk[http-server]==1.1.4
+google-cloud-bigquery==3.45.2

@@ -1,0 +1,6 @@
+*.pyc
+__pycache__/
+orchestrator-card.json
+services-test.log
+.runlogs/*
+!.runlogs/.keep

@@ -1,0 +1,76 @@
+kind: source
+name: bq
+type: bigquery
+project: PROJECT_ID
+---
+kind: tool
+name: resolve_segment
+type: bigquery-sql
+source: bq
+description: >-
+  Sizes an audience of Cymbal Compass loyalty members who looked at a warm-escape
+  destination in the last 90 days, for one home-market climate (cold, mild or warm).
+  Returns how many customers are in it, their average likelihood to book a warm
+  escape in the next 60 days (0 to 1), the share with a strong likelihood (0.30 or
+  higher), and how many we can email. "Lapsed" means a member with no booking in
+  the last 12 months. Safe to run as often as you like; it changes nothing.
+annotations:
+  readOnlyHint: true
+  idempotentHint: true
+parameters:
+  - name: climate
+    type: string
+    description: Home-market climate of the customers, one of cold, mild or warm.
+  - name: lapsed_only
+    type: boolean
+    description: true to keep only lapsed members (no booking in the last 12 months); false for all members.
+statement: |
+  SELECT COUNT(*) AS customers,
+         ROUND(AVG(propensity_score), 3) AS avg_propensity,
+         ROUND(100 * COUNTIF(propensity_score >= 0.3) / COUNT(*), 1) AS pct_propensity_ge_030,
+         COUNTIF(email_contactable) AS email_contactable
+  FROM `cymbal_voyages.customer_features`
+  WHERE home_market_climate = @climate
+    AND loyalty_tier != 'none'
+    AND warm_views_last_90d >= 1
+    AND (NOT @lapsed_only OR loyalty_status = 'lapsed')
+---
+kind: tool
+name: activate_segment
+type: bigquery-sql
+source: bq
+description: >-
+  Sends an audience to a marketing channel so a campaign can reach it, and returns
+  the activation receipt. Use it only after the audience has been sized with
+  resolve_segment and the marketer has confirmed it. Sending the same audience to
+  the same channel again returns the original receipt instead of sending it twice.
+annotations:
+  readOnlyHint: false
+  destructiveHint: false
+  idempotentHint: true
+parameters:
+  - name: segment_description
+    type: string
+    description: The audience in plain English, exactly as it was sized, e.g. "lapsed Compass members in cold markets who viewed a warm escape in the last 90 days".
+  - name: audience_size
+    type: integer
+    description: The number of customers resolve_segment reported for this audience.
+  - name: channel
+    type: string
+    description: Where to send the audience, one of email, paid_social, paid_search.
+statement: |
+  DECLARE rid STRING DEFAULT CONCAT('act-', SUBSTR(TO_HEX(MD5(CONCAT(@segment_description, '|', @channel))), 1, 12));
+  MERGE `cymbal_voyages.activations` t
+  USING (SELECT rid AS receipt_id) s
+  ON t.receipt_id = s.receipt_id
+  WHEN NOT MATCHED THEN
+    INSERT (receipt_id, segment_description, audience_size, channel, submitted_at, status)
+    VALUES (rid, @segment_description, @audience_size, @channel, CURRENT_TIMESTAMP(), 'accepted');
+  SELECT receipt_id, segment_description, audience_size, channel, submitted_at, status
+  FROM `cymbal_voyages.activations` WHERE receipt_id = rid;
+---
+kind: toolset
+name: audience
+tools:
+  - resolve_segment
+  - activate_segment

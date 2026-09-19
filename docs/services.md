@@ -123,16 +123,16 @@ Suppress (R01, "booked in the last 60 days") fires on **variant E**, which inclu
 
 ### Images (public Artifact Registry, pull without a grant)
 
-Current build (Sep 19): `IMAGE_PROJECT` = `qwiklabs-gcp-04-df5f1f023984` (temporary; see below), Toolbox **1.12.0**, orchestrator **1.0.0**.
+Published Sep 19 in the long-lived project **`class-demo-labs`** (public read): Toolbox **1.12.0**, orchestrator **1.0.0**.
 
 | Service | Image | Notes |
 | :-- | :-- | :-- |
-| Audience Tools | `us-central1-docker.pkg.dev/IMAGE_PROJECT/cymbal-voyages/toolbox:1.12.0` | a mirror of Google's `us-central1-docker.pkg.dev/database-toolbox/toolbox/toolbox` at that pinned version, never `:latest` |
-| Orchestrator | `us-central1-docker.pkg.dev/IMAGE_PROJECT/cymbal-voyages/orchestrator:1.0.0` | built from `agents/orchestrator/` (Python 3.12, google-adk 2.9.2, a2a-sdk 1.1.4, google-cloud-bigquery 3.45.2) |
+| Audience Tools | `us-central1-docker.pkg.dev/class-demo-labs/cymbal-voyages/toolbox:1.12.0` | a mirror of Google's `us-central1-docker.pkg.dev/database-toolbox/toolbox/toolbox` at that pinned version, never `:latest` |
+| Orchestrator | `us-central1-docker.pkg.dev/class-demo-labs/cymbal-voyages/orchestrator:1.0.0` | built from `agents/orchestrator/` (Python 3.12, google-adk 2.9.2, a2a-sdk 1.1.4, google-cloud-bigquery 3.45.2) |
 
 Rebuild and republish with `bash services/scripts/build_images.sh` (it publishes to the current gcloud project, or `IMAGE_PROJECT=...`).
 
-**Where the images live.** During the build (Sep 19–) the images are published in the spike Qwiklabs project `qwiklabs-gcp-04-df5f1f023984`, which lasts several days. **Before the lab goes live, publish them once in a long-lived project** (the lab has a year of maintenance, and every Start Lab pulls from this repo), then point provisioning at it with `IMAGE_PROJECT=<that project>`. `deploy_services.sh` defaults `IMAGE_PROJECT` to the project it runs in, and reads the newest Toolbox and orchestrator tags from the repo.
+**Where the images live.** `us-central1-docker.pkg.dev/class-demo-labs/cymbal-voyages`, public read (`allUsers` → Artifact Registry Reader), so every lab project pulls without a grant. `deploy_services.sh` defaults to it and reads the newest Toolbox and orchestrator tags from it. To publish a new version, run `build_images.sh` in Cloud Shell in `class-demo-labs` (it sets up the APIs, the Cloud Build service account's roles and the repo on first run). The Sep 19 test build also left copies in the spike project; ignore them.
 
 ### Reference deployment
 
@@ -145,7 +145,7 @@ Rebuild and republish with `bash services/scripts/build_images.sh` (it publishes
 | Setting | Value |
 | :-- | :-- |
 | Cloud Run service | `audience-tools` |
-| Image | `us-central1-docker.pkg.dev/IMAGE_PROJECT/cymbal-voyages/toolbox:1.12.0` |
+| Image | `us-central1-docker.pkg.dev/class-demo-labs/cymbal-voyages/toolbox:1.12.0` |
 | Runtime service account | `audience-tools-sa@PROJECT.iam.gserviceaccount.com` |
 | Its project roles | `roles/bigquery.jobUser`, `roles/bigquery.dataViewer`, `roles/bigquery.dataEditor` (the receipt row), `roles/secretmanager.secretAccessor`, **`roles/aiplatform.user`** (the meaning match embeds the destination hint with `gemini-embedding-001` on Vertex AI) |
 | Secret | `audience-tools-config`, created from `services/toolbox/tools.yaml` **unchanged** (the file reads the project from the environment) |
@@ -162,7 +162,7 @@ Rebuild and republish with `bash services/scripts/build_images.sh` (it publishes
 | Setting | Value |
 | :-- | :-- |
 | Cloud Run service | `orchestrator` |
-| Image | `us-central1-docker.pkg.dev/IMAGE_PROJECT/cymbal-voyages/orchestrator:1.0.0` |
+| Image | `us-central1-docker.pkg.dev/class-demo-labs/cymbal-voyages/orchestrator:1.0.0` |
 | Runtime service account | `orchestrator-sa@PROJECT.iam.gserviceaccount.com` |
 | Its project roles | `roles/bigquery.jobUser`, `roles/bigquery.dataViewer`, `roles/aiplatform.user` |
 | Env vars | `GOOGLE_CLOUD_PROJECT=<project>`, **`GOOGLE_CLOUD_LOCATION=global`** (Gemini 3.x returns 404 in us-central1; also pinned in code), `GOOGLE_GENAI_USE_VERTEXAI=TRUE`, `BQ_PROJECT=<project>`, `BQ_DATASET=cymbal_voyages`, `ORCHESTRATOR_MODEL=gemini-3.5-flash`, `AGENT_URL=https://orchestrator-PROJECT_NUMBER.us-central1.run.app` |

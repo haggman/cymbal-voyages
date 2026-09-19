@@ -11,9 +11,9 @@
 set -euo pipefail
 PROJECT="${PROJECT:-$(gcloud config get-value project 2>/dev/null)}"
 REGION="${REGION:-us-central1}"
-# Where build_images.sh published the images. Defaults to this project (build and deploy in
-# the same project); provisioning sets it to the long-lived image project.
-IMAGE_PROJECT="${IMAGE_PROJECT:-$PROJECT}"
+# Where build_images.sh published the images: the long-lived, public-read repo in class-demo-labs.
+# Override with IMAGE_PROJECT=<project> (e.g. to test images built in the lab project itself).
+IMAGE_PROJECT="${IMAGE_PROJECT:-class-demo-labs}"
 IMAGE_REPO="${IMAGE_REPO:-us-central1-docker.pkg.dev/${IMAGE_PROJECT}/cymbal-voyages}"
 newest_tag() {  # newest version tag of an image in the public repo
   gcloud artifacts docker tags list "${IMAGE_REPO}/$1" --format='value(tag.basename())' 2>/dev/null \

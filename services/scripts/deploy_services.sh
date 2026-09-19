@@ -2,16 +2,26 @@
 # Deploy the lab services into a lab project from the prebuilt public images.
 # This is what provisioning (Start Lab) does; run it in Cloud Shell from the repo root:
 #
-#   IMAGE_REPO=us-central1-docker.pkg.dev/<image-project>/cymbal-voyages \
-#   TOOLBOX_VERSION=<tag> bash services/scripts/deploy_services.sh
+#   bash services/scripts/deploy_services.sh
+#
+# The image repo defaults to the published one below; the Toolbox and orchestrator tags are
+# read live from that repo (the newest of each). Override with IMAGE_REPO, TOOLBOX_VERSION, ORCH_TAG.
 #
 # Needs: the cymbal_voyages dataset already loaded in this project.
 set -euo pipefail
 PROJECT="${PROJECT:-$(gcloud config get-value project 2>/dev/null)}"
 REGION="${REGION:-us-central1}"
-IMAGE_REPO="${IMAGE_REPO:?set IMAGE_REPO, e.g. us-central1-docker.pkg.dev/<image-project>/cymbal-voyages}"
-TOOLBOX_VERSION="${TOOLBOX_VERSION:?set TOOLBOX_VERSION (see docs/services.md)}"
-ORCH_TAG="${ORCH_TAG:-1.0.0}"
+IMAGE_PROJECT="${IMAGE_PROJECT:-__IMAGE_PROJECT__}"
+IMAGE_REPO="${IMAGE_REPO:-us-central1-docker.pkg.dev/${IMAGE_PROJECT}/cymbal-voyages}"
+newest_tag() {  # newest version tag of an image in the public repo
+  gcloud artifacts docker tags list "${IMAGE_REPO}/$1" --format='value(tag.basename())' 2>/dev/null \
+    | grep -v '^latest$' \
+    | python3 -c 'import sys,re; t=[l.strip() for l in sys.stdin if l.strip()]; t.sort(key=lambda v:[int(x) for x in re.findall(r"\d+",v)]); print(t[-1] if t else "")'
+}
+TOOLBOX_VERSION="${TOOLBOX_VERSION:-$(newest_tag toolbox)}"
+ORCH_TAG="${ORCH_TAG:-$(newest_tag orchestrator)}"
+[[ -n "$TOOLBOX_VERSION" && -n "$ORCH_TAG" ]] || { echo "Could not read image tags from ${IMAGE_REPO}; has build_images.sh been run?" >&2; exit 1; }
+echo "Images: ${IMAGE_REPO}/toolbox:${TOOLBOX_VERSION}  ${IMAGE_REPO}/orchestrator:${ORCH_TAG}"
 ORCH_MODEL="${ORCH_MODEL:-gemini-3.5-flash}"
 TOOLBOX_SVC="${TOOLBOX_SVC:-audience-tools}"
 ORCH_SVC="${ORCH_SVC:-orchestrator}"

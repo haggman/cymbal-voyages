@@ -2,13 +2,16 @@
 # Build and publish the two lab service images to a PUBLIC Artifact Registry repo.
 # Run once per release, in Cloud Shell, from the repo root, in the project that owns the images:
 #
-#   IMAGE_PROJECT=<your-project> bash services/scripts/build_images.sh
+#   bash services/scripts/build_images.sh            # uses the current gcloud project
+#   IMAGE_PROJECT=other-project bash services/scripts/build_images.sh
 #
 # Optional: TOOLBOX_VERSION=<tag> to pin a specific MCP Toolbox release (default: the release
 # that Google's :latest currently points to, resolved to its version tag; never :latest itself).
 # ORCH_TAG=<tag> for the orchestrator image (default 1.0.0).
 set -euo pipefail
-IMAGE_PROJECT="${IMAGE_PROJECT:?set IMAGE_PROJECT to the project that hosts the public images}"
+IMAGE_PROJECT="${IMAGE_PROJECT:-$(gcloud config get-value project 2>/dev/null)}"
+[[ -n "$IMAGE_PROJECT" ]] || { echo "No project: run gcloud config set project <id> or set IMAGE_PROJECT" >&2; exit 1; }
+echo "Publishing images to project: $IMAGE_PROJECT"
 REGION="${REGION:-us-central1}"
 REPO="${REPO:-cymbal-voyages}"
 ORCH_TAG="${ORCH_TAG:-1.0.0}"

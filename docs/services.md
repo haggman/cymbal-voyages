@@ -127,7 +127,9 @@ Suppress (R01, "booked in the last 60 days") fires on **variant E**, which inclu
 | Audience Tools | `__IMAGE_REPO__/toolbox:__TOOLBOX_VERSION__` | a mirror of Google's `us-central1-docker.pkg.dev/database-toolbox/toolbox/toolbox` at that pinned version, never `:latest` |
 | Orchestrator | `__IMAGE_REPO__/orchestrator:1.0.0` | built from `agents/orchestrator/` (Python 3.12, google-adk 2.9.2, a2a-sdk 1.1.4, google-cloud-bigquery 3.45.2) |
 
-Rebuild and republish with `IMAGE_PROJECT=<project> bash services/scripts/build_images.sh`.
+Rebuild and republish with `bash services/scripts/build_images.sh` (it publishes to the current gcloud project, or `IMAGE_PROJECT=...`).
+
+**Where the images live.** During the build (Sep 19–) the images are published in the spike Qwiklabs project `qwiklabs-gcp-04-df5f1f023984`, which lasts several days. **Before the lab goes live, publish them once in a long-lived project** (the lab has a year of maintenance, and every Start Lab pulls from this repo), then point provisioning at it with `IMAGE_PROJECT=<that project>`. `deploy_services.sh` defaults `IMAGE_PROJECT` to the project it runs in, and reads the newest Toolbox and orchestrator tags from the repo.
 
 ### Reference deployment
 

@@ -296,9 +296,12 @@ FROM aud GROUP BY 1 ORDER BY customers DESC
 """),
 ]
 
-# Verified queries for the BigQuery data agent (general forms of the trail above).
+# Verified queries for the BigQuery data agent. Each entry: (question, sql, required).
+# The data agent UI labels the title field "Question", so titles are phrased as questions.
+# Required ones are what the lab's Builder enters in Task 1; optional ones are candidates planning
+# may pre-load or drop (they size the two red herrings).
 VERIFIED = [
-    ("Bookings versus plan by month and category", f"""
+    ("How did bookings compare with plan by month and category?", f"""
 WITH actual AS (
   SELECT DATE_TRUNC(b.booking_date, MONTH) AS month, d.category,
          COUNT(*) AS bookings, ROUND(SUM(b.revenue_usd)) AS revenue_usd
@@ -318,27 +321,32 @@ SELECT month, category, bookings, planned_bookings,
        revenue_usd, planned_revenue_usd
 FROM actual JOIN planned USING (month, category)
 ORDER BY month, category
-"""),
-    ("Conversion rate by customer cohort and month", f"""
-SELECT DATE_TRUNC(s.session_date, MONTH) AS month,
-       CASE
-         WHEN s.customer_id IS NULL THEN 'anonymous'
-         WHEN st.loyalty_tier != 'none' AND st.loyalty_status = 'lapsed' AND c.home_market_climate = 'cold' THEN 'lapsed Compass member, cold market'
-         WHEN st.loyalty_tier != 'none' AND st.loyalty_status = 'lapsed' THEN 'lapsed Compass member, other market'
-         WHEN st.loyalty_tier != 'none' AND st.loyalty_status = 'active' THEN 'active Compass member'
-         ELSE 'non-member'
-       END AS cohort,
-       COUNT(*) AS sessions,
-       COUNTIF(s.converted) AS converted_sessions,
-       ROUND(100 * SAFE_DIVIDE(COUNTIF(s.converted), COUNT(*)), 2) AS conversion_pct
+""", True),
+    ("How did warm-escape browsing conversion change by customer cohort, this August versus last?", f"""
+SELECT
+  CASE
+    WHEN s.customer_id IS NULL THEN 'anonymous'
+    WHEN st.loyalty_tier != 'none' AND st.loyalty_status = 'lapsed' AND c.home_market_climate = 'cold' THEN 'lapsed Compass member, cold market'
+    WHEN st.loyalty_tier != 'none' AND st.loyalty_status = 'lapsed' THEN 'lapsed Compass member, other market'
+    WHEN st.loyalty_tier != 'none' AND st.loyalty_status = 'active' THEN 'active Compass member'
+    ELSE 'non-member'
+  END AS cohort,
+  COUNTIF(s.session_date BETWEEN DATE '2025-08-01' AND DATE '2025-08-31') AS aug_2025_sessions,
+  ROUND(100 * SAFE_DIVIDE(COUNTIF(s.converted AND s.session_date BETWEEN DATE '2025-08-01' AND DATE '2025-08-31'),
+                          COUNTIF(s.session_date BETWEEN DATE '2025-08-01' AND DATE '2025-08-31')), 2) AS aug_2025_conv_pct,
+  COUNTIF(s.session_date BETWEEN DATE '2026-08-01' AND DATE '2026-08-31') AS aug_2026_sessions,
+  ROUND(100 * SAFE_DIVIDE(COUNTIF(s.converted AND s.session_date BETWEEN DATE '2026-08-01' AND DATE '2026-08-31'),
+                          COUNTIF(s.session_date BETWEEN DATE '2026-08-01' AND DATE '2026-08-31')), 2) AS aug_2026_conv_pct
 FROM `cymbal_voyages.web_sessions` s
 LEFT JOIN `cymbal_voyages.customers` c USING (customer_id)
 LEFT JOIN `cymbal_voyages.customer_month_status` st
   ON st.customer_id = s.customer_id AND st.status_month = DATE_TRUNC(s.session_date, MONTH)
-GROUP BY 1, 2
-ORDER BY 1, 2
-"""),
-    ("Paid spend by campaign by week", f"""
+WHERE s.viewed_warm_escape
+  AND (s.session_date BETWEEN DATE '2025-08-01' AND DATE '2025-08-31' OR s.session_date BETWEEN DATE '2026-08-01' AND DATE '2026-08-31')
+GROUP BY 1
+ORDER BY 1
+""", True),
+    ("How did paid spend move by campaign each week?", f"""
 SELECT DATE_TRUNC(spend_date, WEEK(MONDAY)) AS week_start,
        campaign_id, campaign_name, channel,
        ROUND(SUM(spend_usd)) AS spend_usd, SUM(impressions) AS impressions, SUM(clicks) AS clicks,
@@ -346,5 +354,43 @@ SELECT DATE_TRUNC(spend_date, WEEK(MONDAY)) AS week_start,
 FROM `cymbal_voyages.ad_performance`
 GROUP BY 1, 2, 3, 4
 ORDER BY 1, 2
-"""),
+""", True),
+    ("What did each campaign spend per day in July and August 2026?", f"""
+SELECT spend_date, campaign_id, campaign_name,
+       ROUND(SUM(spend_usd)) AS spend_usd, SUM(clicks) AS clicks, SUM(attributed_conversions) AS attributed_conversions
+FROM `cymbal_voyages.ad_performance`
+WHERE spend_date BETWEEN DATE '2026-07-01' AND DATE '2026-08-31'
+GROUP BY 1, 2, 3
+ORDER BY 2, 1
+""", True),
+    ("How many sessions and bookings did the August 9 site incident cost?", f"""
+WITH daily AS (
+  SELECT session_date, COUNT(*) AS sessions, COUNTIF(converted) AS converted_sessions
+  FROM `cymbal_voyages.web_sessions`
+  WHERE session_date BETWEEN DATE '2026-08-05' AND DATE '2026-08-13'
+  GROUP BY 1
+), typical AS (
+  SELECT AVG(sessions) AS sessions, AVG(converted_sessions) AS converted_sessions
+  FROM daily WHERE session_date != DATE '2026-08-09'
+)
+SELECT d.sessions AS aug_9_sessions, ROUND(t.sessions) AS typical_day_sessions,
+       ROUND(t.sessions - d.sessions) AS sessions_lost,
+       d.converted_sessions AS aug_9_converted, ROUND(t.converted_sessions) AS typical_day_converted,
+       ROUND(t.converted_sessions - d.converted_sessions) AS tracked_bookings_lost,
+       ROUND(ROUND(t.converted_sessions - d.converted_sessions) / 0.4) AS estimated_bookings_lost_incl_app_and_phone
+FROM daily d CROSS JOIN typical t
+WHERE d.session_date = DATE '2026-08-09'
+""", False),
+    ("How many bookings did the August 1 price change cost?", f"""
+SELECT CASE WHEN p.price_effective_date = DATE '2026-08-01' THEN 're-priced Aug 1' ELSE 'unchanged price' END AS package_group,
+       COUNTIF(b.booking_date BETWEEN DATE '2025-08-01' AND DATE '2025-08-31') AS aug_2025_bookings,
+       COUNTIF(b.booking_date BETWEEN DATE '2026-08-01' AND DATE '2026-08-31') AS aug_2026_bookings,
+       COUNTIF(b.booking_date BETWEEN DATE '2025-08-01' AND DATE '2025-08-31')
+         - COUNTIF(b.booking_date BETWEEN DATE '2026-08-01' AND DATE '2026-08-31') AS bookings_lost_vs_last_august
+FROM `cymbal_voyages.bookings` b
+JOIN `cymbal_voyages.packages` p USING (package_id)
+JOIN `cymbal_voyages.destinations` d USING (destination_id)
+WHERE b.status = 'confirmed' AND d.category = 'warm_escape'
+GROUP BY 1 ORDER BY 1
+""", False),
 ]

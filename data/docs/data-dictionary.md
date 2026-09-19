@@ -321,7 +321,7 @@ Receipts written by the activation endpoint when an audience is submitted to a c
 
 ### Instructions
 
-You are the analytics assistant for Cymbal Voyages, an online travel brand, answering marketers' questions from the `cymbal_voyages` dataset. Warm escapes (`category = 'warm_escape'`) are winter and early-spring getaways to sun destinations; they are the signature category and sell mostly to customers in cold-weather markets, who book from late summer onward. A booking is a row in `bookings` with `status = 'confirmed'`; cancelled rows never count, and revenue is `revenue_usd` on confirmed rows. A booking's category comes from `packages` joined to `destinations`. Fiscal months are calendar months: compare actuals against `plan` by the calendar month of `booking_date`, `category` and the customer's `home_market`; variance = actual / plan − 1. The channel taxonomy is fixed: paid_search, paid_social, organic, email, direct, affiliate; `ad_performance` covers only the paid channels. Loyalty: anyone with `loyalty_tier` other than `none` is a Cymbal Compass member; lapsed means at least one booking ever and none in the last 12 months. Use `customer_month_status` for status as of a given month and `customer_features` for status as of Sep 1, 2026. Session conversion rate is `COUNTIF(converted) / COUNT(*)` on `web_sessions`; anonymous sessions (`customer_id IS NULL`) never convert. When asked why a number changed, break it down by category, climate, market and customer cohort before speculating, and say which table each figure came from.
+You are the analytics assistant for Cymbal Voyages, an online travel brand, answering marketers' questions from the `cymbal_voyages` dataset. Warm escapes (`category = 'warm_escape'`) are winter and early-spring getaways to sun destinations; they are the signature category and sell mostly to customers in cold-weather markets, who book from late summer onward. A booking is a row in `bookings` with `status = 'confirmed'`; cancelled rows never count, and revenue is `revenue_usd` on confirmed rows. A booking's category comes from `packages` joined to `destinations`. Fiscal months are calendar months: compare actuals against `plan` by the calendar month of `booking_date`, `category` and the customer's `home_market`; variance = actual / plan − 1. The channel taxonomy is fixed: paid_search, paid_social, organic, email, direct, affiliate; `ad_performance` covers only the paid channels. Loyalty: anyone with `loyalty_tier` other than `none` is a Cymbal Compass member; lapsed means at least one booking ever and none in the last 12 months. Use `customer_month_status` for status as of a given month and `customer_features` for status as of Sep 1, 2026. Session conversion rate is `COUNTIF(converted) / COUNT(*)` on `web_sessions`; anonymous sessions (`customer_id IS NULL`) never convert. When asked why a number changed, break it down by category, climate, market and customer cohort before speculating, and say which table each figure came from. To date a change in spend or traffic, look at daily figures; monthly totals hide the date. When asked what an incident or a price change contributed, estimate it in bookings and as a share of the gap.
 
 ### Glossary
 
@@ -333,12 +333,15 @@ You are the analytics assistant for Cymbal Voyages, an online travel brand, answ
 | cold-weather markets | Chicago, Boston, Minneapolis, Detroit, Denver, Toronto, Cleveland, Milwaukee (`home_market_climate = 'cold'`). Warm markets are Miami, Phoenix, Houston, Los Angeles, San Diego; every other metro is mild. |
 | Compass tier | Cymbal Compass loyalty tier: none (not enrolled), blue (enrolled), silver (4 bookings or $8,000 lifetime spend), gold (8 bookings or $20,000). `loyalty_tier` on customers, customer_month_status and customer_features. |
 | retargeting | Paid-social advertising shown to people who already browsed the site. The always-on Warm Escapes Retargeting program (campaign CMP-002, `target_segment = 'lapsed_compass_cold'`) reaches lapsed Compass members in cold-weather markets who viewed warm destinations. In `ad_performance`, its spend, clicks and attributed conversions appear by day and market. |
+| conversion rate | Session conversion: `COUNTIF(converted) / COUNT(*)` on `web_sessions`. For a cohort question about warm escapes, measure it on warm-escape browsing sessions only (`viewed_warm_escape`), with the customer's loyalty status as of that month from `customer_month_status`, and compare against the same month a year earlier, not the previous month, because warm-escape conversion is seasonal. |
 | propensity score | `customer_features.propensity_score`: the modeled probability (0–1) that a customer books a warm-escape package in the 60 days after Sep 1, 2026, from the BigQuery ML logistic regression `warm_escape_propensity`. Right-skewed: the median customer scores about 0.08; scores above 0.30 are strong. |
 | plan | The `plan` table: planned confirmed bookings and revenue by calendar month, category and home market. Variance = actual / plan − 1; anything within about ±5% is on plan. |
 
 ### Verified queries
 
-**Bookings versus plan by month and category**
+The data agent's editor labels the title field **Question** and the SQL field the answer, so each title below is the question to enter. 4 required queries; the 2 optional ones size the two red herrings and are candidates for pre-loading. Character counts (SQL only) are listed so planning can decide what students type.
+
+**How did bookings compare with plan by month and category?** (810 characters)
 
 ```sql
 WITH actual AS (
@@ -362,29 +365,34 @@ FROM actual JOIN planned USING (month, category)
 ORDER BY month, category
 ```
 
-**Conversion rate by customer cohort and month**
+**How did warm-escape browsing conversion change by customer cohort, this August versus last?** (1,550 characters)
 
 ```sql
-SELECT DATE_TRUNC(s.session_date, MONTH) AS month,
-       CASE
-         WHEN s.customer_id IS NULL THEN 'anonymous'
-         WHEN st.loyalty_tier != 'none' AND st.loyalty_status = 'lapsed' AND c.home_market_climate = 'cold' THEN 'lapsed Compass member, cold market'
-         WHEN st.loyalty_tier != 'none' AND st.loyalty_status = 'lapsed' THEN 'lapsed Compass member, other market'
-         WHEN st.loyalty_tier != 'none' AND st.loyalty_status = 'active' THEN 'active Compass member'
-         ELSE 'non-member'
-       END AS cohort,
-       COUNT(*) AS sessions,
-       COUNTIF(s.converted) AS converted_sessions,
-       ROUND(100 * SAFE_DIVIDE(COUNTIF(s.converted), COUNT(*)), 2) AS conversion_pct
+SELECT
+  CASE
+    WHEN s.customer_id IS NULL THEN 'anonymous'
+    WHEN st.loyalty_tier != 'none' AND st.loyalty_status = 'lapsed' AND c.home_market_climate = 'cold' THEN 'lapsed Compass member, cold market'
+    WHEN st.loyalty_tier != 'none' AND st.loyalty_status = 'lapsed' THEN 'lapsed Compass member, other market'
+    WHEN st.loyalty_tier != 'none' AND st.loyalty_status = 'active' THEN 'active Compass member'
+    ELSE 'non-member'
+  END AS cohort,
+  COUNTIF(s.session_date BETWEEN DATE '2025-08-01' AND DATE '2025-08-31') AS aug_2025_sessions,
+  ROUND(100 * SAFE_DIVIDE(COUNTIF(s.converted AND s.session_date BETWEEN DATE '2025-08-01' AND DATE '2025-08-31'),
+                          COUNTIF(s.session_date BETWEEN DATE '2025-08-01' AND DATE '2025-08-31')), 2) AS aug_2025_conv_pct,
+  COUNTIF(s.session_date BETWEEN DATE '2026-08-01' AND DATE '2026-08-31') AS aug_2026_sessions,
+  ROUND(100 * SAFE_DIVIDE(COUNTIF(s.converted AND s.session_date BETWEEN DATE '2026-08-01' AND DATE '2026-08-31'),
+                          COUNTIF(s.session_date BETWEEN DATE '2026-08-01' AND DATE '2026-08-31')), 2) AS aug_2026_conv_pct
 FROM `cymbal_voyages.web_sessions` s
 LEFT JOIN `cymbal_voyages.customers` c USING (customer_id)
 LEFT JOIN `cymbal_voyages.customer_month_status` st
   ON st.customer_id = s.customer_id AND st.status_month = DATE_TRUNC(s.session_date, MONTH)
-GROUP BY 1, 2
-ORDER BY 1, 2
+WHERE s.viewed_warm_escape
+  AND (s.session_date BETWEEN DATE '2025-08-01' AND DATE '2025-08-31' OR s.session_date BETWEEN DATE '2026-08-01' AND DATE '2026-08-31')
+GROUP BY 1
+ORDER BY 1
 ```
 
-**Paid spend by campaign by week**
+**How did paid spend move by campaign each week?** (333 characters)
 
 ```sql
 SELECT DATE_TRUNC(spend_date, WEEK(MONDAY)) AS week_start,
@@ -394,6 +402,55 @@ SELECT DATE_TRUNC(spend_date, WEEK(MONDAY)) AS week_start,
 FROM `cymbal_voyages.ad_performance`
 GROUP BY 1, 2, 3, 4
 ORDER BY 1, 2
+```
+
+**What did each campaign spend per day in July and August 2026?** (299 characters)
+
+```sql
+SELECT spend_date, campaign_id, campaign_name,
+       ROUND(SUM(spend_usd)) AS spend_usd, SUM(clicks) AS clicks, SUM(attributed_conversions) AS attributed_conversions
+FROM `cymbal_voyages.ad_performance`
+WHERE spend_date BETWEEN DATE '2026-07-01' AND DATE '2026-08-31'
+GROUP BY 1, 2, 3
+ORDER BY 2, 1
+```
+
+#### Optional verified queries
+
+**How many sessions and bookings did the August 9 site incident cost?** (887 characters)
+
+```sql
+WITH daily AS (
+  SELECT session_date, COUNT(*) AS sessions, COUNTIF(converted) AS converted_sessions
+  FROM `cymbal_voyages.web_sessions`
+  WHERE session_date BETWEEN DATE '2026-08-05' AND DATE '2026-08-13'
+  GROUP BY 1
+), typical AS (
+  SELECT AVG(sessions) AS sessions, AVG(converted_sessions) AS converted_sessions
+  FROM daily WHERE session_date != DATE '2026-08-09'
+)
+SELECT d.sessions AS aug_9_sessions, ROUND(t.sessions) AS typical_day_sessions,
+       ROUND(t.sessions - d.sessions) AS sessions_lost,
+       d.converted_sessions AS aug_9_converted, ROUND(t.converted_sessions) AS typical_day_converted,
+       ROUND(t.converted_sessions - d.converted_sessions) AS tracked_bookings_lost,
+       ROUND(ROUND(t.converted_sessions - d.converted_sessions) / 0.4) AS estimated_bookings_lost_incl_app_and_phone
+FROM daily d CROSS JOIN typical t
+WHERE d.session_date = DATE '2026-08-09'
+```
+
+**How many bookings did the August 1 price change cost?** (750 characters)
+
+```sql
+SELECT CASE WHEN p.price_effective_date = DATE '2026-08-01' THEN 're-priced Aug 1' ELSE 'unchanged price' END AS package_group,
+       COUNTIF(b.booking_date BETWEEN DATE '2025-08-01' AND DATE '2025-08-31') AS aug_2025_bookings,
+       COUNTIF(b.booking_date BETWEEN DATE '2026-08-01' AND DATE '2026-08-31') AS aug_2026_bookings,
+       COUNTIF(b.booking_date BETWEEN DATE '2025-08-01' AND DATE '2025-08-31')
+         - COUNTIF(b.booking_date BETWEEN DATE '2026-08-01' AND DATE '2026-08-31') AS bookings_lost_vs_last_august
+FROM `cymbal_voyages.bookings` b
+JOIN `cymbal_voyages.packages` p USING (package_id)
+JOIN `cymbal_voyages.destinations` d USING (destination_id)
+WHERE b.status = 'confirmed' AND d.category = 'warm_escape'
+GROUP BY 1 ORDER BY 1
 ```
 
 ## Propensity model

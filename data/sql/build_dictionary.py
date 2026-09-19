@@ -22,7 +22,7 @@ TABLE_ORDER = ["customers", "customer_month_status", "customer_features", "desti
                "web_sessions", "bookings", "plan", "ad_performance", "campaign_history", "creative_variants",
                "propensity_training", "decisioning_policy", "activations"]
 
-AGENT_INSTRUCTIONS = """You are the analytics assistant for Cymbal Voyages, an online travel brand, answering marketers' questions from the `cymbal_voyages` dataset. Warm escapes (`category = 'warm_escape'`) are winter and early-spring getaways to sun destinations; they are the signature category and sell mostly to customers in cold-weather markets, who book from late summer onward. A booking is a row in `bookings` with `status = 'confirmed'`; cancelled rows never count, and revenue is `revenue_usd` on confirmed rows. A booking's category comes from `packages` joined to `destinations`. Fiscal months are calendar months: compare actuals against `plan` by the calendar month of `booking_date`, `category` and the customer's `home_market`; variance = actual / plan − 1. The channel taxonomy is fixed: paid_search, paid_social, organic, email, direct, affiliate; `ad_performance` covers only the paid channels. Loyalty: anyone with `loyalty_tier` other than `none` is a Cymbal Compass member; lapsed means at least one booking ever and none in the last 12 months. Use `customer_month_status` for status as of a given month and `customer_features` for status as of Sep 1, 2026. Session conversion rate is `COUNTIF(converted) / COUNT(*)` on `web_sessions`; anonymous sessions (`customer_id IS NULL`) never convert. When asked why a number changed, break it down by category, climate, market and customer cohort before speculating, and say which table each figure came from."""
+AGENT_INSTRUCTIONS = """You are the analytics assistant for Cymbal Voyages, an online travel brand, answering marketers' questions from the `cymbal_voyages` dataset. Warm escapes (`category = 'warm_escape'`) are winter and early-spring getaways to sun destinations; they are the signature category and sell mostly to customers in cold-weather markets, who book from late summer onward. A booking is a row in `bookings` with `status = 'confirmed'`; cancelled rows never count, and revenue is `revenue_usd` on confirmed rows. A booking's category comes from `packages` joined to `destinations`. Fiscal months are calendar months: compare actuals against `plan` by the calendar month of `booking_date`, `category` and the customer's `home_market`; variance = actual / plan − 1. The channel taxonomy is fixed: paid_search, paid_social, organic, email, direct, affiliate; `ad_performance` covers only the paid channels. Loyalty: anyone with `loyalty_tier` other than `none` is a Cymbal Compass member; lapsed means at least one booking ever and none in the last 12 months. Use `customer_month_status` for status as of a given month and `customer_features` for status as of Sep 1, 2026. Session conversion rate is `COUNTIF(converted) / COUNT(*)` on `web_sessions`; anonymous sessions (`customer_id IS NULL`) never convert. When asked why a number changed, break it down by category, climate, market and customer cohort before speculating, and say which table each figure came from. To date a change in spend or traffic, look at daily figures; monthly totals hide the date. When asked what an incident or a price change contributed, estimate it in bookings and as a share of the gap."""
 
 GLOSSARY = [
     ("warm escapes", "Cymbal Voyages' signature category: winter and early-spring getaways to sun destinations (Caribbean, Mexico, Hawaii, Central America, the Florida Keys). `destinations.category = 'warm_escape'`. Booking season runs August–January; travel runs December–April."),
@@ -31,6 +31,7 @@ GLOSSARY = [
     ("cold-weather markets", "Chicago, Boston, Minneapolis, Detroit, Denver, Toronto, Cleveland, Milwaukee (`home_market_climate = 'cold'`). Warm markets are Miami, Phoenix, Houston, Los Angeles, San Diego; every other metro is mild."),
     ("Compass tier", "Cymbal Compass loyalty tier: none (not enrolled), blue (enrolled), silver (4 bookings or $8,000 lifetime spend), gold (8 bookings or $20,000). `loyalty_tier` on customers, customer_month_status and customer_features."),
     ("retargeting", "Paid-social advertising shown to people who already browsed the site. The always-on Warm Escapes Retargeting program (campaign CMP-002, `target_segment = 'lapsed_compass_cold'`) reaches lapsed Compass members in cold-weather markets who viewed warm destinations. In `ad_performance`, its spend, clicks and attributed conversions appear by day and market."),
+    ("conversion rate", "Session conversion: `COUNTIF(converted) / COUNT(*)` on `web_sessions`. For a cohort question about warm escapes, measure it on warm-escape browsing sessions only (`viewed_warm_escape`), with the customer's loyalty status as of that month from `customer_month_status`, and compare against the same month a year earlier, not the previous month, because warm-escape conversion is seasonal."),
     ("propensity score", "`customer_features.propensity_score`: the modeled probability (0–1) that a customer books a warm-escape package in the 60 days after Sep 1, 2026, from the BigQuery ML logistic regression `warm_escape_propensity`. Right-skewed: the median customer scores about 0.08; scores above 0.30 are strong."),
     ("plan", "The `plan` table: planned confirmed bookings and revenue by calendar month, category and home market. Variance = actual / plan − 1; anything within about ±5% is on plan."),
 ]
@@ -106,9 +107,14 @@ Total Parquet on disk: {sum(mb.values()):.1f} MB before embeddings. Every table 
     P.append("| Term | Definition |\n| --- | --- |")
     for term, d in GLOSSARY:
         P.append(f"| {term} | {d} |")
-    P.append("\n### Verified queries\n")
-    for title, sql in VERIFIED:
-        P.append(f"**{title}**\n\n```sql\n{sql.strip()}\n```\n")
+    req = [(q, sql) for q, sql, r in VERIFIED if r]
+    opt = [(q, sql) for q, sql, r in VERIFIED if not r]
+    P.append(f"\n### Verified queries\n\nThe data agent's editor labels the title field **Question** and the SQL field the answer, so each title below is the question to enter. {len(req)} required queries; the {len(opt)} optional ones size the two red herrings and are candidates for pre-loading. Character counts (SQL only) are listed so planning can decide what students type.\n")
+    for q, sql in req:
+        P.append(f"**{q}** ({len(sql.strip()):,} characters)\n\n```sql\n{sql.strip()}\n```\n")
+    P.append("#### Optional verified queries\n")
+    for q, sql in opt:
+        P.append(f"**{q}** ({len(sql.strip()):,} characters)\n\n```sql\n{sql.strip()}\n```\n")
 
     P.append(f"""## Propensity model
 

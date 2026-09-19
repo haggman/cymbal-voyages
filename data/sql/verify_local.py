@@ -84,7 +84,7 @@ def run_all(con) -> dict:
         cols = [d[0] for d in cur.description]
         rows = cur.fetchall()
         results[key] = (title, sql.strip(), cols, rows)
-    for i, (title, sql) in enumerate(VERIFIED):
+    for i, (title, sql, _required) in enumerate(VERIFIED):
         cur = con.execute(to_duckdb(sql))
         cols = [d[0] for d in cur.description]
         rows = cur.fetchall()

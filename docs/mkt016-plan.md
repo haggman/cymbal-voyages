@@ -11,7 +11,7 @@
 
 Last updated: 2026-09-19 (planning conversation, day 4)
 
-**Status:** SC1 data foundation delivered and staged (§6a). Spike S1–S8 finished Sep 18 in a real Qwiklabs project: seven pass, one partial (§4). Every task now has one locked implementation path (§5); the six decisions the spike raised are made (§4a). SC2 moves to Phase 2 (services). SC3 handoff updated for the findings. Two data fixes still owed to SC1 (§6a).
+**Status (Sep 19, evening):** SC1 data foundation delivered, staged, and fixed (§6a). Spike S1–S8 finished Sep 18 (§4); the six decisions are made (§4a). **SC2 Phase 2 done and tested Sep 19:** both services built, images public in `class-demo-labs`, every number matches the walkthrough (§7a). SC3 (provisioning) can open now. SC4 (Tasks 0–2) is writing. Two things still untested inside Gemini Enterprise go on the Sep 21 walk (§10, R10).
 
 ---
 
@@ -96,8 +96,8 @@ Legs alternate Builder (🔧) and Marketer (📣). The **admin console** is the 
 📣 8 min: ask the Analyst for the findings summary (the prompt is in the lab) → copy → Skills → *executive-readout* → **New chat** → paste → send. Three paragraphs, numbers inline, recommendations not claims. Download as PDF. *Business translation: this is the readout that usually eats an analyst's Thursday, and it's reproducible next month.*
 
 **Task 3 — Build the audience (30 min).**
-🔧 12 min: admin console → Connected data stores → Create → **Custom MCP server** → the Toolbox service URL + `/mcp`, auth **None** (Cloud Run IAM does the work) → Create. Actions tab → *reload custom actions* → enable **Resolve Segment** and **Activate Segment**. Read `tools.yaml` in the lab: two tools, their parameters, what comes back; note the Actions tab shows names only. *Business translation: this contract is the same whether the far end is Ads Data Manager, a CDP or an ESP.*
-📣 18 min: describe the segment in English; the read-only tool runs with no prompt: **3,838 customers, propensity 0.16, 3,271 email-contactable**. Refine out loud (email-only 3,271; lapsed 12–24 months 2,242 at 0.19; widen to all cold-market Compass browsers 8,152; drop recent bookers 6,049). Activate to email → **Review: Activate Segment** card (Channel, Audience Size, Segment Description, editable) → Send → receipt `act-…`. Send it again: same receipt, one row. Stand-in endpoint, said plainly; the contract is the lesson.
+🔧 12 min: admin console → Connected data stores → Create → **Custom MCP server** → the **Audience Tools** service URL + `/mcp`, auth **None** (Cloud Run IAM does the work) → Create. Actions tab → *reload custom actions* → three actions appear (**Resolve Segment**, **Activate Segment**, **Variant Performance**); enable the first two now (Variant Performance waits for Task 5). Read `services/toolbox/tools.yaml` in the lab (`docs/services.md` Part 1 is the marketer-language version): the tools, their choices, what comes back, what they never do; note the Actions tab shows names only. *Business translation: this contract is the same whether the far end is Ads Data Manager, a CDP or an ESP.*
+📣 18 min: describe the segment in English; the read-only tool runs with no prompt: **3,838 customers, propensity 0.16, 3,271 email-contactable**, plus a readable `segment_id` naming exactly what was counted. Refine out loud (email-only 3,271; lapsed 12–24 months 2,242 at 0.19; widen to all cold-market Compass browsers 8,152; drop recent bookers 6,049); optionally "who looked at Hawaii" to see the meaning match (2,005, and it lists the destinations it matched). Activate to email → **Review: Activate Segment** card, **five** editable fields (Segment Id, Segment Description, Audience Size, Channel; the fifth is what makes a retry safe) → Send → receipt `act-…` with the note "New activation recorded." Ask again in different words: same receipt, "already activated … nothing was sent twice," one row. Stand-in endpoint, said plainly; the contract is the lesson.
 
 **Break (15 min).**
 
@@ -106,12 +106,12 @@ Legs alternate Builder (🔧) and Marketer (📣). The **admin console** is the 
 📣 13 min: brief for the Task 3 segment; it cites Winter Sun Early Bird 2025, bonus points over discounts, beach-couple imagery, "Plan your escape". Push back on tone. Then plant "guaranteed lowest price" in the ask: it goes through with a note. 🔧 2 min inside the leg: tighten the rule ("if a requested phrase or its paraphrase is in the banned table, don't use it; name the rule; use the approved alternative from the same row; use exactly the template's headings"). 📣 Re-run: clean. *Business translation: this is the lowest-cost, highest-frequency win in the room.*
 
 **Task 5 — Governed creative from the same agent (22 min).**
-🔧 8 min: Brand Studio → tools picker → attach the Toolbox data store; enable **Variant Performance**; instructions: consult variant performance for the segment before generating, and check every image against the creative production standards.
+🔧 8 min: admin console → the Audience Tools data store → Actions → enable **Variant Performance**; web app → Brand Studio → tools picker → attach the Audience Tools data store; instructions: consult variant performance for the segment before generating (the tool's own description says so too), and check every image against the creative production standards.
 📣 14 min: three concepts for the brief's creative direction. It reports what converted for `lapsed_compass_cold` (bonus points 4.76% vs. percent-off 1.49%; beach couple leads; "Plan your escape"), generates images, explains its choices. Critique one against the production standards (warm-escape setting, no posing, no sunset silhouettes). Ask for the variant it says won't work, and why. *The defensibility beat: generation bounded by brand policy on one side and conversion evidence on the other.*
 
 **Task 6 — Next-best-action orchestration (25 min).**
-🔧 11 min: admin console → + Add agent → *Custom agent via A2A* → paste the **trimmed card** from the lab → skip OAuth → save. Open `decisioning_policy` in BigQuery: eight rules, priority order, thresholds as text. Governance aside: the same dialog offers *Agents from Agent Registry*, the Agent Gateway route where policies apply; ours came by card, so Gateway policies don't. Know where your boundary sits.
-📣 14 min: run the base audience: almost everyone held for retargeting (the scores are right-skewed). Widen to the Task 3 variant that includes recent bookers: **suppress** fires ("booked in the last 60 days"). Override one and ask why. 🔧 lowers the offer threshold from 0.30 to 0.15 in the table; 📣 re-runs: about a third now get the offer. B2C reads as lifecycle; B2B reads as MQL→SQL routing.
+🔧 11 min: admin console → + Add agent → *Custom agent via A2A* → paste the **trimmed card** (the lab provides it; students never copy the served card, which Gemini Enterprise rejects) → skip OAuth → save. Open `decisioning_policy` in BigQuery: eight rules, priority order, thresholds as text. Governance aside: the same dialog offers *Agents from Agent Registry*, the Agent Gateway route where policies apply; ours came by card, so Gateway policies don't. Know where your boundary sits. The orchestrator's model never decides: the policy engine applies the table, the model explains.
+📣 14 min: run the base audience (describe it the same way as Task 3, without a destination): 289 send_offer, 14 route_to_loyalty_team, 3,535 held (the scores are right-skewed). Widen to **all Compass members in cold markets who browsed warm** (variant E, 8,152): **suppress** fires on 2,103 ("booked in the last 60 days"). Ask about one customer and get the rule and reason. 🔧 lowers the offer threshold from 0.30 to 0.15 in the table (R03, R04, R05); 📣 re-runs the base audience: **1,082 of 3,838 (28%)** now get the offer. B2C reads as lifecycle; B2B reads as MQL→SQL routing.
 
 **Task 7 — Wrap (7 min).** The loop: a question nobody could answer → an explanation → an audience → a brief → creative → a per-customer decision, all traceable to the company's own data, none of it from a blank page. Business translation table by team. No Lab 3 tee-up.
 
@@ -139,7 +139,7 @@ Everything is under `DevWork/cymbal-voyages/data/`. Read `docs/data-dictionary.m
 
 **Creative learning for `lapsed_compass_cold`:** bonus_points 4.76% vs. percent_off 1.49% and urgency 1.49%; beach_couple 3.49% leads; "Plan your escape" 3.95% beats "Claim offer" 2.10%. For `all_customers` percent_off wins. Matches the Winter Sun Early Bird 2025 retrospective.
 
-**Policy dry run:** the default policy holds ~90% of the base audience (269 send_offer, 14 route_to_loyalty_team). The natural edit is the offer threshold 0.30 → 0.15. The "suppressed because they booked last week" beat needs the wider variant E/F audience, where R01 fires.
+**Policy dry run (confirmed by the built orchestrator, Sep 19):** base audience 289 send_offer (R03 269, R04 20), 14 route_to_loyalty_team, 3,535 held, 0 suppressed. The offer threshold lowered to 0.15 sends offers to **1,082 of 3,838 (28%)**. The "suppressed because they booked last week" beat needs **variant E** (all cold-market Compass browsers, 8,152), where R01 suppresses 2,103; variant F has already removed those customers, so suppress cannot fire there.
 
 **Data fixes applied:** the `propensity_training` description (Sep 18, planning); the `ad_performance` table description and the CMP-002 retrospective no longer name the Jul 24 rotation (SC1, commit d7c1734), so the unaided agent no longer gets the answer from text.
 
@@ -153,19 +153,27 @@ Qwiklabs startup-script Terraform as in mkt013–015, native resources first. Or
 2. APIs (BigQuery, Gemini Data Analytics, Gemini for Google Cloud, Discovery Engine, Cloud Run, Secret Manager, Artifact Registry, Vertex AI; *Knowledge Catalog was not needed*). Service identities. `roles/run.invoker` on every Cloud Run service for `service-PN@gcp-sa-discoveryengine.iam.gserviceaccount.com`.
 3. Identity provider = **Google Identity** on the Gemini Enterprise instance, if scriptable (needed before any custom MCP data store can be created).
 4. BigQuery: dataset `cymbal_voyages`; load all 16 tables from `gs://…/v1/out/` with the schemas from `gs://…/v1/schemas/` (`google_bigquery_job` load jobs, or `bash sql/load.sh` from a **fresh checkout at a pinned commit** with no stale local `schemas/`); then `train_propensity.sql` (56 s) and `predict_propensity.sql`.
-5. Cloud Run, every service with **`--min-instances=1`**: **Toolbox** from Google's image at a **pinned** version, `tools.yaml` from Secret Manager, service account with `bigquery.jobUser`, `bigquery.dataViewer`, `bigquery.dataEditor` (the receipt row), `secretmanager.secretAccessor`; the **orchestrator** from a prebuilt image in a public Artifact Registry repo with `GOOGLE_CLOUD_LOCATION=global`, and its trimmed agent card written where the lab can show it.
+5. Cloud Run, both services from the public images in `class-demo-labs`, exactly as `services/scripts/deploy_services.sh` does it (§7a): **`audience-tools`** (Toolbox 1.12.0 mirror, `tools.yaml` from the `audience-tools-config` secret, service account with `bigquery.jobUser`, `bigquery.dataViewer`, `bigquery.dataEditor`, `secretmanager.secretAccessor`, **`aiplatform.user`**) and **`orchestrator`** (1.0.0, `GOOGLE_CLOUD_LOCATION=global`, `AGENT_URL` set to its own deterministic URL). Both `--min-instances=1`, no unauthenticated access, `roles/run.invoker` for the Discovery Engine service agent. The trimmed agent card is written where the lab can show it.
 6. Gemini Enterprise app activation, feature toggles, and the data-agent build stay student steps (Task 0 and Task 1); nothing a student creates triggers a fresh import.
 
-Measured pieces: BigQuery load ~5 min, model 1 min, Cloud Run deploys 2–3 min each from source (seconds from an image), corpus import ~10 min. Everything runs in parallel behind the import.
+Measured pieces: BigQuery load ~5 min, model 1 min, Cloud Run deploys seconds from an image, corpus import ~10 min. Everything runs in parallel behind the import.
+
+## 7a. What SC2 delivered (Sep 19)
+
+`docs/services.md` in the repo is the handoff: Part 1 the tool contracts in marketer language (the lab quotes it), Part 2 the deploy facts (SC3 reproduces `services/scripts/deploy_services.sh` in Terraform), Part 3 the test run (every number matches the walkthrough), Part 4 thirteen build decisions. Images, public-read, pulled cross-project with no grant: `us-central1-docker.pkg.dev/class-demo-labs/cymbal-voyages/toolbox:1.12.0` and `.../orchestrator:1.0.0`. No builds at Start Lab.
+
+**Absorbed into §5:** the Review card has five fields (Segment Id is the activation key, so a reworded retry returns the same receipt); the offer threshold at 0.15 sends 1,082 of 3,838 (28%); suppress fires on variant E (2,103 of 8,152), not F; the Actions tab lists three actions; `resolve_segment` returns a readable `segment_id` and, for a place or vibe, the five closest catalog destinations ("Hawaii" matches four Hawaii items plus Key West as the fifth-closest, which the answer shows). Task 6's audiences are described the same way as Task 3's, without a destination hint, so the orchestrator's counts match.
+
+**For the lab writers:** `tools.yaml` reads the project from its environment, so the file shown to the Builder is the exact file mounted in the service. Channels are limited to email, paid_social, paid_search. The orchestrator normalizes anything a student types into the policy table (case, `30%`, `≥`, `yes`) and skips rows it can't read with a report, so Task 6's edit can't break it. The served agent card is in the newer A2A format that Gemini Enterprise rejects; students paste the trimmed card the lab provides.
 
 ## 8. Sub-conversations and venues
 
 | # | Conversation | Venue | Status |
 | :-- | :-- | :-- | :-- |
 | SC1 | Data engineering | Standalone | Done Sep 18; one fix prompt pending (`docs/sc1-fix-prompt-2.md`) |
-| SC2 | Spike companion → services | Standalone | Phase 1 done Sep 18; **Phase 2 starts Sep 19** |
-| SC3 | Provisioning: Terraform + startup script, qwiklabs.yaml, timing | Standalone | Handoff updated Sep 19 for the findings; open when SC2 publishes image names |
-| SC4 | Task writing: Tasks 0–2 | In project | Mon–Tue |
+| SC2 | Spike companion → services | Standalone | **Done Sep 19** (§7a) |
+| SC3 | Provisioning: Terraform + startup script, qwiklabs.yaml, timing | Standalone | Handoff updated Sep 19 with the deploy facts; **open now** |
+| SC4 | Task writing: Tasks 0–2 | In project | Opened Sep 19 |
 | SC5 | Task writing: Task 3 | In project | Tue |
 | SC6 | Task writing: Tasks 4–5 | In project | Wed |
 | SC7 | Task writing: Tasks 6–7, Overview, Summary, Optional | In project | Wed |
@@ -175,8 +183,8 @@ Measured pieces: BigQuery load ~5 min, model 1 min, Cloud Run deploys 2–3 min 
 
 | Day | Patrick | Claude |
 | :-- | :-- | :-- |
-| Sat 19 | Run `sc1-fix-prompt-2`; re-stage; commit the execute-bit fix | SC2 Phase 2 build |
-| Mon 21 | End-to-end walk of the story in the spike project (both Task 1 corpus states; Chat agent + variant_performance; banned-phrase re-run; image model name) | SC3 build; provisioning timing |
+| Sat 19 | Data fixes done; SC2 Phase 2 done; SC4 opened | Plan and SC3 handoff updated |
+| Sun 20 / Mon 21 | Open SC3. End-to-end walk in the spike project: R10 (Audience Tools data store, orchestrator by trimmed card), both Task 1 corpus states, Brand Studio + Variant Performance, banned-phrase re-run, image model name | SC3 build; provisioning timing |
 | Tue 22 | Test tasks as they land | SC4, SC5 |
 | Wed 23 | Test tasks as they land | SC6, SC7 |
 | Thu 24 | Full run-through from Start Lab; R4 recheck list | Assemble en.md, yaml, diagram; SC8 |
@@ -192,6 +200,7 @@ Measured pieces: BigQuery load ~5 min, model 1 min, Cloud Run deploys 2–3 min 
 - **R6 (new):** the corpus connector must be **disabled** at Start Lab or Task 1's bare assistant may read the Fall City Breaks brief. SC3 finds the API; Sep 21 walk tests both states.
 - **R7 (new):** the Chat agent must actually call `variant_performance` before generating in Task 5 (instruction-driven ordering, not enforced). Sep 21 walk confirms; if flaky, the tool description carries the ordering ("call this before generating any creative").
 - **R8 (new):** the unaided data agent's answer is non-deterministic; the lab describes its shape ("names a cause, usually the price increase") and never quotes it verbatim.
+- **R10 (new, Sep 21 walk):** two things the services build could not test inside Gemini Enterprise: creating the Audience Tools custom MCP data store on the new `audience-tools` URL (three actions, the five-field Review card, the reworded retry), and registering the orchestrator by the trimmed card and running the Task 6 questions through the assistant. Also confirm `destination_hint` behaves when no place is named (Gemini should send `none`, not invent one).
 - **R9 (new):** corpus import ~10 min is inside the budget only because it starts first. If Start Lab measures over 15 min, drop the Layout Parser for the eight PDFs without tables and keep it for the four with tables.
 - **R4 (Sep 24 recheck list):** the Skill + agent restriction; the Actions tab layout; where Google Search's default sits in the Chat agent's tools picker; the banned-phrase re-run with the tightened rule; `variant_performance` called before generation; workflow follow-up behaviour (only if a Workflow is used anywhere, which it currently isn't); the A2A card fields Gemini Enterprise rejects.
 

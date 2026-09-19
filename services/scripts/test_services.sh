@@ -55,18 +55,18 @@ curl -s -X POST "$TB/mcp" -H "Authorization: Bearer $TOKEN" -H "Content-Type: ap
 
 seg() { tool resolve_segment "$1" | show; }
 echo; echo "== resolve_segment, walkthrough variants A-F (want 3838/0.156, 3271, 2242/0.188, 1596/0.112, 8152/0.189, 6049/0.154)"
-echo " A base";            seg '{"segment_description":"lapsed Compass members in cold markets who browsed warm destinations","climate":"cold","member_status":"lapsed"}'
-echo " B email only";      seg '{"segment_description":"only the ones we can email","climate":"cold","member_status":"lapsed","email_only":true}'
-echo " C lapsed 12-24";    seg '{"segment_description":"lapsed 12 to 24 months","climate":"cold","member_status":"lapsed","lapsed_months_min":12,"lapsed_months_max":24}'
-echo " D lapsed 24+";      seg '{"segment_description":"lapsed more than two years","climate":"cold","member_status":"lapsed","lapsed_months_min":24}'
-echo " E all members";     seg '{"segment_description":"widen to all Compass members in cold markets who browsed warm","climate":"cold","member_status":"any"}'
-echo " F E minus recent";  seg '{"segment_description":"drop anyone who booked in the last 60 days","climate":"cold","member_status":"any","exclude_booked_last_60d":true}'
+echo " A base";            seg '{"segment_description":"lapsed Compass members in cold markets who browsed warm destinations","climate":"cold","member_status":"lapsed","destination_hint":"none"}'
+echo " B email only";      seg '{"segment_description":"only the ones we can email","climate":"cold","member_status":"lapsed","email_only":true,"destination_hint":"none"}'
+echo " C lapsed 12-24";    seg '{"segment_description":"lapsed 12 to 24 months","climate":"cold","member_status":"lapsed","lapsed_months_min":12,"lapsed_months_max":24,"destination_hint":"none"}'
+echo " D lapsed 24+";      seg '{"segment_description":"lapsed more than two years","climate":"cold","member_status":"lapsed","lapsed_months_min":24,"destination_hint":"none"}'
+echo " E all members";     seg '{"segment_description":"widen to all Compass members in cold markets who browsed warm","climate":"cold","member_status":"any","destination_hint":"none"}'
+echo " F E minus recent";  seg '{"segment_description":"drop anyone who booked in the last 60 days","climate":"cold","member_status":"any","exclude_booked_last_60d":true,"destination_hint":"none"}'
 echo; echo "== resolve_segment, meaning match"
 echo " Hawaii";            seg '{"segment_description":"lapsed cold-market members who looked at Hawaii","climate":"cold","member_status":"lapsed","destination_hint":"Hawaii"}'
 echo " warm in March";     seg '{"segment_description":"lapsed members who want somewhere warm in March","climate":"cold","member_status":"lapsed","destination_hint":"somewhere warm","travel_month":3}'
 
 echo; echo "== activate_segment: first send, then a reworded retry (want the same receipt, one row)"
-SEG_ID=$(tool resolve_segment '{"segment_description":"base","climate":"cold","member_status":"lapsed"}' \
+SEG_ID=$(tool resolve_segment '{"segment_description":"base","climate":"cold","member_status":"lapsed","destination_hint":"none"}' \
   | python3 -c 'import json,sys; r=json.load(sys.stdin); print(r[0].get("segment_id",""))')
 echo "   segment_id: $SEG_ID"
 ACT1=$(python3 -c 'import json,sys; print(json.dumps({"segment_id":sys.argv[1],"segment_description":"lapsed Compass members in cold markets who browsed warm destinations","audience_size":3838,"channel":"email"}))' "$SEG_ID")

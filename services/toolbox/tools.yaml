@@ -81,8 +81,7 @@ parameters:
     default: false
   - name: destination_hint
     type: string
-    description: A place, region or kind of trip the marketer named, e.g. "Hawaii" or "quiet beaches with snorkeling". The five closest destinations in our catalog are matched by meaning, and only customers who looked at one of them count. none means any warm-escape destination.
-    default: none
+    description: A place, region or kind of trip the marketer named, e.g. "Hawaii" or "quiet beaches with snorkeling". The five closest destinations in our catalog are matched by meaning, and only customers who looked at one of them count. Use none when no place or kind of trip was named (plain "warm escapes" or "warm destinations" is none).
   - name: travel_month
     type: integer
     description: Month number (1 to 12) the marketer wants people to travel in; only destinations at their best that month are matched. 0 means any month. Used only together with destination_hint.

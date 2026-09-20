@@ -20,7 +20,6 @@ declare -A SRC=(
   [tools.yaml]="services/toolbox/tools.yaml"
   [agent.card.template.json]="agents/orchestrator/orchestrator/agent.card.template.json"
   [train_propensity.sql]="data/sql/train_propensity.sql"
-  [predict_propensity.sql]="data/sql/predict_propensity.sql"
 )
 stale=0
 mkdir -p "$TF/files"

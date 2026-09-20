@@ -38,17 +38,17 @@ if grep -q '"name"' <<<"$store"; then
   created=$(python3 -c 'import json,sys; print(json.load(sys.stdin).get("createTime",""))' <<<"$store")
   say "Corpus data store" "✓ exists (created $created)"
   ops=$(api "$STORE/branches/default_branch/operations")
-  read -r odone osucc ofail oend < <(python3 - "$ops" <<'PY'
+  read -r odone osucc ofail oend ostart < <(python3 - "$ops" <<'PY'
 import json,sys
 ops=[o for o in json.loads(sys.argv[1]).get("operations",[]) if "importDocuments" in o.get("name","") or "ImportDocuments" in json.dumps(o.get("metadata",{}))]
-if not ops: print("none 0 0 -"); sys.exit()
+if not ops: print("none 0 0 - -"); sys.exit()
 o=sorted(ops,key=lambda o:o.get("metadata",{}).get("createTime",""))[-1]; m=o.get("metadata",{})
-print(("done" if o.get("done") else "running"), m.get("successCount",0), m.get("failureCount",0), m.get("updateTime","-") if o.get("done") else "-")
+print(("done" if o.get("done") else "running"), m.get("successCount",0), m.get("failureCount",0), m.get("updateTime","-") if o.get("done") else "-", m.get("createTime","-"))
 PY
 )
   case "$odone" in
-    done) if [[ "$ofail" == "0" && "$osucc" -ge 12 ]]; then say "Corpus import" "✓ done: $osucc documents, 0 failures (finished $oend)"; T+=("$oend"); else bad "Corpus import" "done with $osucc ok / $ofail failed"; fi ;;
-    running) bad "Corpus import" "running ($osucc so far) — not ready yet" ;;
+    done) if [[ "$ofail" == "0" && "$osucc" -ge 12 ]]; then say "Corpus import" "✓ done: $osucc documents, 0 failures (${ostart:11:8} → ${oend:11:8})"; T+=("$oend"); else bad "Corpus import" "done with $osucc ok / $ofail failed"; fi ;;
+    running) bad "Corpus import" "running since ${ostart:11:8} ($osucc so far) — not ready yet" ;;
     *) bad "Corpus import" "no import operation found — run: bash check.sh --reimport" ;;
   esac
   attached=$(api "$GE/collections/default_collection/engines" | python3 -c "
@@ -77,17 +77,27 @@ elif [[ "$jstate" != "DONE" ]]; then bad "Warehouse job" "$jid $jstate (started 
 elif [[ "$jerr" != "ok" ]]; then bad "Warehouse job" "$jid FAILED: ${jerr//_/ }"
 else say "Warehouse job" "✓ $jid done ($jstart → $jend)"; T+=("$jend"); fi
 
+# INFORMATION_SCHEMA.TABLES lists tables only; __TABLES__ alone also counts the
+# BQML model (measured Sep 19: "16 tables" = 15 + warm_escape_propensity).
 tables=$(bq query --project_id="$P" --nouse_legacy_sql --format=csv \
-  "SELECT table_id, row_count FROM \`$P.$DS.__TABLES__\` ORDER BY table_id" 2>/dev/null | tail -n +2 | tr '\n' ' ')
-ntab=$(wc -w <<<"$tables")
-[[ "$ntab" -eq 15 ]] && say "Tables" "✓ 15" || bad "Tables" "$ntab (expect 15)"
+  "SELECT t.table_name, r.row_count FROM \`$P.$DS.INFORMATION_SCHEMA.TABLES\` t JOIN \`$P.$DS.__TABLES__\` r ON r.table_id = t.table_name ORDER BY 1" 2>/dev/null | tail -n +2 | tr '\n' ' ')
+# Compare against the frozen table list, and NAME any extra: every table in the
+# dataset shows up in Task 1's data-agent table picker.
+expected=$(gcloud storage cat gs://class-demo/cymbal-voyages/v1/schemas/_tables.json 2>/dev/null | python3 -c 'import json,sys; print(" ".join(sorted(json.load(sys.stdin))))')
+actual=$(tr ' ' '\n' <<<"$tables" | cut -d, -f1 | grep -v '^$' | sort | tr '\n' ' ')
+extra=$(comm -13 <(tr ' ' '\n' <<<"$expected" | sort) <(tr ' ' '\n' <<<"$actual" | sort) | grep -v '^$' | tr '\n' ' ')
+missing=$(comm -23 <(tr ' ' '\n' <<<"$expected" | sort) <(tr ' ' '\n' <<<"$actual" | sort) | grep -v '^$' | tr '\n' ' ')
+ntab=$(wc -w <<<"$actual")
+if [[ -z "$extra$missing" ]]; then say "Tables" "✓ $ntab, exactly the frozen list"
+else bad "Tables" "$ntab — extra: ${extra:-none} · missing: ${missing:-none}"; fi
 empty=$(tr ' ' '\n' <<<"$tables" | awk -F, '$2==0 && $1!="activations"{print $1}' | tr '\n' ' ')
 [[ -z "$empty" ]] || bad "Empty tables" "$empty"
 aud=$(bq query --project_id="$P" --nouse_legacy_sql --format=csv "
   SELECT COUNT(*), ROUND(AVG(propensity_score),3), ROUND(100*COUNTIF(propensity_score>=0.30)/COUNT(*),1)
   FROM \`$P.$DS.customer_features\`
   WHERE home_market_climate='cold' AND loyalty_tier!='none' AND loyalty_status='lapsed' AND warm_views_last_90d>=1" 2>/dev/null | tail -1)
-[[ "$aud" == 3838,0.16* ]] && say "Audience (post-scoring)" "✓ $aud (expect 3838, ~0.162, ~10.3)" || bad "Audience (post-scoring)" "${aud:-no result} (expect 3838,0.162,10.3)"
+# Reference scores as shipped (no re-scoring at Start Lab, decision 2026-09-19).
+[[ "$aud" == 3838,0.156,8.7 ]] && say "Audience (as the lab quotes)" "✓ $aud" || bad "Audience (as the lab quotes)" "${aud:-no result} (expect 3838,0.156,8.7; 0.162/10.3 means something re-scored)"
 bq show --model "$P:$DS.warm_escape_propensity" >/dev/null 2>&1 && say "Propensity model" "✓" || bad "Propensity model" "missing"
 desc=$(bq show --format=json "$P:$DS.ad_performance" 2>/dev/null | python3 -c 'import json,sys; print(json.load(sys.stdin).get("description",""))')
 grep -q "Jul 24" <<<"$desc" && bad "ad_performance description" "still names Jul 24 (stale schemas)" || say "ad_performance description" "✓ no Jul 24 leak"

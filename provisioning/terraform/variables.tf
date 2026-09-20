@@ -102,9 +102,9 @@ variable "toolbox_tag" {
 }
 
 variable "orchestrator_tag" {
-  description = "Orchestrator image tag. Pinned; never latest."
+  description = "Orchestrator image tag. Pinned; never latest. 1.0.1 (Sep 19) = 1.0.0 + exponential backoff on Gemini calls (429s seen on a busy night)."
   type        = string
-  default     = "1.0.0"
+  default     = "1.0.1"
 }
 
 variable "orchestrator_model" {

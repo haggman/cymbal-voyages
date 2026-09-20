@@ -125,7 +125,7 @@ Suppress (R01, "booked in the last 60 days") fires on **variant E**, which inclu
 
 Published Sep 19 in the long-lived project **`class-demo-labs`** (public read): Toolbox **1.12.0**, orchestrator **1.0.0**.
 
-**Orchestrator 1.0.1 (Sep 19, to be published):** same as 1.0.0 plus exponential backoff on Gemini calls (`HttpRetryOptions`: 10 attempts, 0.5 s initial, ×1.5, 15 s cap, on 408/429/5xx; under a minute worst case), after a 429 RESOURCE_EXHAUSTED in the services test. Provisioning switches `orchestrator_tag` to 1.0.1 only once the image exists.
+**Orchestrator 1.0.1 (published Sep 19, what provisioning deploys):** same as 1.0.0 plus exponential backoff on Gemini calls (`HttpRetryOptions`: 10 attempts, 0.5 s initial, ×1.5, 15 s cap, on 408/429/5xx; under a minute worst case), after a 429 RESOURCE_EXHAUSTED in the services test. `provisioning/terraform/variables.tf` pins `orchestrator_tag = 1.0.1`.
 
 | Service | Image | Notes |
 | :-- | :-- | :-- |

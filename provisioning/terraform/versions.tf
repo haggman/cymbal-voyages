@@ -4,9 +4,10 @@
 # at Start Lab. Do not float them.
 #
 # DELTA FROM mkt015:
-#   * GONE google-beta. Nothing here needs it. Every Discovery Engine resource
-#     used (data_store, acl_config) and google_project_service_identity are in
-#     the GA provider at 7.35.0 (read from the source at that tag, 2026-09-19).
+#   * HELD google-beta, for exactly ONE resource: google_project_service_identity.
+#     Its GA source file at 7.35.0 is an empty stub (the resource is beta-only);
+#     caught by `terraform validate` on 2026-09-19. The Discovery Engine
+#     resources (data_store, acl_config) ARE registered in GA and stay there.
 #   * NEW  hashicorp/http. Used by exactly ONE data source: the brand-corpus
 #     documents:import call. There is no Terraform resource for importing
 #     documents into a data store. See "BRAND CORPUS" in main.tf.
@@ -19,6 +20,10 @@ terraform {
   required_providers {
     google = {
       source  = "hashicorp/google"
+      version = "7.35.0"
+    }
+    google-beta = {
+      source  = "hashicorp/google-beta"
       version = "7.35.0"
     }
     http = {

@@ -9,7 +9,8 @@
 # (tested Sep 19 in a Qwiklabs project; test_services.sh passed).
 #
 # ⚠️ DELTA FROM mkt015 — every difference listed so a diff is legible:
-#   1. GONE  AlloyDB, network, PSA, google-beta. No VPC anything.
+#   1. GONE  AlloyDB, network, PSA. No VPC anything. google-beta stays, but for
+#            ONE resource only: google_project_service_identity (beta-only).
 #   2. NEW   Brand corpus: a Discovery Engine data store (native resource) plus
 #            ONE REST call, documents:import, through the hashicorp/http data
 #            source (no curl/gcloud on the runner). There is no Terraform
@@ -230,8 +231,10 @@ resource "google_project_service" "apis" {
 # 4. SERVICE IDENTITIES AND IAM
 # =============================================================================
 # Make the Discovery Engine service agent exist before anything binds it
-# (gcloud beta services identity create, in GA Terraform since 5.x).
+# (= gcloud beta services identity create). ⚠️ google-beta: this resource is
+# not registered in the GA provider at 7.35.0 (validate error, 2026-09-19).
 resource "google_project_service_identity" "discoveryengine" {
+  provider   = google-beta
   service    = "discoveryengine.googleapis.com"
   depends_on = [google_project_service.discoveryengine]
 }

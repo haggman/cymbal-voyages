@@ -7,14 +7,14 @@
 #
 # Optional: TOOLBOX_VERSION=<tag> to pin a specific MCP Toolbox release (default: the release
 # that Google's :latest currently points to, resolved to its version tag; never :latest itself).
-# ORCH_TAG=<tag> for the orchestrator image (default 1.0.0).
+# ORCH_TAG=<tag> for the orchestrator image (default 1.0.1: adds Gemini retry with backoff).
 set -euo pipefail
 IMAGE_PROJECT="${IMAGE_PROJECT:-$(gcloud config get-value project 2>/dev/null)}"
 [[ -n "$IMAGE_PROJECT" ]] || { echo "No project: run gcloud config set project <id> or set IMAGE_PROJECT" >&2; exit 1; }
 echo "Publishing images to project: $IMAGE_PROJECT"
 REGION="${REGION:-us-central1}"
 REPO="${REPO:-cymbal-voyages}"
-ORCH_TAG="${ORCH_TAG:-1.0.0}"
+ORCH_TAG="${ORCH_TAG:-1.0.1}"
 GOOGLE_TOOLBOX="us-central1-docker.pkg.dev/database-toolbox/toolbox/toolbox"
 REG="${REGION}-docker.pkg.dev/${IMAGE_PROJECT}/${REPO}"
 

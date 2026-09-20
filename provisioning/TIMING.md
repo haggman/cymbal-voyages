@@ -5,7 +5,7 @@ Target < 10 min to everything ready, ceiling 15. "Ready" = apply returned AND wa
 | Run | Date | Project | Apply duration | Warehouse job done | Corpus import done | Everything ready | Slowest | Flakes |
 | :-- | :-- | :-- | :-- | :-- | :-- | :-- | :-- | :-- |
 | 1 | 2026-09-19 | qwiklabs-gcp-01-61b6c572e170 | 2m36s, one pass, no errors | done inside the import window | **6m02s** import (start → end) | **≈7.5 min** from apply start (import starts ≈1.5 min in, behind the 60 s agent-grant settle; estimate — check.sh Timing line not recorded) | corpus import | none |
-| 2 | 2026-09-19 | (fresh project, orchestrator 1.0.1) | 2m43s, one pass | | | | | |
+| 2 | 2026-09-20 | fresh project, orchestrator 1.0.1 | ≈2m43s, one pass | done | done | READY (import times not sent) | corpus import | none; services test clean incl. A2A answers (first run with Gemini backoff) |
 | 3 | | | | | | | | |
 
 ## Pre-run project (qwiklabs-gcp-03-a6e4f92c632a, not timed)

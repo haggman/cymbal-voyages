@@ -32,6 +32,22 @@ for pair in "${SRC[@]}"; do
   fi
 done
 
+# Image pins: the Terraform must point at tags that actually exist in the public repo,
+# and it should not silently lag behind a newer build. Skipped when gcloud is absent.
+# (Sep 20: the orchestrator pin sat at 1.0.0 for a whole test run after 1.0.1 was published.)
+REPO_IMG="us-central1-docker.pkg.dev/class-demo-labs/cymbal-voyages"
+if command -v gcloud >/dev/null; then
+  for img in toolbox orchestrator; do
+    pin=$(sed -n "/variable \"${img}_tag\"/,/}/p" "$TF/variables.tf" | sed -n 's/.*default *= *"\(.*\)".*/\1/p')
+    [[ -n "$pin" ]] || continue
+    tags=$(gcloud artifacts docker tags list "$REPO_IMG/$img" --format='value(tag.basename())' 2>/dev/null | grep -v '^latest$')
+    if [[ -z "$tags" ]]; then echo "NOTE   could not read tags for $img (no access to $REPO_IMG?)"; continue; fi
+    if ! grep -qx "$pin" <<<"$tags"; then echo "STALE  $img: Terraform pins $pin, which is NOT published"; stale=1; fi
+    newest=$(sort -V <<<"$tags" | tail -1)
+    if [[ "$newest" != "$pin" ]]; then echo "NOTE   $img: newest published is $newest, Terraform pins $pin (deliberate?)"; fi
+  done
+fi
+
 if [[ -d "$LAB_DIR" ]]; then
   if (( CHECK )); then
     diff -rq --exclude='.terraform*' --exclude='*.tfstate*' "$TF" "$LAB_DIR/terraform" >/dev/null 2>&1 || { echo "STALE  lab folder terraform/"; stale=1; }

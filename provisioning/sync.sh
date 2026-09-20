@@ -16,17 +16,19 @@ TF="$HERE/terraform"
 LAB_DIR="${LAB_DIR:-$REPO/../../gcp-ce-content/labs/mkt016-from-question-to-campaign}"
 CHECK=0; [[ "${1:-}" == "--check" ]] && CHECK=1
 
-declare -A SRC=(
-  [tools.yaml]="services/toolbox/tools.yaml"
-  [agent.card.template.json]="agents/orchestrator/orchestrator/agent.card.template.json"
-  [train_propensity.sql]="data/sql/train_propensity.sql"
+# name:source pairs (plain list, not an associative array: macOS ships bash 3.2)
+SRC=(
+  "tools.yaml:services/toolbox/tools.yaml"
+  "agent.card.template.json:agents/orchestrator/orchestrator/agent.card.template.json"
+  "train_propensity.sql:data/sql/train_propensity.sql"
 )
 stale=0
 mkdir -p "$TF/files"
-for f in "${!SRC[@]}"; do
-  if ! cmp -s "$REPO/${SRC[$f]}" "$TF/files/$f"; then
+for pair in "${SRC[@]}"; do
+  f="${pair%%:*}"; src="${pair#*:}"
+  if ! cmp -s "$REPO/$src" "$TF/files/$f"; then
     stale=1
-    if (( CHECK )); then echo "STALE  files/$f  (source: ${SRC[$f]})"; else cp "$REPO/${SRC[$f]}" "$TF/files/$f"; echo "copied files/$f"; fi
+    if (( CHECK )); then echo "STALE  files/$f  (source: $src)"; else cp "$REPO/$src" "$TF/files/$f"; echo "copied files/$f"; fi
   fi
 done
 

@@ -40,9 +40,10 @@ Both principals differ per project, so the prefix needs `allAuthenticatedUsers` 
 | Symptom | Where | Fix |
 | :-- | :-- | :-- |
 | Apply fails at **plan** reading `_tables.json` | the runner can't read `class-demo` | Grant object read on the prefix (see above) |
-| `Brand corpus import did not start (HTTP …)` | the `http` data source | Read the body. 403 means the runner lacks `discoveryengine` rights, or the API isn't settled yet (raise the 30 s sleep). Retry by hand: `bash check.sh --reimport` |
+| `Brand corpus import did not start (HTTP 403) … storage.buckets.create` | the Discovery Engine agent's storage grant hadn't propagated (the import creates a staging bucket in the project) | Raise `time_sleep.ge_agent_settle`; re-running apply retries the import |
+| `Brand corpus import did not start (HTTP …)`, any other error | the `http` data source | Read the body. 403 means the runner lacks `discoveryengine` rights, or the API isn't settled yet (raise the 30 s sleep). Retry by hand: `bash check.sh --reimport` |
 | `acl_config` error | identity provider can't be set before Gemini Enterprise is activated | Delete that block; Task 0 sets Google Identity by hand |
-| Cloud Run revision fails with a secret permission error | IAM propagation | Raise `time_sleep.iam_settle` |
+| `audience-tools` fails with `Error code 7 … internal error` (or a secret permission error) | IAM propagation to the secret (measured Sep 19 at 30 s) | Raise `time_sleep.iam_settle` (now 60 s, plus a grant on the secret itself) |
 | `check.sh`: warehouse job FAILED | the SQL (error text shown) | Re-run it: the job's SQL is in BigQuery → Job history, and it's safe to re-run (TRUNCATE + LOAD) |
 | `check.sh`: audience not 3838 / 0.162 | scoring didn't run, or the data isn't v1 | Check the job error. The pre-scoring value is 0.156 |
 | `check.sh`: ad_performance still names Jul 24 | stale schemas in the bucket | Re-stage `schemas/` from the repo (SC1 fix d7c1734) |

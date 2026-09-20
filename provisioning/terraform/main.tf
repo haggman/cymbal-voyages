@@ -144,11 +144,39 @@ resource "google_discovery_engine_data_store" "brand_corpus" {
 #   * Data sources are re-read on every plan/refresh. A second plan or a destroy
 #     would POST the import again; with INCREMENTAL reconciliation that is a
 #     harmless re-sync of the same 12 files.
+#   * It waits for the Discovery Engine agent's storage grant (below): the
+#     import creates a staging bucket in the project as that agent.
 #   * retry covers 5xx/429 and connection errors (a store created seconds ago
 #     can briefly 404/503). Any non-200 after that FAILS the apply on purpose:
 #     an empty corpus is otherwise invisible until Task 4, an hour into the lab.
 # -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# 🔴 MEASURED 2026-09-19 (first manual apply, fresh Qwiklabs project): the import
+# 403'd with "service-PN@gcp-sa-discoveryengine... does not have
+# storage.buckets.create ... buckets/PN_..._us_import_content". The Layout
+# Parser import stages content in a bucket it creates IN THE LAB PROJECT, as the
+# Discovery Engine service agent. The console flow (spike S8) evidently
+# provisions that agent first; a bare API call does not wait for it. So:
+#   service identity -> storage.admin on the project for the agent -> 60 s
+#   IAM settle -> import.
+# The data store create runs in parallel with that chain, so the import starts
+# ~1.5 min into the apply instead of ~1 min.
+# -----------------------------------------------------------------------------
+resource "google_project_iam_member" "ge_agent_storage" {
+  project    = local.project
+  role       = "roles/storage.admin" # needs storage.buckets.create for the staging bucket
+  member     = "serviceAccount:${local.ge_agent}"
+  depends_on = [google_project_service_identity.discoveryengine]
+}
+
+resource "time_sleep" "ge_agent_settle" {
+  depends_on      = [google_project_iam_member.ge_agent_storage]
+  create_duration = "60s"
+}
+
 data "http" "corpus_import" {
+  depends_on = [time_sleep.ge_agent_settle]
+
   url    = "https://discoveryengine.googleapis.com/v1/${google_discovery_engine_data_store.brand_corpus.name}/branches/default_branch/documents:import"
   method = "POST"
 
@@ -292,12 +320,24 @@ resource "google_project_iam_member" "orchestrator" {
 # Cloud Run checks at deploy time that the runtime SA can read the mounted
 # secret. Fresh grants take a few seconds to propagate; this sleep is off the
 # corpus's critical path (it runs alongside the import and the BigQuery job).
+# 🔴 MEASURED 2026-09-19: with a 30 s settle and only the project-level grant,
+# audience-tools failed on first apply with "Error code 7 ... internal error"
+# (gRPC 7 = PERMISSION_DENIED) while orchestrator (no secret) deployed fine.
+# So: also grant accessor ON THE SECRET, and settle 60 s. Still off the
+# corpus's critical path.
+resource "google_secret_manager_secret_iam_member" "audience_tools" {
+  secret_id = google_secret_manager_secret.tools.id
+  role      = "roles/secretmanager.secretAccessor"
+  member    = "serviceAccount:${google_service_account.audience_tools.email}"
+}
+
 resource "time_sleep" "iam_settle" {
   depends_on = [
     google_project_iam_member.audience_tools,
     google_project_iam_member.orchestrator,
+    google_secret_manager_secret_iam_member.audience_tools,
   ]
-  create_duration = "30s"
+  create_duration = "60s"
 }
 
 # =============================================================================

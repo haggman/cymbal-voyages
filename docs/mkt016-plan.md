@@ -9,9 +9,9 @@
 **Data staging:** `gs://class-demo/cymbal-voyages/v1/` (frozen once labs point at it; regenerate into `v2`)
 **Planning docs:** this file plus `mkt016-handoff-*.md` in the project's `claude/` folder; spike record in `cymbal-voyages/docs/spike-findings.md` and `docs/sc2-phase1-handback.md`
 
-Last updated: 2026-09-21, evening (planning conversation absorbed SC4's handback: §5 timings and Task 1–2 legs, the running total, §4a and §7 supersessions, §8, §9; SC4 wrote §5a, §5b, and the Task 0 rewrite)
+Last updated: 2026-09-22 (planning conversation absorbed SC5's handback, `claude/mkt016-sc5-handback.md`: Task 3 as written, four-field card, R10 half closed, running total, §5c, §8, §9)
 
-**Status (Sep 21, evening):** SC1 data foundation delivered, staged, and fixed (§6a). Spike S1–S8 finished Sep 18 (§4); the six decisions are made (§4a). SC2 Phase 2 done and tested Sep 19 (§7a). SC3 (provisioning) is running; its first Start Lab already carried the Tasks 0–2 walk. **SC4 (Tasks 0–2) done Sep 21:** written, walked end to end in a fresh Start Lab project, zero verify markers left (§5a, §5b). **SC5 (Task 3) opens next** with `claude/mkt016-handoff-task-3.md`. Two things still untested inside Gemini Enterprise go on the run-through (§10, R10). Google has not yet answered the deck-review email (60-minute lab blocks; CMO room); nothing in the build changes until they do (§5, timing note).
+**Status (Sep 22):** SC1 data foundation delivered, staged, and fixed (§6a). Spike S1–S8 finished Sep 18 (§4); the six decisions are made (§4a). SC2 Phase 2 done and tested Sep 19 (§7a). SC3 (provisioning) running; two timed Start Labs at ≈7.5 min (§7). **SC4 (Tasks 0–2) done Sep 21** and **SC5 (Task 3) done Sep 22**, both walked in fresh Start Lab projects with zero verify markers left (§5a–§5c). `en.md` now runs Overview through Task 3, ≈100 min as written. **SC6 (Tasks 4–5) opens next** with `claude/mkt016-handoff-tasks-4-5.md`. The orchestrator half of R10 waits for Task 6. Google has not yet answered the deck-review email (60-minute lab blocks; CMO room); nothing in the build changes until they do (§5, timing note).
 
 ---
 
@@ -79,9 +79,9 @@ Full record: `cymbal-voyages/docs/spike-findings.md`; summary: `docs/sc2-phase1-
 5. **Task 1 bare-assistant risk: create the corpus data store at Start Lab, keep it away from the app until Task 4.** ~~SC3 finds the API or CLI to leave the connector disabled; if it isn't scriptable, Task 0's Builder disables it.~~ **Settled Sep 21 (R6 closed):** a data store created by provisioning is simply **unattached** (Connected apps: N/A) and stays that way after the student creates the app, so there is nothing to disable. Task 4's Builder **adds** the existing store to the app, which is the real step we wanted anyway.
 6. **Both new beats adopted.** Task 1 gets three answers, not two: the bare assistant (generic), the data agent before instructions (**sure but partly wrong**: it blames the Aug 1 price increase, a 3% red herring), and the data agent with definitions (decomposes before naming a cause). Task 4's banned-phrase rule **fails on the first run** ("guaranteed lowest price" sails through with a note that it "will require legal review"), the Builder tightens the rule, and the re-run is clean. Both are stronger than the outline's version of the same beats.
 
-## 5. Task structure (~176 min lab time as written; the 165 target is in the timing note below)
+## 5. Task structure (~180 min lab time as written; the 165 target is in the timing note below)
 
-Legs alternate Builder (🔧) and Marketer (📣). The **admin console** is the Builder's surface; the **web app** is the Marketer's. Tasks 0–2 are written and walked (§5b); their entries here are summaries of `en.md`. Tasks 3–7 are still the plan.
+Legs alternate Builder (🔧) and Marketer (📣). The **admin console** is the Builder's surface; the **web app** is the Marketer's. Tasks 0–3 are written and walked (§5b, §5c); their entries here are summaries of `en.md`. Tasks 4–7 are still the plan.
 
 **Task 0 — Get both seats working (~15 min, written; rewritten after the Sep 21 walk, see §5a).** Both partners sign in. 🔧 The trial and Google Identity are already done by provisioning, so the Builder creates the `cymbal-voyages` app; Feature management toggles; then the **Assistant** tab: *Default web search state* **Off** and a short Cymbal Voyages system instruction. Meet the brand corpus (Data stores → Documents tab, green checks, RAG explained). 📣 Open the web app (*Go to Gemini Enterprise*); see Agents and Skills.
 
@@ -91,13 +91,14 @@ Legs alternate Builder (🔧) and Marketer (📣). The **admin console** is the 
 **Task 2 — Find the root cause and write the Monday readout (~21 min, written).**
 📣 2.1 (10) follow the thread: which markets (cold, all eight, −33.5%); traffic or conversion (the cohort verified query: lapsed Compass, cold market, 6.74% → 2.43% on warm-escape browsing, every other cohort flat); size the red herrings; when did retargeting fall: **July 24**, because the Task 1 instructions tell the Analyst to date a change at daily grain (one-line fallback prompt if an Analyst says August 1). 🔧 2.2 (4) Skills → *Create skill with Gemini* → paste Name, Description, Instructions → Save. 📣 2.3 (7) ask the Analyst for the findings summary → copy → Skills → *executive-readout* → **New chat** → paste → send. Three paragraphs, numbers inline, recommendations not claims. Download as PDF. *Business translation: this is the readout that usually eats an analyst's Thursday, and it's reproducible next month.*
 
-**Task 3 — Build the audience (30 min; handoff `claude/mkt016-handoff-task-3.md`).** Opens with a Marketer ➜ Builder switch banner.
-🔧 12 min: admin console → Connected data stores → Create → **Custom MCP server** → the **Audience Tools** service URL + `/mcp`, auth **None** (Cloud Run IAM does the work) → Create. Actions tab → *reload custom actions* → three actions appear (**Resolve Segment**, **Activate Segment**, **Variant Performance**); enable the first two now (Variant Performance waits for Task 5). Read `services/toolbox/tools.yaml` in the lab (`docs/services.md` Part 1 is the marketer-language version): the tools, their choices, what comes back, what they never do; note the Actions tab shows names only. *Business translation: this contract is the same whether the far end is Ads Data Manager, a CDP or an ESP.*
-📣 18 min: describe the segment in English; the read-only tool runs with no prompt: **3,838 customers, propensity 0.16, 3,271 email-contactable**, plus a readable `segment_id` naming exactly what was counted. Refine out loud (email-only 3,271; lapsed 12–24 months 2,242 at 0.19; widen to all cold-market Compass browsers 8,152; drop recent bookers 6,049); optionally "who looked at Hawaii" to see the meaning match (2,005, and it lists the destinations it matched). Activate to email → **Review: Activate Segment** card, **five** editable fields (Segment Id, Segment Description, Audience Size, Channel; the fifth is what makes a retry safe) → Send → receipt `act-…` with the note "New activation recorded." Ask again in different words: same receipt, "already activated … nothing was sent twice," one row. Stand-in endpoint, said plainly; the contract is the lesson. Tool results are deterministic, so Task 3 quotes exact counts; the assistant's wording around them is described as a shape.
+**Task 3 — Build the audience (≈34 min, written; see §5c).** Opens with a shared 3-minute concept section, **Understanding the Audience Tools** (MCP, MCP Toolbox for Databases, how we built the three tools, repo links, diagram `img/audience-tools.png`), then a Marketer ➜ Builder banner.
+🔧 3.1–3.3 (12): Connected data stores → **+ New data store** → **Add MCP server** → **No authentication**, the templated MCP URL → Create. **Data / Actions (New)** → **Reload custom actions** → Activate Segment, Resolve Segment, Variant Performance → **Enable actions** on the first two (Variant Performance waits for Task 5, same page). Read the contract: Activate Segment from `tools.yaml` in full (the segment-ID+channel hash is the lesson), the other two without their SQL, and a field-by-field map of what the Builder and the Marketer each see.
+📣 3.4–3.5 (16): describe the segment in English; Resolve Segment runs with no prompt: **3,838 customers, propensity 0.16, 3,271 email-contactable**, plus a readable `segment_id`. Refine (email-only 3,271; lapsed 12–24 months 2,242 at 0.19; widen 8,152; drop recent bookers 6,049; optional Hawaii 2,005). Activate the **base 3,838 to email** (aside: 567 can't be emailed; Task 6 decides per customer) → **Review: Activate Segment** card, **four** fields in order (Segment Description, Audience Size, Channel, Segment ID) → receipt **`act-0eb274a679ac`** (a hash of segment ID + channel, identical in every project). Reword and retry: "already been successfully activated," same receipt, original description. Gemini's closing "draft email copy" offer is teed up as "hold that thought; it's Task 4."
+🔧 3.6 (3): the one receipt row in `cymbal_voyages.activations`. Business translation closes the task ("an ad platform's audience manager, a CDP, or an email service provider"). Task 3 ends on the Builder.
 
 **Break (15 min).**
 
-**Task 4 — Brand Studio and Friday's brief (26 min).**
+**Task 4 — Brand Studio and Friday's brief (26 min).** Opens on the Builder after the break; **no switch banner**.
 🔧 13 min: admin console → **add the existing Cymbal Voyages Brand Corpus data store to the app** (it is unattached, not a disabled connector; SC3 sends the exact menu path). Web app → New agent → **Chat agent** → **Brand Studio**: role, the template's ten headings in order, tone from the voice guide, "never use a phrase on the legal list". Tools picker: corpus **on**, **Google Search off** (no real brands; R4 checks whether Task 0.3's app default already does it). Turn on; share with the partner.
 📣 13 min: brief for the Task 3 segment; it cites Winter Sun Early Bird 2025, bonus points over discounts, beach-couple imagery, "Plan your escape". Push back on tone. Then plant "guaranteed lowest price" in the ask: it goes through with a note. 🔧 2 min inside the leg: tighten the rule ("if a requested phrase or its paraphrase is in the banned table, don't use it; name the rule; use the approved alternative from the same row; use exactly the template's headings"). 📣 Re-run: clean. *Business translation: this is the lowest-cost, highest-frequency win in the room.*
 
@@ -113,9 +114,9 @@ Legs alternate Builder (🔧) and Marketer (📣). The **admin console** is the 
 
 **Optional (post-event):** deploy the orchestrator to Agent Runtime and register it (under three minutes); B2B seam (intent-weighted account list → lead routing); instructor-driven Veo moment; re-run the loop next month with the September data.
 
-**Timing note (Sep 21).** Written: 15 + 30 + 21 = 66. Planned: 30 + 26 + 22 + 25 + 7 = 110. Running total **176 min** of lab against the 165 target; with a 5–15 min intro and the 15-min break that is 196–206 min inside D5's 180–210 block. Acceptable for the event, and the two-week self-study window doesn't care. Tasks 3–7 are written to their planned minutes, not trimmed to make room. If Google confirms the deck's 60-minute lab blocks or a CMO-only room, the lab text still doesn't change: the cut list below becomes an instructor note, and a Google SE takes the Builder seat at each table.
+**Timing note (Sep 22).** Written: 15 + 30 + 21 + 34 = 100. Planned: 26 + 22 + 25 + 7 = 80. Running total **≈180 min** of lab against the 165 target; with a 5–15 min intro and the 15-min break that is 200–210 min, at the top of D5's 180–210 block. Still acceptable for the event, and the two-week self-study window doesn't care, but there is no slack left: Tasks 4–7 are written to their planned minutes and SC6/SC7 should treat those as ceilings, and the cut list below gets rehearsed on Thursday. If Google confirms the deck's 60-minute lab blocks or a CMO-only room, the lab text still doesn't change: the cut list becomes an instructor note, and a Google SE takes the Builder seat at each table.
 
-Cut order if the room runs slow: Task 0.4's Documents-tab visit; Task 2.1 prompts 1 and 4; Task 5 marketer leg to one concept; Task 6 becomes instructor-driven with hands-on moved to optional.
+Cut order if the room runs slow: Task 0.4's Documents-tab visit; Task 2.1 prompts 1 and 4; Task 3.4.6 (Hawaii) and the Variant Performance YAML excerpt in 3.2.6; Task 5 marketer leg to one concept; Task 6 becomes instructor-driven with hands-on moved to optional.
 
 ## 5a. Notes for the Task 3–7 writers from the Sep 21 walk (Tasks 0–2, fresh Start Lab)
 
@@ -145,6 +146,22 @@ Cut order if the room runs slow: Task 0.4's Documents-tab visit; Task 2.1 prompt
 - **SC3 / provisioning:** confirm what activates the Gemini Enterprise trial (nothing in the tree does it explicitly; the lab now says the setup scripts did, with a fallback). Send the Task 4 menu path for adding the existing corpus data store to the app.
 - **Patrick:** set `qwiklabs.yaml` duration back to 180 before submission; commit after **File → Revert File** in VS Code whenever Claude has edited `en.md`.
 - **SC8 (run-through checklist):** the Tasks 0–2 checklist artifact exists but is stale after the walk; rebuild from the final `en.md` for the full lab.
+
+## 5c. SC5 handback (Sep 22): Task 3 done, and what later tasks inherit
+
+Full record: `claude/mkt016-sc5-handback.md`. Walked in `qwiklabs-gcp-04-0bb3cdf9d22f`; 0 verify markers; new diagram `instructions/img/audience-tools.png` (+ `.svg`). Builder ≈15 min, Marketer ≈16, plus the 3-minute shared concept section.
+
+**What Tasks 4–7 inherit:**
+- **The Review card has four fields**, not five: Segment Description\*, Audience Size\*, Channel, Segment ID (the last two greyed but passed through). The plan's "five" was a miscount.
+- **Task 3 ends on the Builder; Task 4 opens on the Builder** after the break, so Task 4 has no switch banner at the top.
+- **Task 5 enables Variant Performance on the same Actions page** Task 3.2/3.3 already walked (admin console → app → Connected data stores → Audience Tools → **Data / Actions (New)** → tick → **Enable actions**), so Task 5 can point back rather than re-teach the path.
+- **Gemini's "draft email copy" offer** at the end of Task 3 is teed up as "hold that thought; it's Task 4." Task 4's opener should pick that line up.
+- **Web app defaults after the connector exists:** Connectors shows **Audience Tools on, Google Search off** in a new chat. Brand Studio's tools picker is still its own thing (R4).
+- **Business translation lands once, at the end of each task** (Task 3 set the pattern). "Ads Data Manager" isn't named anywhere; use "an ad platform's audience manager, a CDP, or an email service provider."
+- **Receipt `act-0eb274a679ac`** is the same in every project (MD5 of segment ID + channel); Task 6 can refer to it.
+- A concept section read by both roles before the first banner is now an accepted shape (Task 3's "Understanding the Audience Tools"). Task 6 will want the same for the orchestrator and the policy table; keep it to three minutes.
+
+**Owed by others:** Patrick commits `en.md` and the two image files (VS Code **File → Revert File** first). Nothing owed to SC1 or SC3 from this one.
 
 ## 6. Data design (summary; the full spec is in the data-engineering handoff)
 
@@ -191,7 +208,7 @@ Qwiklabs startup-script Terraform as in mkt013–015, native resources first. Or
 
 `docs/services.md` in the repo is the handoff: Part 1 the tool contracts in marketer language (the lab quotes it), Part 2 the deploy facts (SC3 reproduces `services/scripts/deploy_services.sh` in Terraform), Part 3 the test run (every number matches the walkthrough), Part 4 thirteen build decisions. Images, public-read, pulled cross-project with no grant: `us-central1-docker.pkg.dev/class-demo-labs/cymbal-voyages/toolbox:1.12.0` and `.../orchestrator:1.0.0`. No builds at Start Lab.
 
-**Absorbed into §5:** the Review card has five fields (Segment Id is the activation key, so a reworded retry returns the same receipt); the offer threshold at 0.15 sends 1,082 of 3,838 (28%); suppress fires on variant E (2,103 of 8,152), not F; the Actions tab lists three actions; `resolve_segment` returns a readable `segment_id` and, for a place or vibe, the five closest catalog destinations ("Hawaii" matches four Hawaii items plus Key West as the fifth-closest, which the answer shows). Task 6's audiences are described the same way as Task 3's, without a destination hint, so the orchestrator's counts match.
+**Absorbed into §5:** the Review card has four fields (corrected Sep 22; Segment ID is the activation key, so a reworded retry returns the same receipt); the offer threshold at 0.15 sends 1,082 of 3,838 (28%); suppress fires on variant E (2,103 of 8,152), not F; the Actions tab lists three actions; `resolve_segment` returns a readable `segment_id` and, for a place or vibe, the five closest catalog destinations ("Hawaii" matches four Hawaii items plus Key West as the fifth-closest, which the answer shows). Task 6's audiences are described the same way as Task 3's, without a destination hint, so the orchestrator's counts match.
 
 **For the lab writers:** `tools.yaml` reads the project from its environment, so the file shown to the Builder is the exact file mounted in the service. Channels are limited to email, paid_social, paid_search. The orchestrator normalizes anything a student types into the policy table (case, `30%`, `≥`, `yes`) and skips rows it can't read with a report, so Task 6's edit can't break it. The served agent card is in the newer A2A format that Gemini Enterprise rejects; students paste the trimmed card the lab provides.
 
@@ -203,9 +220,9 @@ Qwiklabs startup-script Terraform as in mkt013–015, native resources first. Or
 | SC2 | Spike companion → services | Standalone | **Done Sep 19** (§7a) |
 | SC3 | Provisioning: Terraform + startup script, qwiklabs.yaml, timing | Standalone | Running; tree, yaml, README, and two timed runs done (≈7.5 min ready, §7); third timed run and the two §5b answers owed |
 | SC4 | Task writing: Tasks 0–2 | In project | **Done Sep 21**: written, walked in a real Start Lab project, all verify markers closed (§5a, §5b) |
-| SC5 | Task writing: Task 3 | In project | Handoff written Sep 21 (`claude/mkt016-handoff-task-3.md`); **open next** |
-| SC6 | Task writing: Tasks 4–5 | In project | Handoff to be written when SC5 hands back |
-| SC7 | Task writing: Tasks 6–7, Lab Summary, Optional | In project | After SC6 |
+| SC5 | Task writing: Task 3 | In project | **Done Sep 22**: written, walked in a fresh Start Lab project, all verify markers closed (§5c, `claude/mkt016-sc5-handback.md`) |
+| SC6 | Task writing: Tasks 4–5 | In project | Handoff written Sep 22 (`claude/mkt016-handoff-tasks-4-5.md`); **open next** |
+| SC7 | Task writing: Tasks 6–7, Lab Summary, Optional | In project | Handoff to be written when SC6 hands back |
 | SC8 | Run-through checklist artifact for the full lab | In project | Thu, from the final `en.md` |
 
 ## 9. Schedule
@@ -214,8 +231,8 @@ Qwiklabs startup-script Terraform as in mkt013–015, native resources first. Or
 | :-- | :-- | :-- |
 | Sat 19 | Data fixes done; SC2 Phase 2 done; SC4 opened | Plan and SC3 handoff updated |
 | Sun 20 / Mon 21 | SC3 opened; first Start Lab worked. Tasks 0–2 walked in it (done). Deck-review email to Google | SC4 done; plan absorbed; SC5 handoff |
-| Tue 22 | Test Task 3 as it lands; R10 items on the real Audience Tools URL | SC5, then the SC6 handoff |
-| Wed 23 | Test Tasks 4–7 as they land | SC6, SC7 |
+| Tue 22 | Task 3 walked (done); R10's Task 3 half closed. Test Tasks 4–5 as they land | SC5 done, plan absorbed, SC6 handoff; SC6 |
+| Wed 23 | Test Tasks 6–7 as they land; R10's orchestrator half | SC7 (and its handoff first thing) |
 | Thu 24 | Full run-through from Start Lab; R4 recheck list | Assemble en.md, yaml; SC8 |
 | Fri 25 | Fixes; submit to Qwiklabs | Retrofit outline |
 | Mon 28 | Buffer; second run-through inside Qwiklabs | — |
@@ -229,7 +246,7 @@ Qwiklabs startup-script Terraform as in mkt013–015, native resources first. Or
 - ~~R6~~ **Closed Sep 21:** the corpus is created unattached (Connected apps: N/A) and stays that way after the student creates the app.
 - **R7:** the Chat agent must actually call `variant_performance` before generating in Task 5 (instruction-driven ordering, not enforced). Run-through confirms; if flaky, the tool description carries the ordering ("call this before generating any creative").
 - **R8:** the unaided data agent's answer is non-deterministic; the lab describes its shape ("names a cause, usually the price increase") and never quotes it verbatim. Extended by the walk to every agent answer that isn't a verified-query or tool result (§5a).
-- **R10 (Tue 22, as Task 3 and Task 6 land):** two things the services build could not test inside Gemini Enterprise: creating the Audience Tools custom MCP data store on the new `audience-tools` URL (three actions, the five-field Review card, the reworded retry), and registering the orchestrator by the trimmed card and running the Task 6 questions through the assistant. Also confirm `destination_hint` behaves when no place is named (Gemini should send `none`, not invent one).
+- **R10, Task 3 half closed Sep 22:** the Audience Tools data store on the provisioned `audience-tools` URL, the three actions, the four-field Review card, `destination_hint` staying `none` when no place is named, and the reworded retry returning the original receipt `act-0eb274a679ac` are all confirmed in a Start Lab project. **Still open (Wed 23, as Task 6 lands):** registering the orchestrator by the trimmed card and running the Task 6 questions through the assistant.
 - **R9:** corpus import ~10 min is inside the budget only because it starts first. If Start Lab measures over 15 min, drop the Layout Parser for the eight PDFs without tables and keep it for the four with tables.
 - **R11 (new, Sep 21):** the lab runs ~176 min as written against a 165 target (§5 timing note). Inside the block, but the cut list has to be real and rehearsed on Thursday, not theoretical.
 - **R12 (new, Sep 21):** Google's deck shows 60-minute lab blocks and a "50 CMOs" room. Email sent; if either is confirmed, the lab text is unchanged and the delivery plan changes (cut list as an instructor note; Google SE in the Builder seat per table).

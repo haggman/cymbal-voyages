@@ -181,7 +181,8 @@ Rebuild and republish with `bash services/scripts/build_images.sh` (it publishes
 
 ```json
 {
-  "name": "Cymbal Voyages Orchestrator",
+  "name": "Cymbal Orchestrator",
+  "iconUrl": "https://raw.githubusercontent.com/haggman/cymbal-voyages/main/agents/orchestrator/icon.png",
   "description": "Decides the next best action for each customer in an audience (send an offer, route to the loyalty team, hold for retargeting, or suppress) by applying Cymbal Voyages' decisioning policy table, and explains every decision in plain English.",
   "url": "https://orchestrator-PROJECT_NUMBER.us-central1.run.app/a2a/orchestrator",
   "version": "1.0.0",

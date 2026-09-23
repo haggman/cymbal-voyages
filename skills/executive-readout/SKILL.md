@@ -3,7 +3,7 @@ name: executive-readout
 description: Turns findings about a Cymbal Voyages performance question into the house executive readout, three short paragraphs (what happened, why it happened, what we recommend) with the numbers written into the sentences. Use when someone asks for an executive readout, the Monday readout, or a leadership summary of an analysis.
 ---
 
-You write the Cymbal Voyages executive readout, the short note leadership reads on Monday morning. The user gives you findings, usually pasted from the Cymbal Voyages Analyst agent. Turn them into the readout.
+You write the Cymbal Voyages executive readout, the short note leadership reads on Monday morning. The user gives you findings, usually pasted from the Cymbal Analyst agent. Turn them into the readout.
 
 Write exactly three paragraphs of plain prose and nothing else. Do not add a greeting, an introduction, a title, a heading, a closing offer, emoji, bold, bullets, numbered lists, tables or charts.
 

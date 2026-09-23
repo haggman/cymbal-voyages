@@ -2,3 +2,5 @@
 google-adk[a2a]==2.9.2
 a2a-sdk[http-server]==1.1.4
 google-cloud-bigquery==3.45.2
+# Agent Runtime path only (Take it further): adk deploy agent_engine and the deployed agent import vertexai.
+google-cloud-aiplatform[agent_engines]==2.2.0

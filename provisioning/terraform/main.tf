@@ -1,14 +1,14 @@
 # =============================================================================
 # mkt016 — From Question to Campaign (Cymbal Voyages). Start Lab provisioning.
 # =============================================================================
-# SHAPE COPIED FROM mkt015 (cymbalgoal-database-intelligence/terraform), which is
+# SHAPE COPIED FROM an earlier Start Lab tree of ours, which is
 # proven at Start Lab: the three injected variables + `username`, the domain
 # tolerance on username, runtime.yaml, the version pins, and the rule that every
 # API string must be verified before it goes in (a bad one halts the room).
 # The services are a straight translation of services/scripts/deploy_services.sh
 # (tested Sep 19 in a Qwiklabs project; test_services.sh passed).
 #
-# ⚠️ DELTA FROM mkt015 — every difference listed so a diff is legible:
+# ⚠️ DELTA FROM that tree — every difference listed so a diff is legible:
 #   1. GONE  AlloyDB, network, PSA. No VPC anything. google-beta stays, but for
 #            ONE resource only: google_project_service_identity (beta-only).
 #   2. NEW   Brand corpus: a Discovery Engine data store (native resource) plus

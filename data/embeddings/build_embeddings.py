@@ -7,8 +7,8 @@ and write out/catalog_embeddings/part-000.parquet in the BigQuery-ready layout.
     PROJECT_ID=my-project python3 embeddings/build_embeddings.py
     PROJECT_ID=my-project LOCATION=us-central1 python3 embeddings/build_embeddings.py --workers 4
 
-Same model, dimension and SDK pattern as the mkt013 CymbalGoal lab (google-genai with
-vertexai=True; gemini-embedding-001 on Vertex accepts one text per request). 360 texts take about
+Uses google-genai with
+vertexai=True; gemini-embedding-001 on Vertex accepts one text per request. 360 texts take about
 a minute. Re-running overwrites the output; --resume keeps vectors already written.
 """
 from __future__ import annotations

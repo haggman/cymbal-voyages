@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # End-to-end check of the deployed lab services against the reference numbers in
-# data/docs/anomaly-walkthrough.md. Run in Cloud Shell from the repo root, in the lab project:
+# data/sql/walkthrough_queries.py. Run in Cloud Shell from the repo root, in the lab project:
 #
 #   bash services/scripts/test_services.sh 2>&1 | tee services-test.log
 set -uo pipefail

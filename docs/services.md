@@ -223,7 +223,7 @@ agents/orchestrator/tests/local_check.py   offline check of the policy engine ag
 
 ## Part 3. Test run (Sep 19, spike project `qwiklabs-gcp-04-df5f1f023984`, reference propensity scores)
 
-`test_services.sh` against the deployed services. Every number matches `data/docs/anomaly-walkthrough.md`.
+`test_services.sh` against the deployed services. Every number matches the reference queries in `data/sql/walkthrough_queries.py` (run them locally with `data/sql/verify_local.py`).
 
 | Check | Result |
 | :-- | :-- |

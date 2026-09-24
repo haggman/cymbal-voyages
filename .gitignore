@@ -4,3 +4,7 @@ orchestrator-card.json
 services-test.log
 .runlogs/*
 !.runlogs/.keep
+
+# internal: rendered locally by `make docs`; kept out of the public repo
+data/docs/anomaly-walkthrough.md
+docs/mkt016-plan.md

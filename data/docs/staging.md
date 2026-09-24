@@ -32,7 +32,7 @@ PROJECT_ID=$PROJECT_ID python3 embeddings/build_embeddings.py
 gcloud storage rsync --recursive --delete-unmatched-destination-objects out       gs://$BUCKET/$PREFIX/out
 gcloud storage rsync --recursive                                        schemas   gs://$BUCKET/$PREFIX/schemas
 gcloud storage rsync --recursive                                        brand_corpus/pdf gs://$BUCKET/$PREFIX/brand_corpus
-gcloud storage cp docs/data-dictionary.md docs/anomaly-walkthrough.md   gs://$BUCKET/$PREFIX/docs/
+gcloud storage cp docs/data-dictionary.md                               gs://$BUCKET/$PREFIX/docs/
 gcloud storage ls -r gs://$BUCKET/$PREFIX/ | head -50
 ```
 
@@ -77,4 +77,4 @@ Point a Cloud Storage data store at `gs://$BUCKET/$PREFIX/brand_corpus/` (unstru
 bq query --nouse_legacy_sql "SELECT table_id, row_count FROM \`$PROJECT_ID.cymbal_voyages.__TABLES__\` ORDER BY table_id"
 ```
 
-Expected row counts are in `out/_manifest.json`. Then run any query from `docs/anomaly-walkthrough.md`; the numbers must match the document exactly.
+Expected row counts are in `out/_manifest.json`. Then run any query from `sql/walkthrough_queries.py`; the numbers must match `sql/verify_local.py`'s output exactly.

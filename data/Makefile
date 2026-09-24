@@ -31,7 +31,7 @@ stage:               ## copy out/, schemas/ and the PDFs to gs://$(BUCKET)/$(PRE
 	gcloud storage rsync --recursive --delete-unmatched-destination-objects out gs://$(BUCKET)/$(PREFIX)/out
 	gcloud storage rsync --recursive schemas gs://$(BUCKET)/$(PREFIX)/schemas
 	gcloud storage rsync --recursive brand_corpus/pdf gs://$(BUCKET)/$(PREFIX)/brand_corpus
-	gcloud storage cp docs/data-dictionary.md docs/anomaly-walkthrough.md docs/staging.md gs://$(BUCKET)/$(PREFIX)/docs/
+	gcloud storage cp docs/data-dictionary.md docs/staging.md gs://$(BUCKET)/$(PREFIX)/docs/
 
 load:                ## bq load everything into $(PROJECT_ID):cymbal_voyages
 	PROJECT_ID=$(PROJECT_ID) BUCKET=$(BUCKET) PREFIX=$(PREFIX) ./sql/load.sh

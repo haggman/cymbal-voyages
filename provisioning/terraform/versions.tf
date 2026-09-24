@@ -1,9 +1,9 @@
 # Version pins.
 #
-# Terraform 1.12.1 and google 7.35.0 are carried from mkt013–mkt015, all proven
+# Terraform 1.12.1 and google 7.35.0 are carried from earlier labs, all proven
 # at Start Lab. Do not float them.
 #
-# DELTA FROM mkt015:
+# DELTA FROM the earlier tree:
 #   * HELD google-beta, for exactly ONE resource: google_project_service_identity.
 #     Its GA source file at 7.35.0 is an empty stub (the resource is beta-only);
 #     caught by `terraform validate` on 2026-09-19. The Discovery Engine

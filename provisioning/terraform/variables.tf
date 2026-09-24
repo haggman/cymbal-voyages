@@ -1,10 +1,10 @@
 # Variables the Qwiklabs runtime injects at Start Lab time.
 #
-# ⚠️ RULE (carried from mkt015): every variable here must be one the platform
+# ⚠️ RULE (carried over from earlier labs): every variable here must be one the platform
 # actually supplies, under the exact name the platform uses. A required variable
 # the runtime does not know about fails the apply — for every student at once.
 #
-# MEASURED on mkt013–mkt015 (live Start Lab log, 2026-08-18), the ENTIRE command line is:
+# MEASURED on earlier labs (live Start Lab log, 2026-08-18), the ENTIRE command line is:
 #   terraform apply -var gcp_project_id=... -var gcp_zone=... -var gcp_region=... -auto-approve
 # Three variables. Everything else arrives only because qwiklabs.yaml declares it
 # under startup_script.custom_properties (here: username).
@@ -41,7 +41,7 @@ variable "gcp_zone" {
 }
 
 # -----------------------------------------------------------------------------
-# username — same handling as mkt013–mkt015.
+# username — same handling as earlier labs.
 # -----------------------------------------------------------------------------
 # LOCAL PART ONLY ("student-03-abc123") when qwiklabs.yaml passes
 # user_0.local_username; FULL ADDRESS when it passes user_0.username. main.tf
@@ -50,7 +50,7 @@ variable "gcp_zone" {
 # What it is used for here: three explicit role grants to the student
 # (geminidataanalytics.dataAgentCreator / dataAgentUser, discoveryengine.admin)
 # so no task depends on Owner implying them. A wrong value fails the IAM grant
-# LOUDLY at apply time (unknown user) — unlike mkt015, there is no silent mode.
+# LOUDLY at apply time (unknown user); there is no silent mode here.
 # -----------------------------------------------------------------------------
 variable "username" {
   description = <<-EOT

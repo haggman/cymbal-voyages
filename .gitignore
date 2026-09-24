@@ -8,3 +8,7 @@ services-test.log
 # internal: rendered locally by `make docs`; kept out of the public repo
 data/docs/anomaly-walkthrough.md
 docs/mkt016-plan.md
+
+# generated artifacts: staged in gs://class-demo/cymbal-voyages/v1/ and rebuilt by `make`; not checked in
+data/out/
+data/brand_corpus/pdf/
